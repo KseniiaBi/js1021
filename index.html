@@ -9,47 +9,141 @@
 </head>
 <body>
 
-	<div class="box"></div>
-
-	<h1>Heading text</h1>
-	<h2>Heading text</h2>
-	<h3>Heading text</h3>
-
-	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-	tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-	quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-	consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-	cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-	proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-
-	<section class="content">
-		<p>text p</p>
-		<div class="inner">
-			<p>text in div</p>
-		</div>
-	</section>
-
-	<picture>
-	  <source type="image/webp"
-	    srcset="img/webp/author_m.webp 1x, img/webp/author_m@2x.webp 2x, img/webp/author_m@3x.webp 4x" />
-	  <source type="image/webp"
-	    srcset="
-	      img/webp/author.webp 1x,
-	      img/webp/author@2x.webp  2x, img/webp/author@4x.webp 4x
-	    "
-	    media="(min-width: 600px)" />
-	  
-	  <source srcset="img/author_m.jpg 1x, img/author_m@2x.jpg 2x, img/author_m@3x.jpg 4x" />
-	  <source srcset="img/author.jpg 1x, img/author@2x.jpg 2x, img/author@4x.jpg 4x"
-	    media="(min-width: 600px)" />
-	  
-	  <img src="img/author_m.jpg" alt="Yoga"  loading="lazy" width="335" height="408"/>
-</picture>
 
 
-<svg viewbox="-12 -12 72 72">
-	<path d="M0,25a25,25 0 1,0 50,0a25,25 0 1,0 -50,0" stroke="lightgreen" stroke-width="10">
-</svg>
+<script>
+	// 'use strict'
+	let n = 12; // n is not defined if without let
+	console.log(`j: ${j}`);
+	// console.log(`h: ${h}`); // Cannot access 'h' before initialization
+
+
+	// data types number, string, boolean, undefined, null, Symbol, BigInt, ??? Object ???
+	// data structures : Array, Object, Set, Map, [WeakSet, WeakMap]
+
+
+	// typeof - tells about data type
+
+
+	const x = 5;
+	let a = 'Hello';
+	a = "World";
+	a = `Hello, ${x}`; // a = 'Hello' + ', ' + x;
+
+	let b,c,d,e;
+
+	b = true; // false
+	c = null; // typeof(c) object
+
+	let sym = Symbol('name');
+	let s = Symbol('name');
+
+	// alert(111);
+	// e = confirm('Are you okay?'); // returns true or false depend on button clicked
+	// d = Number(prompt('How old are you?', 11));
+
+	// console.log(d);
+	// console.warn(s == sym);// false
+	// console.error('Alarm!');
+
+
+// = - присвоение значения == - нестрогое равенство === - строгое равенство (учитывает тип данных)
+
+	// + - * / % ++ -- 
+	// == === > < >= <= && || ! != !==
+
+
+	let y = 10;
+	let z = a; // z =  'Hello, 5'
+
+	let w = x + y;
+	console.log(w);
+
+	w++; // +1
+	console.log(w);
+	++w; // +1
+	console.log(++w);
+	console.log(w);
+
+	w += 4; // w = w + 4;
+	console.log(w);
+
+
+	if(w < y){
+		console.log('w > y');
+	}
+	else if(w == y){
+		console.log('w = y');
+	}
+	else{
+		console.log('w < y');
+	}
+
+	//замена множественным else if()
+
+	let letter = 'A'; 
+
+	switch(letter){
+		case 'A':  console.log('Apple');
+				break;
+		case 'B': console.log('Banana');
+				break;
+		default: console.log('zzzzZZZZzzzz');
+				break;
+	}
+
+
+	// тернарный оператор
+
+	let q = n>x ? n : x; // запишем в q большее из n, x
+	//  if (n>x) ? true : false
+
+
+	//  loops 
+
+	let i = 12;
+	for(let i = 0; i <= 5; i++){
+		// тело цикла
+		console.log(`i: ${i}`);
+	}
+
+
+	let k = 5;
+	while( k > 2){
+		console.log(`k: ${k}`);
+		k--;
+	}
+
+	var j = 3;
+	let h = 4;
+	//  область видимости переменных let и const - блок {}, область видимости var - функция
+
+	// срабатывает всегда хотя бы один раз, потому что проверка стоит после тела цикла
+	do{
+		h++;
+		console.warn(h);
+	}
+	while(h < 2);
+
+
+	for(let j = 3; j < 12; j++){
+		if(j%2 == 0){
+			// break; // останавливает выполнение
+			continue; // пропустили итерацию
+		}
+		console.log(`j: ${j}`);
+	}
+
+
+
+
+	//  ДЗ: 1) установить гит, завести аккаунт, скинуть мне (в общем чате) никнейм и после получения доступа создать отдельную ветку в общем репозитории
+	//  2) написать Программу, которая будет у Пользователя  спрашивать его имя, возраст, наличие домашнего питомца (если есть, то после вывести окно с возможностью ввести имя питомца) и вывести итоговое сообщение в консоль, в котором будет приветствие с обращением по имени, если возраст меньше 18 добавлять вопрос разрешили ли родители пользоваться компьютером, альтернативное сообщение при большем возрасте, при наличии питомца спросить как он поживает (тоже по имени) или не грустно ли жить без него
+
+
+
+
+</script>
 
 </body>
 </html>
