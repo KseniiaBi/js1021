@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html, charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<!-- <link rel="stylesheet" href="css/reset.css" type="text/css"/>
+	<link rel="stylesheet" href="css/all.css" type="text/css"/>
+	<link rel="stylesheet" href="css/fonts.css" type="text/css"/> -->
+	<script type="text/javascript" src="js/main.js"></script>
+	<title>Js</title>
+</head>
+<body>
+	<script>
+		'use strict'
+		let name = prompt('What is your name?', '');
+		let age = Number(prompt('How old are you?', ''));
+		let pet = confirm('Do you have any pets?');
+	
+		if(age<18){
+			if(pet == true){
+				let pettrue = prompt('What is its name?','');
+			}
+			confirm('Have your parents allowed you to use the computer?');
+		}
+		if(age>18){
+			if(pet == true){
+				let pettrue = prompt('What is its name?','');
+				if(pet == true){
+					prompt(`How is your ${pettrue} ` + `doing?`,'');
+				}
+			}
+			else{
+				prompt('Is it sad to live without him?','');
+			}
+		}	
+		console.log(`Hello, ${name}`);
+	</script>
+</body>
+</html>
