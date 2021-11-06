@@ -13,40 +13,170 @@
 
 <script>
 
+	// вывести в консоль числа 1-50, при этом заменяя числа кратные 3м на слово fizz, кратные 5 - на слово buzz, кратные 3 и 5 - на слово fizzbuzz
 
-	//  2) написать Программу, которая будет у Пользователя  спрашивать его имя, возраст, наличие домашнего питомца (если есть, то после вывести окно с возможностью ввести имя питомца) и вывести итоговое сообщение в консоль, в котором будет приветствие с обращением по имени, если возраст меньше 18 добавлять вопрос разрешили ли родители пользоваться компьютером, альтернативное сообщение при большем возрасте, при наличии питомца спросить как он поживает (тоже по имени) или не грустно ли жить без него
-
-
-	let username = prompt('what is your name');
-	let age = +prompt('How old are you?');
-	let hasPet = confirm('Do you have a pet?');
-	let petname;
-
-	if(hasPet){
-		petname = prompt('What is his name?');
+	for(let i = 1; i <= 50; i++){
+		if(i%3 == 0 && i%5 == 0){
+			console.log('fizzbuzz');
+		}
+		else if(i%5 == 0){
+			console.log('buzz');
+		}
+		else if(i%3 == 0){
+			console.log('fizz');
+		}
+		else{
+			console.log(i);	
+		}
 	}
 
-	let msg = `Hello, ${username}!`;
-	
-	if(age < 18){
-		msg += 'Are your parents ok you are using computer?';
+
+
+	// вывести в консоль шахматную доску следующего вида
+	//  # # # #
+	//   # # # #
+
+	let size = 8;
+
+	for(let i = 0; i < size; i++){
+		let str = '';
+		for(let j = 0; j < size; j++){
+			if(i%2 == 0 && j%2 == 0 || i%2 != 0 && j%2 != 0){ // четный символ четной строки или нечетный символ нечетной строки
+				str += '#';
+			}
+			else{ // четный символ нечетной строки и нечетный символ четной строки
+				str += ' ';
+			}
+		}
+		console.log(str);
+	}
+
+// пояснение к работе вложенных циклов
+	for(let i = 0; i<8; i++){
+		let str = '';
+		for(let j = 0; j < 8; j++){
+			str+= j;
+		}
+		console.log(str);
+	}
+
+
+
+	// прямоугольный  треугольник из звездочек
+	let num = 6;
+
+	for(let i = 0; i <= num; i++){
+		let str = '';
+		for(j = 0;j<=i; j++){
+			str += '*';
+		}
+		console.log(str);
+	}
+
+
+	// равнобедренный треугольник из звездочек
+	let triangle = 13;
+
+	for(let i = 0; i < triangle; i++){
+		let str = '';
+		let half = Math.ceil(triangle/2);
+		if(i < half){
+			for(j = 0;j<=i; j++){
+				str += '*';
+			}
+		}
+		else{
+			for(let j = 0; j < triangle - i; j++){
+				str += '*';
+			}
+		}
+		console.log(str);
+	}
+
+
+	// преобразование данных
+
+	// numbers incl ±Infinity ±0 NaN
+
+	// 5 + '2' // 52
+	// 5 - '2' // 3
+
+	// 34 + '12' - true + 8 // 3419
+
+	//if(3){} ... 3 == true
+
+	// false : 0, '', undefined, null, NaN
+
+	// number: true/false => 1/0, str => num/NaN, null => 0, undefined => NaN
+
+
+	// HW: 1) составить код, который будет принимать три параметра a,b,c, выводить из них в консоль квадратное уравнение  и будет считать корни квадратного уравнения и их тоже выводить в консоль (дискриминантный метод)
+	// 2) вывести в консоли 11е число Фибоначчи, при этом ряд начинается с 1 (с=а+б)
+	// 3) решить классическую задачу про мудреца и шахматы, 1 зерно риса весит 1 аруззу (0,019г) и считаем, что 1кг риса = 1$
+	// **** таким же образом, как треугольники построить ромб
+
+
+	let day = 0;
+
+	// while(isNaN(day) || day <= 1 || day >= 7){
+	// 	debugger;
+	// 	day = +prompt('Type num 1-7');
+	// }
+
+	switch(day){
+		case 1: console.log('Mon');
+				break;
+		case 2: console.log('Tue');
+				break;
+		case 3: console.log('Wed');
+				break;
+		case 4: console.log('Thu');
+				break;
+		case 5: console.log('fri');
+				break;
+		case 6: console.log('sat');
+				break;
+		case 7: console.log('sun');
+				break;
+		default: console.log('Not a day');
+				break;
+	}
+
+
+	// 0 -60 => четверть часа 
+
+	let mins = 54;
+
+	if(mins > 0 && mins <=15){
+		console.log('1st quarter');
+	}
+	else if(mins > 15 && mins <= 30){
+		console.log('2nd quarter');
+	}
+	else if(mins > 30 && mins <= 45){
+		console.log('3rd quarter');
+	}
+	else if(mins > 45 && mins <= 60){
+		console.log('4th quarter');
 	}
 	else{
-		msg += 'How is your artrit?';
-	}
-
-	if(hasPet){
-		msg += `How is ${petname} doing?`;
-	}
-	else{
-		msg += "Isn't boring life without pet?"
+		console.warn('Not a quarter');
 	}
 
 
-	console.log(msg);
+	let q = 1+ Math.floor(mins / 15);
 
-
-
+	switch(q){
+		case 1: console.log('1st quarter');
+				break;
+		case 2: console.log('2nd quarter');
+				break;
+		case 3: console.log('3rd quarter');
+				break;
+		case 4: console.log('4th quarter');
+				break;
+		default: console.warn('Not a quarter');
+	}
 
 </script>
 
