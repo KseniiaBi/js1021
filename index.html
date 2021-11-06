@@ -13,7 +13,26 @@
 
 <script>
 
-222
+let name,age,pet,petname,ageconfirm;
+
+	name = (prompt('Hi, what is your name?', ));
+	age = Number(prompt('How old are you?', ));
+	pet = (confirm('Do you have a pet?'));
+
+	if (pet == true) {
+		petname = (prompt(name + ', what is your pet name?', ));
+	}
+	if (age < 18){
+		ageconfirm = confirm(name + ', did your parents allow you to use the computer?');
+	}
+	else if (age >= 18, pet == true) {
+		prompt(name + ',how is your ' + petname + ' doing?');
+	console.log(name + ',how is your ' + petname + ' doing?');
+	}
+	else if (age >= 18, pet == false) {
+		 confirm(name + ", isn't it sad to live without a pet?");
+	console.log(name + ", isn't it sad to live without a pet?");
+	}
 
 </script>
 
