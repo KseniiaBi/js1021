@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html, charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Project name for browser tab</title>
+</head>
+<body>
+    <script>
+        let a = prompt('What is your name?');
+                    
+        let b = Number(prompt('How old are you?'));
+            if(b < 18) {
+                let c = confirm('Did your parents allow you to use a computer?');
+            }
+            else if(b > 18) {
+                let d = confirm('Do you have any children?');
+            }
+
+        let e = confirm('Do you have a pet?');
+            if(e == true) {
+                let f = prompt('What is their name?');
+                console.log(`Hello, ${a} and ${f}!`);
+            }
+            else {
+                let g = confirm('Is it sad to live without pets?');
+            }
+
+    </script>
+</body>
+</html>    
