@@ -12,128 +12,92 @@
 
 
 <script>
-	// 'use strict'
-	let n = 12; // n is not defined if without let
-	console.log(`j: ${j}`);
-	// console.log(`h: ${h}`); // Cannot access 'h' before initialization
+// let username = prompt('what is ypir name?');
+// let age = +prompt('How old are you?');
+// let hasPet = confirm('Do you have a pet?');
+// let petname;
+// if(hasPet){
+// 	petname = prompt('What is his name?');
+// }
+
+// let msq = `Hello, ${username}!`;
+
+// if(age < 18) {
+// 	msq += 'Are your parrents ok you are using computer?';
+// }
+// else{
+// 	msq += 'How is your artrit?';
+// }
+
+// if(hasPet){
+// 	msq += `How is ${petname} doing?`;
+// }
+// else{
+// 	msq += 'Isnt borring life without pet?';
+// }
 
 
-	// data types number, string, boolean, undefined, null, Symbol, BigInt, ??? Object ???
-	// data structures : Array, Object, Set, Map, [WeakSet, WeakMap]
+// console.log(msq);
 
+//____________________________________________
 
-	// typeof - tells about data type
+// for(let i = 1; i <= 50; i++){
+// 	 if(i%3 == 0 && i%5 == 0){
+// 		console.log('fizzbuzz')
+// 	}
+// 	else if(i%5 ==0){
+// 		console.log('buzz')
+// 	}
+// 	else if(i%3 == 0){
+// 		console.log('fizz');
+// 	}
+// 	console.log(i);
+// }
 
+//____________________________________________
 
-	const x = 5;
-	let a = 'Hello';
-	a = "World";
-	a = `Hello, ${x}`; // a = 'Hello' + ', ' + x;
+// let size = 8;
 
-	let b,c,d,e;
+// for(let i = 0; i < size; i++){
+// 	let str = '';
+// 	for(let j = 0; j < size; j++){
+// 		if(i%2 ==0 && j%2 == 0 || i%2 !=0 && j%2 != 0){
+// 			str += '#';
+// 		}
+// 		else{
+// 			str += ' ';
+// 		}
+// 	}
+// 	console.log(str);
+// }
 
-	b = true; // false
-	c = null; // typeof(c) object
+let num = 6;
 
-	let sym = Symbol('name');
-	let s = Symbol('name');
-
-	// alert(111);
-	// e = confirm('Are you okay?'); // returns true or false depend on button clicked
-	// d = Number(prompt('How old are you?', 11));
-
-	// console.log(d);
-	// console.warn(s == sym);// false
-	// console.error('Alarm!');
-
-
-// = - присвоение значения == - нестрогое равенство === - строгое равенство (учитывает тип данных)
-
-	// + - * / % ++ -- 
-	// == === > < >= <= && || ! != !==
-
-
-	let y = 10;
-	let z = a; // z =  'Hello, 5'
-
-	let w = x + y;
-	console.log(w);
-
-	w++; // +1
-	console.log(w);
-	++w; // +1
-	console.log(++w);
-	console.log(w);
-
-	w += 4; // w = w + 4;
-	console.log(w);
-
-
-	if(w < y){
-		console.log('w > y');
+for(let i = 0; i <= num; i++){
+	let str = '';
+	for( j = 0; j<=i; j++){
+		str += '*'
 	}
-	else if(w == y){
-		console.log('w = y');
+	console.log(str);
+}
+
+let triangle = 13;
+
+for(let i = 0; i<triangle; i++){
+	let str ='';
+	let half = Math.ceil(triangle/2);
+	if(i < half){
+		for( j = 0; j<=i; j++){
+		str += '*'
+		}
 	}
 	else{
-		console.log('w < y');
-	}
-
-	//замена множественным else if()
-
-	let letter = 'A'; 
-
-	switch(letter){
-		case 'A':  console.log('Apple');
-				break;
-		case 'B': console.log('Banana');
-				break;
-		default: console.log('zzzzZZZZzzzz');
-				break;
-	}
-
-
-	// тернарный оператор
-
-	let q = n>x ? n : x; // запишем в q большее из n, x
-	//  if (n>x) ? true : false
-
-
-	//  loops 
-
-	let i = 12;
-	for(let i = 0; i <= 5; i++){
-		// тело цикла
-		console.log(`i: ${i}`);
-	}
-
-
-	let k = 5;
-	while( k > 2){
-		console.log(`k: ${k}`);
-		k--;
-	}
-
-	var j = 3;
-	let h = 4;
-	//  область видимости переменных let и const - блок {}, область видимости var - функция
-
-	// срабатывает всегда хотя бы один раз, потому что проверка стоит после тела цикла
-	do{
-		h++;
-		console.warn(h);
-	}
-	while(h < 2);
-
-
-	for(let j = 3; j < 12; j++){
-		if(j%2 == 0){
-			// break; // останавливает выполнение
-			continue; // пропустили итерацию
+		for(let j = 0; j < triangle - i; j++){
+			str = '*';
 		}
-		console.log(`j: ${j}`);
 	}
+	console.log(str);
+}
 </script>
-
 </body>
 </html>
