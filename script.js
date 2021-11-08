@@ -26,3 +26,23 @@ if(animal === true) {
 
 // HomeWork 2
 
+let a = +prompt("Введите число a", '');
+let b = +prompt("Введите число b", '');
+let c = +prompt("Введите число c", '');
+
+console.log(`${a}x2 + ${b}x + ${c} = 0`);
+
+let D = b * b - 4 * a * c;
+console.log("D = " + D);
+
+if(D < 0) {
+    console.log("Корней нет");
+}else if (D == 0) {
+    let x = (-b + Math.sqrt(D)) / (2 * a);
+    console.log(x);
+}else{
+    let firstX = (-b + Math.sqrt(D)) / (2 * a);
+    let secondX = (-b - Math.sqrt(D)) / (2 * a);
+    console.log(`Первый корень : ${firstX}`);
+    console.log(`Второй корень : ${secondX}`);
+};
