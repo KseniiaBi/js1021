@@ -46,3 +46,18 @@ if(D < 0) {
     console.log(`Первый корень : ${firstX}`);
     console.log(`Второй корень : ${secondX}`);
 };
+
+// HomeWork 2
+
+function fib(n) {
+    let a = 1;
+    let b = 1;
+    for(let i = 1; i <= n; i++) {
+        let c = a + b;
+        a = b;
+        b = c;
+    }
+    return b;
+}
+
+alert( fib(11) );
