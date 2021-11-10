@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>JS FE</title> 
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1"> 
+	<meta name="keywords" content="Js HTML CSS markup front-end">
+</head>
+<body>
+
+<script>
+
+// задача 1
+    let a = +prompt('set value for a');
+    let b = +prompt('set value for b');
+    let c = +prompt('set value for c');
+    let r = `${a}*x^2 + ${b}*x + c = 0`;
+    console.log(r);
+
+    let x1;
+    let x2;
+
+    let d = b*b  - 4*a*c;
+
+    if(d<0) {
+        x1 = (-b - Math.sqrt(d))/2*a;
+        x2 = (-b + Math.sqrt(d))/2*a;
+        console.log(`x1 = ${x1}, x2 = ${x2}`);
+    }
+
+    else if (d == 0) {
+        x1 = x2 = -b/ (2*a);
+        console.log(`x1,x2 = ${x1}`);
+    }
+
+    else {
+        console.warn('Корней нет');
+    }
+
+    
+// задача 2
+
+    function fib(n) {
+        let a = 1;
+        let b = 1;
+        for(let i=3; i <= n; i++) {
+            let c = a + b;
+            a = b;
+            b = c;
+        }
+        return b;
+    }
+        console.log(fib(11));
+
+// задача 3
+        
+    let rice = 0;
+    let w = 0.000019;
+    
+    for( let i = 1; i < 64; i++) {
+        let r = Math.pow(2, i) * w;
+        rice += r;
+    }
+
+    console.log(rice);
+
+
+    
+</script>
+
+</body>
+</html>
