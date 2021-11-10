@@ -13,68 +13,282 @@
 
 <script>
 
-	// HW: 1) составить код, который будет принимать три параметра a,b,c, выводить из них в консоль квадратное уравнение  и будет считать корни квадратного уравнения и их тоже выводить в консоль (дискриминантный метод)
+	// hoisting - переменные с var и Function Declaration "всплывают" при первом проходе интерпретатора и становятся доступными с 1й строчки скрипта
 
-	// let a = +prompt('Type A');
-	// let b = +prompt('Type B');
-	// let c = +prompt('Type C');
+	console.log(`a = ${a}`);
+	// Function Declaration
 
-	// let r = `${a}*x^2 + ${b}*x + c`;
-	// console.log(r);
-
-	// let x1;
-	// let x2;
-
-	// let d = b*b - 4*a*c;
-
-	// if(d > 0){
-	// 	x1 = (-b - Math.sqrt(d))/2*a;
-	// 	x2 = (-b + Math.sqrt(d))/2*a;
-	// 	console.log(`x1 = ${x1}, x2 = ${x2}`);
-	// }
-	// else if(d == 0){
-	// 	x1 = x2 = -b/ (2*a);
-	// 	console.log(`x1,x2 = ${x1}`);
-	// }
-	// else{
-	// 	console.warn('Корней среди действительных чисел нет');
-	// }
-
-
-	// 2) вывести в консоли 11е число Фибоначчи, при этом ряд начинается с 1 (с=а+б)
-
-	// 1 1 2 3 5 8 13 21 34 55 89 
-
-	let fib = 11;
-
-	let a = 1;
-	let b = 1;
-	let c;
-
-	for(let i = 2; i < fib; i++){
-		c = a+b;
-		a = b;
-		b = c;
+	sayHi();
+	function sayHi(){
+		console.log('Hello, world');
 	}
 
-	console.log(c);
+	var a = 4;
 
+	// Function Expression
 
-	// 3) решить классическую задачу про мудреца и шахматы, 1 зерно риса весит 1 аруззу (0,019г) и считаем, что 1кг риса = 1$
-
-	let rice = 0;
-	let w = 0.000019;
-
-	for(let i = 1; i < 64; i++){
-		let r = Math.pow(2,i) * w;
-		rice += r;
+	// bar(); // Cannot access 'bar' before initialization
+	let bar = function(){
+		console.warn('bar');
 	}
 
-	console.log(rice);
+	bar();
+
+
+	// anonymous self-calling
+
+
+	(function(){
+		console.error('anonymous');
+	})();
+
+// anonymous
+	setTimeout(function(){
+		console.log(111);
+	}, 500);
 
 
 
+	function sum(a, b){
+		console.log(a+b);
+		// return a+b;
+	}
 
+	sum(2,3);
+	sum(2,2,3,4);
+	sum(2);
+
+	let ar = new Array(10);
+	console.log(ar);
+	let arr = [1,2,3];
+	console.log(arr);
+
+
+	delete arr[0]; 
+	console.log(arr[2]);
+	arr[3] = 4; // записать в 3й элемент массива число 4
+	// *** массивы мутабельны
+
+
+// псевдомассив arguments
+	function superSum(){
+		let sum = 0;
+		for(let i = 0; i< arguments.length; i++){
+			sum += arguments[i];
+		}
+		console.log(`superSum = ${sum}`);
+	}
+
+	superSum(2);
+	superSum(2,2);
+	superSum(2,3,4,5);
+
+// переметры по умолчанию
+	function greeting(name = 'Stranger'){
+		console.warn(`Hello, ${name}`);
+	}
+
+	greeting('Ann');
+	greeting();
+
+
+
+	// callback function
+
+	function del(conf, decline){
+		// let res = confirm('Are you sure?');
+		// if(res){
+		// 	conf();
+		// }
+		// else{
+		// 	decline();
+		// }
+
+		confirm('Are you sure?') ? conf() : decline();
+	}
+
+	function proceedDel(){
+		console.warn('Item was deleted');
+	}
+	function declineDel(){
+		console.error('Item was not deleted');
+	}
+
+	// del(proceedDel, declineDel);
+
+
+	// arrow functions || lambda-expression
+	// do not have [arguments] and "this"
+
+	let multiply = function (a,b) {
+		console.log(a*b);
+	}
+
+	multiply(2,3);
+
+	let mul = (a,b) => console.log(a*b);
+
+	mul(2,3);
+
+
+	function pow(n, p){
+		let res = n;
+		for(let i = 1; i < p; i++){
+			res *= n;
+		}
+		return res;
+	}
+
+	let p = pow(4,2);
+	console.log(pow(2,3));
+	console.log(sum(2,3)); // undefined - no return statement
+
+
+	// practice
+
+	let x = [1,2,3,4,5];
+
+	function printArr(a){
+		for(i = 0; i < a.length; i++){
+			console.log(`a[i]: ${a[i]}`);
+		}
+	}
+
+	printArr(x);
+
+	function createArr(size){
+		let arr = [];
+		for(let i = 0; i < size; i++){
+			arr[i] = i+1;
+		}
+		console.log(arr);
+	}
+
+	createArr(9);
+
+	function createArray(){
+		let arr = [];
+		for(let i = 0; i < arguments.length; i++){
+			arr[i] = arguments[i];
+		}
+		console.log(arr);
+	}
+
+	createArray(2,5,7,1,8,4);
+
+
+	// создать функцию, которая принимает на входе любой массив, а возвращает массив только из положительных чисел
+
+	function arrPositives(a){
+		let arr = [];
+		let index = 0;
+
+		for(let i = 0; i < a.length; i++){
+			if(a[i] >= 0){
+				arr[index] = a[i];
+				index++;
+			}
+		}
+		return arr;
+	}
+
+	console.log(arrPositives([-1,2,-4,9,-2,34,-55,87,0]));
+
+	//  создать функцию, которая принимает на входе любой массив, и проверяет есть ли в нем число 3. Если да - выводим в консоли "есть", если нет - "нет"
+
+	function isThreePassed(a){
+		let isThree = false;
+		for(let i = 0; i < a.length; i++){
+			if(a[i] === 3){
+				isThree = true;
+			}
+		}
+		let msg = isThree ? "есть" : "нет";
+		console.log(msg);
+	}
+
+	isThreePassed([1,2,3]);
+	isThreePassed([1,2,4]);
+
+
+	// написать функцию, которая принимает на вход массив и возвращает его развернутым наоборот
+
+	function reverse(a){
+		let arr = [];
+		for(let i = 0; i < a.length; i++){
+			arr[i] = a[a.length - i - 1];
+		}
+		return arr;
+	}
+
+	console.log(reverse([1,2,3,4,5,6,7,8,9]));
+	console.log(reverse([33,45,22,64]));
+
+
+
+	// написать функцию, которая возвращает среднее арифметическое элементов массива
+
+	function srArifm(a){
+		let sum = 0;
+		for(let i = 0; i < a.length; i++){
+			sum += a[i];
+		}
+		return sum/a.length;
+	}
+
+	console.log(srArifm([1,2,3,4,5]));
+
+
+	// написать функцию, которая принимает параметром число и возвращает его факториал
+	// 10! = 10 * 9*8*7*6...*1
+
+	function factorial(n){
+		let oldN = n;
+		let res = 1;
+		while (n > 1){
+			res *= n;
+			n--;
+		}
+		console.log(`factorial ${oldN} = ${res}`);
+	}
+
+	factorial(5);
+
+	// recursive function
+
+	function fact(n){
+		if(n > 1){
+			return n * fact(n-1);
+		}
+		else{
+			return n;
+		}
+	}
+
+	console.log(fact(5));
+
+
+
+	function mArr(l1, l2){
+		let arr = [];
+		for(let i = 0; i < l2; i++){
+			arr[i] = [];
+			for(let j = 0; j < l1; j++){
+				arr[i][j] = j;
+			}
+		}
+		console.log(arr);
+	}
+
+	mArr(3,9);
+
+
+	let z = [[1,2, [3,4,[5,6]]]];
+
+	console.log(z);
+
+
+	// HW: 1) отсортировать массив пузырьком [3,7,1,9,2,8,6,5,4] 2) написать функцию, которая принимает параметрами три числа, первое суммирует с вторым и делит на третье 3) переписать фибоначчи рекурсивно 4) написать функцию, которая принимает произвольный массив и выводит из него массив только четных (б) только отрицательные 
 
 
 </script>
