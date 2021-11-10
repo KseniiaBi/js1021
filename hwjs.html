@@ -9,26 +9,37 @@
 </head>
 <body>
     <script>
-        "use strict";
 
-        let userName = prompt('Как тебя зовут?');
-        let age = prompt('Сколько тебе лет?');
-        let pet = confirm('У тебя есть домашний питомец?');
-        
-        if (pet === true) {
-        let p = prompt( 'Как зовут домашнего питомца?' );
+        // Первое задание
+
+        // var a = +prompt('Введите знаечение для - а')
+        // var b = +prompt('Введите знаечение для - b')
+        // var c = +prompt('Введите знаечение для - c')
+
+        // console.log(`${a}x^2 + ${b}x + ${c} = 0`)
+
+        // var desc = (b**2) - (4 * a * c);
+
+        // var x1 = (-b + Math.sqrt(desc)) / (2 * a)
+        // var x2 = (-b - Math.sqrt(desc)) / (2 * a)
+
+        // console.log(`x1=${x1} x2=${x2}`)
+
+
+        // Второе задание
+
+        for (var i=0, a=1, b=1; i<11; i++) {
+            var c = a + b;
+            a = b;
+            b = c;
+            if (i == 8) {
+                console.log(c)
+                break;
+            }
         }
-        else {
-        let q = confirm('Не грустно ли тебе без питомца?' );
-        } 
 
-        alert(`Привет ${userName} и ${p}!`);
-
-        if (age < `18`) {
-        alert( 'Родители разрешают пользоваться компьютером?' );
-        } else {
-        alert( `Как поживает ${p}?` );
-        }
+    </script>
+    <script>
 
     </script>
 </body>
