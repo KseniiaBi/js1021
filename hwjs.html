@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="Js HTML CSS markup front-end">
+    <title>HomeworkJS</title>
+</head>
+<body>
+    <script>
+        "use strict";
+
+        let userName = prompt('Как тебя зовут?');
+        let age = prompt('Сколько тебе лет?');
+        let pet = confirm('У тебя есть домашний питомец?');
+        
+        if (pet === true) {
+        let p = prompt( 'Как зовут домашнего питомца?' );
+        }
+        else {
+        let q = confirm('Не грустно ли тебе без питомца?' );
+        } 
+
+        alert(`Привет ${userName} и ${p}!`);
+
+        if (age < `18`) {
+        alert( 'Родители разрешают пользоваться компьютером?' );
+        } else {
+        alert( `Как поживает ${p}?` );
+        }
+
+    </script>
+</body>
+</html>
