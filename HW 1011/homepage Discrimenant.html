@@ -1,0 +1,22 @@
+
+<!DOCTYPE html>
+<script>
+"use strict";
+	let a, b, c;
+	let x1, x2;
+	a = 1;
+	b = 20;
+	c = 30;
+	let D = b * b - 4 * a * c;
+	if(D == 0) {
+		x1 = (- b) / (2 * a);
+		x2 = x1;
+	}
+	else if(D > 0){
+		x1 = (- b + Math.sqrt(D)) / (2 * a);
+		x2 = (- b - Math.sqrt(D)) / (2 * a);
+	}
+		else if(D < 0){
+	}
+	console.log(x1, x2);
+</script>
