@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homework (JS #1)</title>
+</head>
+<body>
+    <script>
+
+        let name = prompt("Как Вас зовут?");
+
+        alert(`Добро пожаловать, ${name}`);
+
+        let age = prompt("Сколько Вам лет?");
+
+        if(age < 18){
+            confirm("А родители знают о твоих деяниях???");
+        }else if(age > 70){
+            confirm("Как ваше здоровье,как внуки?");
+        }
+
+        let pet = confirm("У вас есть домашний питомец?");
+
+        if(pet == true){
+            let c = prompt("Как зовут вашего прелестного питомца?");   
+        }
+        /*else if(c == true){
+            prompt(`Как поживает ${c}?`); //Почему не сработало?
+        }
+        */
+        else{
+            confirm("Не грустно ли живётся без комочка добра?:(");
+        }
+    </script>
+</body>
+</html>
