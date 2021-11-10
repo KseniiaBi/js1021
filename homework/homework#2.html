@@ -49,15 +49,17 @@
 		}
 
 		console.log(`Задача №3`);
-		let m = 63;
-		for(let i = 0; i <= m; i++){
-			let p = BigInt(2**i);
-			console.log(p);
-		}
+		// let m = 64;
+		// for(let i = 0; i <= m; i++){
+		// 	let p = BigInt(2**i);
+		// 	console.log(p);
+		// }
 		let psum = BigInt(2**64)-1n;
-			console.log(psum);
-		let z = ((((2**64)-1)*0.065)/1000000);
-			console.log(z);
-		</script>
+			console.log(`${psum} кол-во зерен на всей доске.`);
+		let z = Math.floor(((((2**64)-1)*0.019)/1000));
+			console.log(`${z} киллограмм.`);
+		let s = 1 * z;
+			console.log(`${s} долларов.`);
+	</script>
 </body>
 </html>
