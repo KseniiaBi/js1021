@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html, charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<!-- <link rel="stylesheet" href="css/reset.css" type="text/css"/>
+	<link rel="stylesheet" href="css/all.css" type="text/css"/>
+	<link rel="stylesheet" href="css/fonts.css" type="text/css"/> -->
+	<script type="text/javascript" src="js/main.js"></script>
+	<title>Js</title>
+</head>
+<body>
+	<script>
+		'use strict'
+		let a = +prompt("Enter the number for A");
+		let b = +prompt("Enter the number for B");
+		let c = +prompt("Enter the number for C");
+
+		console.log(`Задача №1`);
+		console.log(`${a}x^2+${b}x+${c}=0`);
+
+		let d = b**2 - 4*a*c;
+
+		// console.log(d);
+
+		if(d > 0){
+			let x1 = (-b - Math.sqrt(d))/(2*a);
+			let x2 = (-b + Math.sqrt(d))/(2*a);
+
+			console.log(`Так как дискриминант больше 0, то квадратное уравнение имеет два корня: x1 = ${x1}, x2 = ${x2}`);
+		}
+		else if(d == 0){
+			let x = -b/(2*a);
+
+			console.log(`В случае если дискриминант равен 0, то квадратное уравнение имеет один корень: x = ${x}`);
+		}
+		else if(d < 0){
+			console.log(`Поскольку дискриминант меньше 0, уравнение не имеет действительных решений`)
+		}
+		else{
+			console.log(`Дискриминант не может быть равен строке либо символу, обновите страницу и повторите решение действий`)
+		}
+
+		console.log(`Задача №2`);
+		let w = +prompt("Enter the number for F");
+		for(let i = 1; i <= w; i++){
+			let f = ((((1 + Math.sqrt(5))/2)**i)-(((1 - Math.sqrt(5))/2)**i))/Math.sqrt(5);
+			console.log(Math.floor(f));
+		}
+
+		console.log(`Задача №3`);
+		let m = 63;
+		for(let i = 0; i <= m; i++){
+			let p = BigInt(2**i);
+			console.log(p);
+		}
+		let psum = BigInt(2**64)-1n;
+			console.log(psum);
+		let z = ((((2**64)-1)*0.065)/1000000);
+			console.log(z);
+		</script>
+</body>
+</html>
