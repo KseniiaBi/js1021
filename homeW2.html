@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <!-- HW: 
+    1) составить код, который будет принимать три параметра a,b,c, 
+        выводить из них в консоль квадратное уравнение  и будет считать 
+        корни квадратного уравнения и их тоже выводить в консоль (дискриминантный метод)
+    2) вывести в консоли 11е число Фибоначчи, при этом ряд начинается с 1 (с=а+б)
+    3) решить классическую задачу про мудреца и шахматы, 1 зерно риса весит 1 аруззу (0,019г)
+    и считаем, что 1кг риса = 1$
+        **** таким же образом, как треугольники построить ромб -->
+
+        <script>
+            // квадратное уравнение a b c
+
+            let a = +prompt('Введите число а');
+            let b = +prompt('Введите число b');
+            let c = +prompt('Введите число c');
+            // let d = b * - 4 * a * c;
+            let d = a **2 + b **2 + c 
+            console.log(d);
+
+            // Fibbonachi
+            let f =[1, 1]; 
+            let n = 11;
+            if (n <= 2){
+                let result = f.slice(1, n);
+            } else{
+                for(i = 0; i < n - 2; i++){
+                    f.push(f[f.length - 1] + f[f.length - 2]);
+                }
+                let result = f;
+            }
+            console.log(f);
+
+            // Fibbonachi 2
+            // function fib(n) {
+            //   const f = [1, 1];  
+            //   for (let i = 2; i <= n; i++){
+            //       let a = i - 1;
+            //       let b = i - 2;
+            //       let c = a + b;
+            //       f.push(c);
+            //   } return f[n];
+            // }
+            // console.log(fib(7))   
+
+        // ромб rhombus
+        
+        function fn(n){
+            for(let i = 1; i <= n; i++){
+                let str = '';
+                for(let j = n-i; j > 0; j--){
+                    str +=' ';
+                }
+                for(let j = 1; j <= i * 2 -1; j++){
+                    str += '*';
+                }
+                console.log(str);
+            }
+                for(let i = 2; i <= n; i++){
+                let str = '';
+                for(let j = 0; j < i - 1; j++){
+                    str += ' ';
+                }
+                for(let j = (n - i) * 2 + 1; j > 0; j--){
+                    str +='*';
+                }
+                console.log(str);
+                
+            }
+        } fn(7)    
+        </script>
+</body>
+</html>
+ 
