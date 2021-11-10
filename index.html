@@ -12,8 +12,8 @@
 
 
 <script>
-
-let name,age,pet,petname,ageconfirm;
+//HW#1
+/* let name,age,pet,petname,ageconfirm;
 
 	name = (prompt('Hi, what is your name?', ));
 	age = Number(prompt('How old are you?', ));
@@ -33,6 +33,65 @@ let name,age,pet,petname,ageconfirm;
 		 confirm(name + ", isn't it sad to live without a pet?");
 	console.log(name + ", isn't it sad to live without a pet?");
 	}
+ */
+
+
+//HW#2
+
+"use strict";
+
+    //ax2+bx+c=0
+    //d=b2-4ac
+    let a, b, c, d, r, f, g;
+    a = +prompt('Set value for A', );
+    b = +prompt('Set value for B', );
+    c = +prompt('Set value for C', );
+    console.log(`${a}x2+${b}x+${c}=0`);
+    d=(b**2)-4*a*c;{
+        if (d<0){ console.log("A quadratic equation has no real roots");
+        }
+        else if (d == 0){ 
+            b = -b;
+            r = (b**2)/(2*a);
+            console.log(r);
+
+        }
+        else { b = -b;
+            f = (b+d**1/2)/(2*a);
+            g = (b-d**1/2)/(2*a);
+            console.log(f,g)
+        }
+    
+
+    }
+    
+
+    //Fibonacci Sequence
+    let i;
+
+    function fibo(n){
+        a = 1;
+        b = 2;
+        for (i=3; i<=n; i++){
+            c = a+b;
+            a = b;
+            b = c;
+        }
+        return c;
+    }
+    console.log(fibo(11))
+
+
+    //Chess
+
+a = 2**64-1; // amount of grain (piece)
+b = 0.019; //weight 1 grain (gramm)
+c = a*b/1000; // weight of all rise (kg)
+d = c*26.30; //total weight * USD course (uah)
+
+console.log(d)
+   
+
 
 </script>
 
