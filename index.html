@@ -13,31 +13,67 @@
 
 <script>
 
-	let day;
+	// HW: 1) составить код, который будет принимать три параметра a,b,c, выводить из них в консоль квадратное уравнение  и будет считать корни квадратного уравнения и их тоже выводить в консоль (дискриминантный метод)
 
-// здесь нужно было "ИЛИ"
-	while(isNaN(day) || day < 1  || day > 7){
-		day = +prompt('Type num 1-7');
+	// let a = +prompt('Type A');
+	// let b = +prompt('Type B');
+	// let c = +prompt('Type C');
+
+	// let r = `${a}*x^2 + ${b}*x + c`;
+	// console.log(r);
+
+	// let x1;
+	// let x2;
+
+	// let d = b*b - 4*a*c;
+
+	// if(d > 0){
+	// 	x1 = (-b - Math.sqrt(d))/2*a;
+	// 	x2 = (-b + Math.sqrt(d))/2*a;
+	// 	console.log(`x1 = ${x1}, x2 = ${x2}`);
+	// }
+	// else if(d == 0){
+	// 	x1 = x2 = -b/ (2*a);
+	// 	console.log(`x1,x2 = ${x1}`);
+	// }
+	// else{
+	// 	console.warn('Корней среди действительных чисел нет');
+	// }
+
+
+	// 2) вывести в консоли 11е число Фибоначчи, при этом ряд начинается с 1 (с=а+б)
+
+	// 1 1 2 3 5 8 13 21 34 55 89 
+
+	let fib = 11;
+
+	let a = 1;
+	let b = 1;
+	let c;
+
+	for(let i = 2; i < fib; i++){
+		c = a+b;
+		a = b;
+		b = c;
 	}
 
-	switch(day){
-		case 1: console.log('Mon');
-				break;
-		case 2: console.log('Tue');
-				break;
-		case 3: console.log('Wed');
-				break;
-		case 4: console.log('Thu');
-				break;
-		case 5: console.log('fri');
-				break;
-		case 6: console.log('sat');
-				break;
-		case 7: console.log('sun');
-				break;
-		default: console.log('Not a day');
-				break;
+	console.log(c);
+
+
+	// 3) решить классическую задачу про мудреца и шахматы, 1 зерно риса весит 1 аруззу (0,019г) и считаем, что 1кг риса = 1$
+
+	let rice = 0;
+	let w = 0.000019;
+
+	for(let i = 1; i < 64; i++){
+		let r = Math.pow(2,i) * w;
+		rice += r;
 	}
+
+	console.log(rice);
+
+
+
 
 
 
