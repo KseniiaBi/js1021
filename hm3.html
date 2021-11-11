@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>JS FE</title> 
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1"> 
+	<meta name="keywords" content="Js HTML CSS markup front-end">
+</head>
+<body>
+
+<script>
+
+// 1) отсортировать массив пузырьком [3,7,1,9,2,8,6,5,4] 
+function bubble(a) {
+    for (i = 0; i < a.length ; i++) {
+    for(j = 0 ; j < a.length - i - 1; j++){ 
+    if (a[j] > a[j + 1]) {
+        let temp = a[j];
+        a[j] = a[j+1];
+        a[j + 1] = temp;
+        }
+    }
+    }
+    return a;
+}
+
+console.log(bubble([3,7,1,9,2,8,6,5,4]));
+
+// 2) написать функцию, которая принимает параметрами три числа, первое суммирует с вторым и делит на третье 
+    function threeNum(a,b,c){
+        console.log((a+b)/c);
+    }
+    threeNum(4,9,11);
+
+// 3) переписать фибоначчи рекурсивно 
+    function fib(n) {
+        if (n == 0) {
+            return 0;
+        }
+        if (n == 1) {
+            return 1;
+        }
+        else {
+            return fib(n - 1) + fib(n - 2);
+        }
+    }
+    console.log(fib(11));
+// 4) написать функцию, которая принимает произвольный массив и выводит из него массив только четных (б) только отрицательные 
+    function arrEven(a) {
+        let arra = [];
+        let index = 0;
+        for(i = 0; i < a.length; i++) {
+            if(a[i]%2 == 0) {
+                arra[index] = a[i]; 
+                index++;
+            }
+        }
+        return arra;
+    }
+    console.log(arrEven([4,5,7,8,10]));
+
+    function arrNegative(a) {
+        let arr = [];
+        let index = 0;
+        for(i = 0; i < a.length; i++) {
+            if(a[i] < 0) {
+                arr[index] = a[i]; 
+                index++;
+            }
+        }
+        return arr;
+    }
+    console.log(arrNegative([4,-5,7,-8,10]));
+
+
+</script>
+
+</body>
+</html>
