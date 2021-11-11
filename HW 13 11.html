@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>HW for 13 Nov</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="keywords" content="Ls HTML CSSmarkup front-end">
+    </head>
+    <body>
+        <script>
+            // HW: 1) отсортировать массив пузырьком [3,7,1,9,2,8,6,5,4] 
+            function bublSort(p)
+            {
+                for(i = 0; i < p.length; i++)
+                {
+                    for(j = 0; j < p.length - i - 1; j++)
+                    {
+                        if(p[j] > p[j + 1])
+                        {
+                            let l = p[j];
+                            p[j] = p[j + 1];
+                            p[j + 1] = l;
+                        }
+                    }
+                }
+                return p;
+            }
+
+            console.log(bublSort([3,7,1,9,2,8,6,5,4]));
+
+            //2) написать функцию, которая принимает параметрами три числа, первое суммирует с вторым и делит на третье 
+            function eq(a, b, c)
+            {
+                console.log((a + b)/c);
+            }
+
+            eq(8, 9, 2);
+
+            //3) переписать фибоначчи рекурсивно 
+            function fi(n)
+            {
+                if(n == 0)
+                {
+                    return 0;
+                }
+
+                else if(n == 1)
+                {
+                    return 1;
+                }
+
+                else
+                {
+                    return fi(n - 1) + fi(n - 2);
+                }
+            }
+
+            console.log(fi(11));
+
+            //4) написать функцию, которая принимает произвольный массив и выводит из него массив только четных (б) только отрицательные 
+            function arrEven(a)
+            {
+                let arra = [];
+                let indx = 0;
+
+                for(i = 0; i < a.length; i++)
+                {
+                    if(a[i]%2 == 0)
+                    {
+                        arra[indx] = a[i];
+                        indx++;
+                    }
+                }
+
+                return arra;
+            }
+
+            console.log(arrEven([2, 6, 8]));
+
+            function arrNeg(a)
+            {
+                let arr = [];
+                let indx = 0;
+
+                for(i = 0; i < a.length; i++)
+                {
+                    if(a[i] < 0)
+                    {
+                        arr[indx] = a[i];
+                        indx++;
+                    }
+                }
+
+                return arr;
+            }
+
+            console.log(arrNeg([-2, -6, 8, -5]));
+        </script>
+    </body>
+</html>                                      
