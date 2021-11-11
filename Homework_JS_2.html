@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homework(JS #2)</title>
+</head>
+<body>
+    <script>
+            let a = +prompt("Введите A:"),
+                b = +prompt("Введите B:"),
+                c = +prompt("Введите C:"),
+                arr = kvur(a, b, c),
+                d = arr[0];
+            console.log("Дискриминант: " + d);
+            console.log(
+                d < 0
+                    ? "Корней нет"
+                    : d === 0
+                        ? "Один корень: " + arr[1]
+                        : `Два корня: ${arr[1]} и ${arr[2]}`
+            );
+    
+            /**
+            * Вычисление корней квадратного уравнения.
+            * Если корни есть, возвращает массив из дискриминанта и двух чисел-корней.
+            * Если корней нет - возвращает массив из одного элемента - отрицательного дискриминанта
+            */
+            function kvur(a, b, c) {
+                let discr = (a, b, c) => b * b - 4 * a * c;
+                // Если значение дискриминанта квадратного уравнения < 0, то  корней на множестве действительных чисел нет. 
+                let d = discr(a, b, c);
+                if (d < 0) return [d];
+    
+                let x1 = (-b + Math.sqrt(d)) / (2 * a),
+                    x2 = (-b - Math.sqrt(d)) / (2 * a);
+    
+                return [d, x1, x2];
+            }
+    //------------------------------------------------------------------------------------------------
+    function fib(n) {
+
+    const result = [1, 1];
+    for (let i = 2; i < n; i++) {
+    result.push(result[i-2] + result[i-1]);
+    }
+    return result; // or result[n-1] if you want to get the nth term
+
+    }
+
+    console.log(fib(11)); 
+
+//------------------------------------------------------------------------------------------------------
+
+let all = Math.pow(2, 64) - 1;
+    mat = Math.sqrt(0.019 / 1000 * 1);
+console.log(all);
+console.log(mat);
+
+//------------------------------------------------------------------------------------------------------
+let triangle = 13;
+
+	for(let i = 0; i < triangle; i++){
+		let str = '';
+		let half = Math.ceil(triangle/2);
+		if(i < half){
+			for(j = 0;j <= i; j++){
+				str += '*';
+			}
+		}
+		else{
+			for(let j = 0; j < triangle - i; j++){
+				str += '*';
+			}
+		}
+		console.log(str);
+	}
+
+    let size = 8;
+
+	for(let i = 0; i < size; i++){
+		let str = '';
+		for(let j = 0; j < size; j++){
+			if(i%2 == 0 && j%2 == 0 || i%2 != 0 && j%2 != 0){ // четный символ четной строки или нечетный символ нечетной строки
+				str += '#';
+			}
+			else{ // четный символ нечетной строки и нечетный символ четной строки
+				str += ' ';
+			}
+		}
+		console.log(str);
+	}   
+
+    // пояснение к работе вложенных циклов
+	for(let i = 0; i<8; i++){
+		let str = '';
+		for(let j = 0; j < 8; j++){
+			str+= j;
+		}
+		console.log(str);
+	}
+
+    </script>
+</body>
+</html>
