@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html, charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<!-- <link rel="stylesheet" href="css/reset.css" type="text/css"/>
+	<link rel="stylesheet" href="css/all.css" type="text/css"/>
+	<link rel="stylesheet" href="css/fonts.css" type="text/css"/> -->
+	<!-- <script type="text/javascript" src="js/main.js"></script> -->
+	<title>Js</title>
+</head>
+<body>
+	<script>
+
+// 1) отсортировать массив пузырьком [3,7,1,9,2,8,6,5,4] 
+
+	function sortarr(a){
+		let number = 0;
+		let i;
+		let j;
+		for(i = 0; i < a.length - 1; i++){
+			for(j = i+1; j < a.length; j++){
+				if(a[i] > a[j]){
+					number = a[i];
+					a[i] = a[j];
+					a[j] = number;
+				}
+			}
+		}
+			console.log(a);	
+	}
+		
+// 2) написать функцию, которая принимает параметрами три числа, первое суммирует с вторым и делит на третье 
+
+	sortarr([3,7,1,9,2,8,6,5,4]);
+
+	let number1 = 12 //+prompt('Enter number 1');
+	let number2 = 12 //+prompt('Enter number 2');
+	let number3 = 3 // +prompt('Enter number 3');
+
+	function mathoper(a, b, c){
+		let z = (a + b) / c;
+		console.log(z);
+	}
+
+	mathoper(number1, number2, number3);
+
+// 3) переписать фибоначчи рекурсивно 
+
+	// function fib(f){
+	// 	let a = 1;
+	// 	let b = 1;
+	// 	let summ;
+	// 	for(i = 2; i < f; i++){
+	// 		summ = a+b;
+	// 		a = b;
+	// 		b = summ;
+	// 	}
+	// 	return summ;
+	// }
+
+	// console.log(fib(11));
+
+	function fib(f){
+		if(f <= 1){
+			return f;
+		}
+		else{
+			return fib(f - 1) + fib(f - 2);
+		}
+	}
+
+	console.log(fib(11));
+
+// 4) написать функцию, которая принимает произвольный массив и выводит из него массив 
+// (a) только четных 
+
+	function mass2(a){
+		let arr = [];
+		let index = 0;
+		for(i = 0; i < a.length; i++){
+			if(a[i]%2 == 0){
+				arr[index] = a[i];
+				index++;
+			}
+		}
+		return arr;
+	}
+
+	console.log(mass2([1,5,3,7,8,4,9,16,4,20]));
+
+// (б) только отрицательные
+
+	function massotr(a){
+		let arr = [];
+		let index = 0;
+		for(i = 0; i < a.length; i++){
+			if(a[i] <= 0){
+				arr[index] = a[i];
+				index++;
+			}
+		}
+		console.log(arr);
+	}
+
+	massotr([-2,-3,10,15,2,3,-7,-10,13]);
+
+	</script>
+</body>
+</html>
