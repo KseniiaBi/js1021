@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homework_JS #3</title>
+</head>
+<body>
+    <script>
+        function arrBubble(n) {
+            for(let i = n.length - 1; i > 0; i--){
+                for(let j = 0; j < i;j++){
+                    if(n[j] > n[j + 1]){
+                        let arr = n[j];
+                        n[j] = n[j + 1];
+                        n[j + 1] = arr;
+                    }
+                }
+            }
+            return n;
+        }
+        console.log(arrBubble([3,7,1,9,2,8,6,5,4]));
+        //---------------------------------------------------
+        function sumThree(a,b,c) {
+            a = +prompt('Enter first number');
+            b = +prompt('Enter second number');
+            c = +prompt('Enter third number');
+                let result = (a + b) / c; 
+                console.log(result);
+        }
+        
+        sumThree();
+        //-----------------------------------------------------
+        function arrFibonacci(a,b) {
+            let fib = 11;
+            let c = 0;
+            for(let i = 2; i < fib; i++){
+                c = a + b;
+                a = b;
+                b = c;
+            }
+            return c;                
+        }
+        console.log(arrFibocci(1,1)); 
+        //-------------------------------------------------------
+                function arrEvenNumber(a){
+            let arr = [];
+            let index = 0;
+            for(let i = 0;i < a.length; i++){
+                if (a[i] % 2 === 0) {
+                    arr[index] = a[i];
+                    index++;
+                }
+            }
+            return arr;
+        }
+        console.log(arrEvenNumber([-1,2,-4,9,-2,34,-55,87,0]));
+        //B-------------------------------------------------------
+        function arrNegative(a){
+            let arr = [];
+            let index = 0;
+            for(let i = 0;i < a.length; i++){
+                if (a[i] < 0) {
+                    arr[index] = a[i];
+                    index++;
+                }
+            }
+            return arr;
+        }
+        console.log(arrNegative([-1,2,-4,9,-2,34,-55,87,0]));
+    </script>
+</body>
+</html>

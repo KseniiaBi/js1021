@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homework(JS #2)</title>
+</head>
+<body>
+    <script>
+            let a = +prompt("Введите A:"),
+                b = +prompt("Введите B:"),
+                c = +prompt("Введите C:");
+                let d = `${a}*x^2 + ${b}*x + c`;
+	            console.log(d);
+
+                let x1;
+	            let x2;
+
+                let f = b*b - 4*a*c;
+
+                if(f > 0){
+                x1 = (-b - Math.sqrt(d))/2*a;
+                x2 = (-b + Math.sqrt(d))/2*a;
+                console.log(`x1 = ${x1}, x2 = ${x2}`);
+                }
+                else if(f == 0){
+                x1 = x2 = -f/ (2*a);
+                console.log(`x1,x2 = ${x1}`);
+                }
+                else{
+                console.log('Корней нет');
+                }
+
+            
+    //------------------------------------------------------------------------------------------------
+        let fib = 11;
+
+        let e = 1;
+        let g = 1;
+        let h;
+
+        for(let i = 2; i < fib; i++){
+		h = e + g;
+		e = g;
+		g = h;
+        }
+        console.log(h); 
+
+//------------------------------------------------------------------------------------------------------
+
+let all = Math.pow(2, 64) - 1;
+    mat = Math.sqrt(0.019 / 1000 * 1);
+console.log(all);
+console.log(mat);
+
+//------------------------------------------------------------------------------------------------------
+
+    let rice = 0;
+	let w = 0.000019;
+    for(let i = 1; i < 64; i++){
+		let r = Math.pow(2,i) * w;
+		rice += r;
+    }
+    console.log(rice);
+//-------------------------------------------------------------------------------------------------------
+
+function fn(a){
+            for(let i = 1; i <= a; i++){
+                let str = '';
+                for(let j = a-i; j > 0; j--){
+                    str +=' ';
+                }
+                for(let j = 1; j <= i * 2 -1; j++){
+                    str += '*';
+                }
+                console.log(str);
+            }
+                for(let i = 2; i <= a; i++){
+                let str = '';
+                for(let j = 0; j < i - 1; j++){
+                    str += ' ';
+                }
+                for(let j = (a - i) * 2 + 1; j > 0; j--){
+                    str +='*';
+                }
+                console.log(str);
+
+            }
+        } fn(7)    
+
+    </script>
+</body>
+</html>
