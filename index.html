@@ -36,7 +36,7 @@
  */
 
 
-//HW#2
+/* //HW#2
 
 'use strict';
 
@@ -89,7 +89,82 @@ b = 0.019; //weight 1 grain (gramm)
 c = a*b/1000; // weight of all rise (kg)
 d = c*26.30; //total weight * USD course (uah)
 
-console.log(d)
+console.log(d) */
+
+//HW #3
+
+/* HW: 1) отсортировать массив пузырьком [3,7,1,9,2,8,6,5,4] 
+2) написать функцию, которая принимает параметрами три числа, первое суммирует с вторым и делит на третье
+3) переписать фибоначчи рекурсивно 
+4) написать функцию, которая принимает произвольный массив и выводит из него массив только четных (б) только отрицательные 
+ */
+
+//1)отсортировать массив пузырьком [3,7,1,9,2,8,6,5,4]
+function bublesort(a) {
+    for(let i = 0; i < a.length; i++)
+        for(let j = 0; j < a.length-1; j++){
+           if(a[j] > a[j+1]){
+           let temp = a[j+1]
+           a[j+1] = a[j]
+           a[j] = temp
+        }
+    }
+    return a;
+}
+
+console.log(bublesort([3,7,1,9,2,8,6,5,4]));
+
+//2) написать функцию, которая принимает параметрами три числа, первое суммирует с вторым и делит на третье
+
+function abc(a,b,c){
+    return (a+b)/c
+}
+console.log(abc(6,3,3));
+// 3) переписать фибоначчи рекурсивно (если установить (n<=0) выдает 0??? если (n == 1) ошибка стэк вызовов переполнен???)
+
+function fib(n){
+    if (n <= 1){
+        return 1;
+    }
+    else{
+        return fib(n-1) + fib(n-2);
+    }
+}
+console.log (fib(11));
+
+//4) написать функцию, которая принимает произвольный массив и выводит из него массив только четных (б) только отрицательные
+
+
+function arrNegative(a){
+    let arr = [];
+    let index = 0;
+    for(let i = 0; i < a.length; i++){
+        if(a[i] < 0){
+            arr[index] = a[i];
+            index++;
+        }
+    }
+    return arr;
+}
+
+console.log(arrNegative([-1,2,-4,9,-2,34,-55,87,0]));
+
+//
+
+
+function arrEven(a){
+    let arr = [];
+    let index = 0;
+    for(let i=0; i<a.length; i++){
+        if (a[i] % 2 == 0){
+            arr[index] = a[i];
+            index++;
+        }
+    }
+    return arr;
+}
+
+console.log(arrEven([-1,2,-4,9,-2,34,-55,87,0]));
    
 
 
