@@ -13,233 +13,277 @@
 
 <script>
 
-	// вспомогательные функции и комбинации функций
-
-	let ar2 = [-1,4,-2,3,5,-87,6, 5, 6, 43, 24, 55, -43];
-
-	function filterArray(a,check){
-		let arr = [];
-		let index = 0;
-		for(let i = 0; i < a.length; i++){
-			if(check(a[i])){
-				arr[index] = a[i];
-				index++;
-			}
-		}
-		console.log(arr);
+	function sum(a=1,b=1){
+		let res = a+b;
+		return res;
 	}
 
-	function isNegative(n){
-		return n < 0; // if n<0 returns true, else - false
+	let x = sum(2,3);
+	console.log(sum(x,5));
+
+
+	let y = 10;
+
+// функция не является чистой, поскольку она изменяет переменную за ее пределами
+	function bar(){
+		y = 5;
 	}
-	function isCh(n){
-		return n %2 == 0; // if n%2 == 0 returns true, else - false
-	}
 
-	filterArray(ar2, isNegative);
-	filterArray(ar2, isCh);
+	console.log(y);
+	bar();
+	console.log(y);
 
-	// cо строками можем работать, как с массивами - через индекс буквы и использовать длину
-	// строки не мутабельны
 
-	// суммируем цифры внутри числа, пока не получим результат меньше 9
 
-	function sumNums(n){
-		let num = n.toString(); // n + '' => convert number to string
-		let sum = 0;
-		for(let i = 0; i < num.length; i++){
-			sum += +num[i];
-		}
+	// arrow fn
 
-		if(sum > 9){
-			sumNums(sum);
+	let superSum = (a=1,b=1) => a+b; 
+	// имя функции = (параметры) => тело функции 
+	// (если однострочное и без {}, то оно по умолчанию возвращает свое значение)
+
+
+	// recursion
+
+	// В книге N страниц, пронумерованных как обычно от 1 до N. Если сложить количество цифр, содержащихся в каждом номере страницы, будет 1095. Сколько страниц в книге?
+
+	function bookPages(n, currentPage, sum){
+		let pagenum = currentPage.toString();
+		sum += pagenum.length;
+
+		if(sum < n){
+			currentPage++;
+			return bookPages(n, currentPage, sum);
 		}
 		else{
-			console.log(sum);
+			return currentPage;
 		}
 	}
 
-	sumNums(4718962);
+	console.log(bookPages(1095, 1, 0));
 
 
-	// sum arr
-	let arr = [1,[2,[3,[4,5]]], [6,[7],8,[9,[10,11,[12,13,14,[15]]]]]];
 
-	function sumArr(a){
-		let sum = 0;
-		for(let i = 0; i < a.length; i++){
-			if(a[i].length > 0){
-				sum += sumArr(a[i]);
-			}
-			else{
-				sum += a[i];
-			}
+	// objects
+
+
+	let o = {
+		start: 1,
+		end: 5,
+		data: undefined
+	};
+
+	// objects are mutable
+
+	console.log(o.start);
+	o.start = 3;
+	o.length = 4;
+	console.log(o.start);
+
+	console.log(o.name); // undefined if no property found
+	console.log('name' in o);
+
+	o['data'] = '10348uv';
+
+
+	for(let prop in o){ // где prop - название свойства
+		console.log(`${prop}: ${o[prop]} `);
+	}
+
+
+	const user = {
+		name: 'Ann',
+		age: 21,
+		sayHi: function(){
+			console.warn('Hi!');
+		},
+		sayBye(n){
+			console.error(`${n}, your session is over`);
 		}
-		return sum;
+	};
+
+	const user2 = {
+		name: 'Ann',
+		age: 21
+	}
+	let girl = user;
+
+	console.log(girl == user);
+	console.log(user2 == user);
+	console.log(user);
+
+	user.age = 33;
+	user.hobbys = ['cooking', 'art', 'crossfit'];
+
+	let admin = {
+		name: 'admin',
+		role: 'admin'
 	}
 
-	console.log(sumArr(arr));
+	let john = admin;
+	john.name = 'john';
+	console.log(admin.name);
+	admin = null; // теперь вместо ссылки на обьект в переменной живет null
+	console.log(john);
+	john = null;
 
 
-	// str by sym
+	user.sayHi();
+	user.sayBye('User');
 
-	function printStr(s){
-		for(let char of s){
-			console.log(char);
-		}
+
+	// написать функцию, которая будет возвращать обьект, у которого будут храниться следующие данные: имя, фамилия, город, массив хобби
+
+	function createObject(firstname, lastname, city, hobbys){
+		let obj = {
+			firstname: firstname,
+			lastname: lastname,
+			city: city,
+			userhobbys: hobbys
+		};
+
+		return obj;
 	}
 
-	// printStr('Hello');
-	// printStr('Javascript');
 
-	function mulArr(a,multiplier){
-		let arr = [];
-		let index = 0;
-		for(let num of a){
-			arr[index] = num*multiplier;
-			index++;
-		}
-		console.log(arr);
+	console.log(createObject('Jane', 'Doe', 'LA', ['art', 'football', 'JS']));
+
+
+
+	// 1-7 + lang => day
+
+	let days = {
+		en: ['Mo', 'tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+		ru: ['Пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'вс']
 	}
 
-	mulArr(ar2, 2);
-
-
-
-	// count letter instances in string
-
-	function countLetter(str, letter){
-		let sum = 0;
-		for(let i = 0; i < str.length; i++){
-			if(str[i] == letter){
-				sum += 1; 
-			}	
-		}
-		return sum;
+	function getDay(lang, num){
+		console.log(days[lang][num-1]); 
 	}
 
-	console.log(countLetter('hello','l' ));
-	console.log(countLetter('Bubble','b' ));
+	getDay('en', 3); // wed
+	getDay('ru', 7); // vs
+	
 
-
-	function strToArr(str){
-		let arr = [];
-		for(let i = 0; i < str.length; i++){
-			arr[i] = str[i];
-		}
-		console.log(arr);
-	}
-
-	strToArr('Hello, Javascript');
-
-
-	function wordsToArr(str){
-		let arr = [];
-		let index = 0;
-		let word = '';
-
-		for(let i = 0; i <= str.length; i++){
-			// перебираем строку по символам
-			if(str[i] != ' '){ // если символ не пробел
-				word += str[i]; // дописываем символ в слово
-			}
-			else{ // если символ - пробел
-				arr[index] = word; // записываем слово в массив
-				word = ''; // слово очищаем
-				index++;	// индекс элементов в массиве увеличиваем на 1
-			}
-
-			if( i == str.length -1 ){ // если дошли до последнего символа и он не  пробел
-				arr[index] = word; // добавляем последнее слово в массив
-			}
-
-		}
-		console.log(arr); // выводим массив слов
-	}
-
-	wordsToArr('London is a capital of Great Britain :)');
-
-
-	// замыкания
-
-	let name = 'Masha';
-
-	function sayHi(){
-		let phrase = `Hello, ${name}`; // 'Hello, ' + name
-		console.log(phrase);
-	}
-
-	sayHi();
-
-	name = 'Dasha';
-	sayHi(name);
-
-
-	function makeCounter(){
-		let count = 0;
-
-		return function(){
-			console.log(++count);
+	let u = {
+		firstname: 'Ann',
+		lastname: 'F',
+		greet(){
+			console.warn(`Hello, my name is ${this.firstname} ${this.lastname}`);
 		}
 	}
 
+	u.greet();
 
-	let counter = makeCounter();
-	counter();
-	counter();
-	counter();
-	counter();
+	let z = {
+		firstname:'Mary',
+		lastname:'D',
+		greet: u.greet
+	}
 
-	let counter2 = makeCounter();
-	counter2();
-	counter2();
-
-
-	// остаточные параметры и оператор расширения
+	z.greet();
 
 
-	function sum(){
+	// const calc = {
+	// 	a: +prompt('Type A'),
+	// 	b: +prompt('Type B'),
+	// 	sum(){
+	// 		return this.a + this.b;
+	// 	},
+	// 	extr(){
+	// 		return this.a - this.b;
+	// 	},
+	// 	mul(){
+	// 		return this.a * this.b;
+	// 	},
+	// 	div(){
+	// 		return this.a / this.b;
+	// 	}
+	// }
+
+	// console.log(calc.sum());
+	// console.log(calc.extr());
+	// console.log(calc.mul());
+	// console.log(calc.div());
+
+
+	//  сумма всех значений чисел в обьекте
+
+	let nums = {
+		l: 'Lalala',
+		a: 2,
+		b: 7,
+		c: 8,
+		d: 4,
+		e: 9,
+		f: 1,
+		g: 5,
+		h: 6,
+		i: 'BlaBlaBla'
+	}
+
+	function sumObj(ob){
 		let res = 0;
-		for(let i = 0; i < arguments.length; i++){
-			res += arguments[i];
+		for(let num in ob){
+			if(typeof(ob[num]) == 'number'){
+				res += ob[num];
+			}
 		}
 		console.log(res);
 	}
 
-	sum(1,2,3,4);
-
-	// оператор расширения
-	// collection to elements
-	sum(...ar2);
-
-	console.log(Math.min(1,2,3,4));
-	console.log(Math.min(...ar2));
+	sumObj(nums);
 
 
-	// остаточные параметры
+	// count lettes in str and return obj with letter counts {letter: count}
 
-	function greet(phrase, name, ...restOfAll){
-		let msg = `${phrase}, ${name}`;
-		for(let arg of restOfAll){
-			msg += ' ' + arg ;
+	function wordToLetters(word){
+		let obj = {};
+		for(let letter of word){
+			if(letter in obj){ // obj[letter] != undefined если эта буква была найдена, как имя свойства в обьекте
+				obj[letter] += 1;
+			}
+			else{
+				// создаем в обьекте свойство с названием буквы и записываем туда 1
+				obj[letter] = 1;
+			}
 		}
-		console.log( msg);
+		console.log(obj);
 	}
 
-	greet("Good afternoon", 'Jane', 'Doe');
-	greet('Good evening', 'Sir', 'Arthur', 'James', 'Dale');
+	wordToLetters('bubble');
+	wordToLetters('apple pie');
 
 
-	function count(a, b, ...something){
-		console.log(a+b);
-		console.log(something);
+	//  сумма диапазона чисел, начало в свойстве start, end - конец
+	let range = {
+		start: 1,
+		end: 5,
+		sumRange(){
+			let sum = 0;
+			for(let i = this.start; i <= this.end; i++){
+				sum += i;
+			} 
+			console.log(sum);
+		}	
+	}
+	
+	range.sumRange();
+
+
+	function arrToObj(arr){
+		let obj = {};
+		for(let i = 0; i < arr.length; i++){
+			obj[i] = arr[i];
+		}
+		console.log(obj);
 	}
 
-	count(2,3,4,5,6);
-
-	// оператор расширения используется в вызове функции и разбивают массив на элементы, а остаточные параметры при описании параметров (аргументов) функции и собирают лишние аргументы в массив
+	arrToObj([1,2,3,4,5]);
 
 
+	// HW 1) написать отдельные функции или методы для калькулятора вычитания, умножения и деления, при которых используется только оператор сложения целых положительных чисел
+	// 2) Дано число n=1000. Делите его на 2 столько раз, пока результат деления не станет меньше 50. Какое число получится? Посчитайте количество итераций, необходимых для этого (итерация - это проход цикла), и запишите его в переменную num. Решить с рекурсией и без
+	// 3) У скольких целых чисел, лежащих в диапазоне от 1 до 1000, есть цифра 3? PS: 33 - одно число
 
 
 </script>
