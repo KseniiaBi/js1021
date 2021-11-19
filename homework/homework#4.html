@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>JS FE</title> 
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1"> 
+	<meta name="keywords" content="Js HTML CSS markup front-end">
+</head>
+<body>
+
+
+
+<script>
+
+// HW 1) написать отдельные функции или методы для калькулятора вычитания, 
+// умножения и деления, при которых используется только оператор сложения 
+// целых положительных чисел
+
+// Вычитание
+
+console.warn('Задача 1 - Вычитание');
+
+function extrplus(a,b){
+	let sum = 0;
+	if(a == 0){
+		return b;
+	}
+	else if(b == 0){
+		return a;
+	}
+	else{
+		b *= -1;
+		sum = a + b;
+		return sum;
+	}
+	
+}
+
+console.log(extrplus(10,4));
+console.log(extrplus(0,4));
+console.log(extrplus(10,0));
+
+// Умножение
+
+console.warn('Задача 1 - Умножение');
+
+function mulplus(a,b){
+	let sum = 0;
+	if(a == 0 || b == 0){
+		return 0;
+	}
+	else{
+		for(let i = 1; i <= b; i++){
+			sum += a;
+		}
+		return sum;
+	}
+
+}
+
+console.log(mulplus(25,14));
+console.log(mulplus(0,4));
+console.log(mulplus(10,0));
+
+// Деление
+
+console.warn('Задача 1 - Деление');
+
+function divplus(a,b){
+	let sum = 0;
+	let x = 0;
+
+	if (a == 0){
+		return 0;
+	}
+	else if(b == 0){
+		return 'На 0 делить нельзя';
+	}
+	else{
+		while(sum + b <= a){
+			sum += b;
+			x++
+		}
+		return x;
+	}
+		
+}
+
+
+
+console.log(divplus(10,5));
+console.log(divplus(15,5));
+console.log(divplus(10,2));
+console.log(divplus(10,0));
+console.log(divplus(0,5));
+
+// 2) Дано число n=1000. Делите его на 2 столько раз, пока результат 
+// деления не станет меньше 50. Какое число получится? 
+// Посчитайте количество итераций, необходимых для этого (итерация - это проход цикла), 
+// и запишите его в переменную num. Решить с рекурсией и без
+
+console.warn('Задача 2');
+
+function divto(n, i){
+	let summ = 0;
+		if(n > 50){
+			summ = n/2;
+			n = summ;
+			summ = 0;
+			i++;
+			return divto(n, i);
+			
+		}
+		else{
+			console.log(i);
+			return (n);
+		}
+		
+}
+
+console.log(divto(1000, 1));
+
+
+// 3) У скольких целых чисел, лежащих в диапазоне от 1 до 1000, есть цифра 3? 
+// PS: 33 - одно число
+
+console.warn('Задача 3');
+
+let diopazon = {
+	start: 1,
+	end: 1000,
+	three(){
+		let summthree = 0;
+		let string = '';
+		let t;
+		for(let i = this.start; i <= this.end; i++){
+			t = i + string;
+			if(t[0] == 3 || t[1] == 3 || t[2] == 3){
+				summthree++;
+			}
+			
+		}
+		console.log(summthree);
+			
+
+	}
+		
+}
+
+diopazon.three();
+
+</script>
+
+</body>
+</html>
