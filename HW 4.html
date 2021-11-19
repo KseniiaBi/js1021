@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>JS FE</title> 
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1"> 
+	<meta name="keywords" content="Js HTML CSS markup front-end">
+	<link rel="stylesheet"  href="main.css" >
+</head>
+<body>
+
+
+
+<script>
+
+
+	// 2) Дано число n=1000. Делите его на 2 столько раз, пока результат деления не станет меньше 50. Какое число получится? Посчитайте количество итераций, необходимых для этого (итерация - это проход цикла), и запишите его в переменную num. Решить с рекурсией и без
+	
+	function getNum(n, a){
+		let res = 0;
+		if (n > 50){
+			res = n / a;
+			n = res;
+			n ++;
+			return getNum(n, a);
+		}
+		else{
+			return (n)
+		}	
+	}
+	console.log (getNum (1000, 2));
+	
+
+</script>
+
+</body>
+</html>
