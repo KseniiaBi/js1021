@@ -13,277 +13,83 @@
 
 <script>
 
-	function sum(a=1,b=1){
-		let res = a+b;
-		return res;
-	}
-
-	let x = sum(2,3);
-	console.log(sum(x,5));
-
-
-	let y = 10;
-
-// функция не является чистой, поскольку она изменяет переменную за ее пределами
-	function bar(){
-		y = 5;
-	}
-
-	console.log(y);
-	bar();
-	console.log(y);
-
-
-
-	// arrow fn
-
-	let superSum = (a=1,b=1) => a+b; 
-	// имя функции = (параметры) => тело функции 
-	// (если однострочное и без {}, то оно по умолчанию возвращает свое значение)
-
-
-	// recursion
-
-	// В книге N страниц, пронумерованных как обычно от 1 до N. Если сложить количество цифр, содержащихся в каждом номере страницы, будет 1095. Сколько страниц в книге?
-
-	function bookPages(n, currentPage, sum){
-		let pagenum = currentPage.toString();
-		sum += pagenum.length;
-
-		if(sum < n){
-			currentPage++;
-			return bookPages(n, currentPage, sum);
-		}
-		else{
-			return currentPage;
-		}
-	}
-
-	console.log(bookPages(1095, 1, 0));
-
-
-
-	// objects
-
-
-	let o = {
-		start: 1,
-		end: 5,
-		data: undefined
-	};
-
-	// objects are mutable
-
-	console.log(o.start);
-	o.start = 3;
-	o.length = 4;
-	console.log(o.start);
-
-	console.log(o.name); // undefined if no property found
-	console.log('name' in o);
-
-	o['data'] = '10348uv';
-
-
-	for(let prop in o){ // где prop - название свойства
-		console.log(`${prop}: ${o[prop]} `);
-	}
-
-
-	const user = {
-		name: 'Ann',
-		age: 21,
-		sayHi: function(){
-			console.warn('Hi!');
-		},
-		sayBye(n){
-			console.error(`${n}, your session is over`);
-		}
-	};
-
-	const user2 = {
-		name: 'Ann',
-		age: 21
-	}
-	let girl = user;
-
-	console.log(girl == user);
-	console.log(user2 == user);
-	console.log(user);
-
-	user.age = 33;
-	user.hobbys = ['cooking', 'art', 'crossfit'];
-
-	let admin = {
-		name: 'admin',
-		role: 'admin'
-	}
-
-	let john = admin;
-	john.name = 'john';
-	console.log(admin.name);
-	admin = null; // теперь вместо ссылки на обьект в переменной живет null
-	console.log(john);
-	john = null;
-
-
-	user.sayHi();
-	user.sayBye('User');
-
-
-	// написать функцию, которая будет возвращать обьект, у которого будут храниться следующие данные: имя, фамилия, город, массив хобби
-
-	function createObject(firstname, lastname, city, hobbys){
-		let obj = {
-			firstname: firstname,
-			lastname: lastname,
-			city: city,
-			userhobbys: hobbys
-		};
-
-		return obj;
-	}
-
-
-	console.log(createObject('Jane', 'Doe', 'LA', ['art', 'football', 'JS']));
-
-
-
-	// 1-7 + lang => day
-
-	let days = {
-		en: ['Mo', 'tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-		ru: ['Пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'вс']
-	}
-
-	function getDay(lang, num){
-		console.log(days[lang][num-1]); 
-	}
-
-	getDay('en', 3); // wed
-	getDay('ru', 7); // vs
-	
-
-	let u = {
-		firstname: 'Ann',
-		lastname: 'F',
-		greet(){
-			console.warn(`Hello, my name is ${this.firstname} ${this.lastname}`);
-		}
-	}
-
-	u.greet();
-
-	let z = {
-		firstname:'Mary',
-		lastname:'D',
-		greet: u.greet
-	}
-
-	z.greet();
-
-
-	// const calc = {
-	// 	a: +prompt('Type A'),
-	// 	b: +prompt('Type B'),
-	// 	sum(){
-	// 		return this.a + this.b;
-	// 	},
-	// 	extr(){
-	// 		return this.a - this.b;
-	// 	},
-	// 	mul(){
-	// 		return this.a * this.b;
-	// 	},
-	// 	div(){
-	// 		return this.a / this.b;
-	// 	}
-	// }
-
-	// console.log(calc.sum());
-	// console.log(calc.extr());
-	// console.log(calc.mul());
-	// console.log(calc.div());
-
-
-	//  сумма всех значений чисел в обьекте
-
-	let nums = {
-		l: 'Lalala',
-		a: 2,
-		b: 7,
-		c: 8,
-		d: 4,
-		e: 9,
-		f: 1,
-		g: 5,
-		h: 6,
-		i: 'BlaBlaBla'
-	}
-
-	function sumObj(ob){
-		let res = 0;
-		for(let num in ob){
-			if(typeof(ob[num]) == 'number'){
-				res += ob[num];
-			}
-		}
-		console.log(res);
-	}
-
-	sumObj(nums);
-
-
-	// count lettes in str and return obj with letter counts {letter: count}
-
-	function wordToLetters(word){
-		let obj = {};
-		for(let letter of word){
-			if(letter in obj){ // obj[letter] != undefined если эта буква была найдена, как имя свойства в обьекте
-				obj[letter] += 1;
-			}
-			else{
-				// создаем в обьекте свойство с названием буквы и записываем туда 1
-				obj[letter] = 1;
-			}
-		}
-		console.log(obj);
-	}
-
-	wordToLetters('bubble');
-	wordToLetters('apple pie');
-
-
-	//  сумма диапазона чисел, начало в свойстве start, end - конец
-	let range = {
-		start: 1,
-		end: 5,
-		sumRange(){
-			let sum = 0;
-			for(let i = this.start; i <= this.end; i++){
-				sum += i;
-			} 
-			console.log(sum);
-		}	
-	}
-	
-	range.sumRange();
-
-
-	function arrToObj(arr){
-		let obj = {};
-		for(let i = 0; i < arr.length; i++){
-			obj[i] = arr[i];
-		}
-		console.log(obj);
-	}
-
-	arrToObj([1,2,3,4,5]);
-
 
 	// HW 1) написать отдельные функции или методы для калькулятора вычитания, умножения и деления, при которых используется только оператор сложения целых положительных чисел
+
+
+
+	function mul(a,b) {
+		let result = 0;
+		for(let i = 0; i < b; i++){
+			result += a;
+		}
+		console.log(result);
+	}
+
+	mul(12,4);
+
+
+	function extract(a,b){
+		for(let i = 0; i < b; i++){
+			a += -1;
+		}
+		console.log(a);
+	}
+	extract(20,13);
+
+
+	function divide(a,b){
+		let res = 0;
+		let rest = 0;
+		for(let i = b; i <= a; i+=b){
+			res += 1;
+			rest = a-i;
+			if(rest !== 0){
+				rest = 1/b;
+			}
+		}
+		console.log(`res: ${res+rest}`);
+	}
+
+	divide(5,3);
+
 	// 2) Дано число n=1000. Делите его на 2 столько раз, пока результат деления не станет меньше 50. Какое число получится? Посчитайте количество итераций, необходимых для этого (итерация - это проход цикла), и запишите его в переменную num. Решить с рекурсией и без
+
+	let n = 1000;
+	let iter = 0;
+	while(n > 50) {
+		n = n/2;
+		iter++;
+	}
+	console.log(`iter: ${iter}, num: ${n}`);
+
+
+
 	// 3) У скольких целых чисел, лежащих в диапазоне от 1 до 1000, есть цифра 3? PS: 33 - одно число
+
+	function countThrees(num){
+		let count = 0;
+		for(let i = 0; i < num; i++){
+			if(hasThree(i.toString())){
+				count++;
+			}
+		}
+		console.log(count);
+	}
+
+	function hasThree(num){
+		let hasThree = false;
+		for(let char of num){
+			if(char == 3){
+				hasThree = true;
+			}
+		}
+		return hasThree;
+	}
+
+	countThrees(1000);
+
+
 
 
 </script>
