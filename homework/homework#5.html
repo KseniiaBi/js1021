@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>JS FE</title> 
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1"> 
+	<meta name="keywords" content="Js HTML CSS markup front-end">
+</head>
+<body>
+
+
+
+<script>
+
+// 1) Дан массив [1, 2, 3, 4, 5]. С помощью метода преобразуйте в [1, 4, 5].
+
+let arr1 = [1,2,3,4,5];
+let remove = arr1.splice(1,2);
+
+console.log(arr1);
+console.log(remove);
+
+
+// 2) Дан массив [1, 2, 3, 4, 5]. С помощью метода splice сделайте из него массив [1, 2, 3, 'a', 'b',
+// 'c', 4, 5].
+
+let arr2 = [1,2,3,4,5];
+let add = arr2.splice(2,0,'a','b','c');
+
+console.log(arr2);
+
+// 3)  Дана строка, например, '123456'. Переверните эту строку (сделайте из нее '654321') не используя цикл.
+
+let str1 = '123456';
+let arrmass = Array.from(str1);
+let reversemass = arrmass.reverse();
+let str2 = reversemass.join('');
+
+console.log(str1);
+console.log(reversemass);
+console.log(str2);
+
+// 4) Дано число, например, 3751. Отсортируйте цифры в нем (сделайте из него 1357) не используя цикл.
+
+let str3 = '3751';
+let arrmas = Array.from(str3);
+let sortmass = arrmas.sort();
+let str4 = sortmass.join('');
+
+console.log(str3);
+console.log(sortmass);
+console.log(str4);
+
+
+// 5) Дан массив с числами. Выведите последовательно его элементы используя рекурсию в паре с каким-то методом массива и не используя цикл.
+
+let massnum = [2,1,4,6,5,2,7,12,3,4];
+massnum.forEach(item => console.log(item));
+
+
+
+</script>
+
+</body>
+</html>
