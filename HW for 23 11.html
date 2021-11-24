@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>HW for 24 Nov</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="keywords" content="Ls HTML CSSmarkup front-end">
+    </head>
+    <body>
+        <script>
+            // 1) Дан массив [1, 2, 3, 4, 5]. С помощью метода преобразуйте в [1, 4, 5].
+
+            let ar = [1, 2, 3, 4, 5];
+            ar.splice(1, 2);
+            console.log(ar);
+
+            // 2) Дан массив [1, 2, 3, 4, 5]. С помощью метода splice сделайте из него массив [1, 2, 3, 'a', 'b',
+            // 'c', 4, 5].
+
+            let arr = [1, 2, 3, 4, 5];
+            arr.splice(3, 0, 'a', 'b', 'c');
+            console.log(arr);
+
+            // 3)  Дана строка, например, '123456'. Переверните эту строку (сделайте из нее '654321') не
+            // используя цикл.
+
+            let st = '123456';
+            let ay = Array.from(st);
+            let ary = ay.reverse();
+            console.log(ary.toString());
+
+            // 4) Дано число, например, 3751. Отсортируйте цифры в нем (сделайте из него 1357) не
+            // используя цикл.
+
+            let num = 3751;
+            let ns = num.toString();
+            let sa = Array.from(ns);
+            let ssn = sa.sort();
+            let ats = ssn.toString();
+            console.log(ats);
+
+            // 5) Дан массив с числами. Выведите последовательно его элементы используя рекурсию в паре с каким-то методом массива и не используя цикл.
+
+            let arya = [5, -9, 0, 7, 8, 14, -60];
+
+            function arRec(h)
+            {
+                return h.sort(function(a,b){return a - b});
+            }
+
+            console.log(arRec(arya));
+        </script>
+    </body>
+</html>
