@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HW #4</title>
+</head>
+<body>
+    <script>
+	// const calc = {
+	// 	a: +prompt('Type A'),
+	// 	b: +prompt('Type B'),
+	// 	sum(){
+	// 		return this.a + this.b;
+	// 	},
+	// 	extr(){
+	// 		return this.a - this.b;
+	// 	},
+	// 	mul(){
+	// 		return this.a * this.b;
+	// 	},
+	// 	div(){
+	// 		return this.a / this.b;
+	// 	}
+	// }
+
+	// console.log(calc.sum());
+	// console.log(calc.extr());
+	// console.log(calc.mul());
+	// console.log(calc.div());
+
+//-------------------------------------------------------------------------------------------------
+        function summN(n,num){
+            for(i = 0;i < n ;i++){
+                if(n > 50){
+                n /=2;
+                num++;
+                }
+            }
+            console.log(`Результат деления: ${n}`);
+            console.log(`Количество интераций: ${num}`);
+            
+        }
+        summN(1000,0);
+
+        function summN_rec(n,num){
+                if(n > 50){
+                    num++;
+                    return summN_rec(n/=2,num);
+        }
+        console.log(`Результат деления: ${n}`);
+        console.log(`Количество интераций: ${num}`);
+    }
+        summN_rec(1000,0);
+//-------------------------------------------------------------------------------------------------
+function countThrees(num){
+		let count = 0;
+		for(let i = 0; i < num; i++){
+			if(hasThree(i.toString())){
+				count++;
+			}
+		}
+		console.log(count);
+	}
+
+	function hasThree(num){
+		let hasThree = false;
+		for(let char of num){
+			if(char == 3){
+				hasThree = true;
+			}
+		}
+		return hasThree;
+	}
+
+	countThrees(1000);
+    </script>
+</body>
+</html>
