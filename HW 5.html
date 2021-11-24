@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>JS FE</title> 
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1"> 
+	<meta name="keywords" content="Js HTML CSS markup front-end">
+
+</head>
+<body>
+
+
+
+<script>
+
+//HW:
+//1) Дан массив [1, 2, 3, 4, 5]. С помощью метода преобразуйте в [1, 4, 5].
+
+let arr = [1, 2, 3, 4, 5];
+arr.splice(1, 2);
+console.log(arr);
+
+
+//2) Дан массив [1, 2, 3, 4, 5]. С помощью метода splice сделайте из него массив [1, 2, 3, 'a', 'b', 'c', 4, 5].
+
+let arr = [1, 2, 3, 4, 5];
+arr.splice(3, 0, 'a', 'b', 'c');
+console.log(arr);
+
+
+//3)  Дана строка, например, '123456'. Переверните эту строку (сделайте из нее '654321') не используя цикл.
+
+
+function reverseString(str) {
+  return str.split("").reverse().join("");
+}                                                 //split - разбивает строку на символы; reverse - переворачивает 	                                                 //массив;join - собирает строку из массива.
+console.log(reverseString("123456")); 
+
+
+
+//4) Дано число, например, 3751. Отсортируйте цифры в нем (сделайте из него 1357) не используя цикл.
+
+let num = 3751;
+let arrayOfDigits = Array.from(String(num), Number);  
+arrayOfDigits.sort(function(a, b) {
+   return a - b;
+});
+console.log(arrayOfDigits); 
+
+//5) Дан массив с числами. Выведите последовательно его элементы используя рекурсию в паре с каким-то методом массива и не используя цикл.
+
+let arr = [4,7,3,9,6,1,8]
+let arrTwo = [];
+	function flatArr(a){
+		for(num of a){
+			if(num.length > 0){
+					flatArr(num);
+			}
+			else{
+					arrTwo.push(num);
+			}
+		}
+		console.log(arrTwo);
+	}
+	flatArr(arr);
+
+</script>
+
+</body>
+</html>
