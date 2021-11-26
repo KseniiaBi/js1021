@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HW # 6</title>
+</head>
+<body>
+    <script>
+        //1) toCamelCase другим способом
+
+        //2) isAnagram('Анна')
+        function isAnagram (str1,str2){
+            if(str1.length != str2.length){
+                return false;
+            }
+            let a1 = str1.split('');
+            let a2 = str2.split(''); 
+
+            a1.reverse();
+            a2.reverse();
+
+            str1 = a1.join('');
+            str2 = a2.join('');
+            if(str1.charAt(0) && str2.charAt(3) || str1.charAt(3) && str2.charAt(0)){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        console.log(isAnagram('Анна', 'аннА'));
+//----------------------------------------Вариант №2
+        function isAnagram1 (str){
+            let a = str.toLocaleLowerCase();
+            let a1 = Array.from(a);
+            a1 = a1.reverse().join('');
+            let result = (a == a1)
+            console.log(result);
+        }
+        isAnagram1('Анна');
+        //3) Проверить ввод номера телефона в формате +38(099) 099-99-99
+        function telNumber(){
+            debugger;
+            let num1 = prompt(`Введите Ваш номер телефона,начиная с +38`);
+            let tel = /\+[3][8]\d\d\d\d\d\d\d\d\d\d/g;
+            
+            if(num1.match(tel)){
+                alert(`Ваш номер ${num1}`);
+            }else{
+                alert('Неверно введён номер,попробуйте ещё раз');
+                return false;
+            }
+            console.log(num1);
+        }
+        telNumber();
+    </script>
+</body>
+</html>
