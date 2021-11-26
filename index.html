@@ -243,7 +243,7 @@ NdivTwoRec(1000, 2, 0);
     // 3) У скольких целых чисел, лежащих в диапазоне от 1 до 1000, есть цифра 3? PS: 33 - одно число */
 
 
-    // HW #5
+/*     // HW #5
 // 1) Дан массив [1, 2, 3, 4, 5]. С помощью метода преобразуйте в [1, 4, 5].
 let arr = [1, 2, 3, 4, 5];
 arr.splice(1,2);
@@ -298,7 +298,47 @@ function callEvery(n){
     };
 }
 
-console.log (callEvery([1,2,3,4,5]))
+console.log (callEvery([1,2,3,4,5])) */
+
+// HW #6
+// 1) toCamelCase другим способом
+
+
+/* function camelize(text) {
+    text = text.replace(/[-_\s.]+(.)?/g,
+     (_, c) => c ? c.toUpperCase() : '');
+
+    return text.substr(0, 1).toLowerCase() + text.substr(1);
+} */
+
+function toCamelCase2(s){
+    let arr = s.split('-');
+    }
+
+//2) isAnagram('Анна')
+function isAnagram(word){
+    let a1 = word.toLowerCase();
+    let a2 = Array.from(a1);
+    a2 = a2.reverse();
+    a2 = a2.join('');
+    let result = (a1 == a2);
+    console.log(result);
+}
+isAnagram('Анна');
+
+//3)проверить ввод номера телефона в таком формате +38 (099) 099-99-99
+//(num.startsWith(+38) && num.lenghts == 18)
+function checkNumFormat (num){
+    let regex = /\+[3][8]\s\(\d\d\d\)\s\d\d\d[-]\d\d[-]\d\d/g;
+    if (num.match(regex)) {
+        return true;
+    }
+    else {
+        console.warn(`uncorrect phone number format`)
+        return false;
+    }
+}
+console.log(checkNumFormat('+38 (099) 099-99-99'))
 
 
 </script>
