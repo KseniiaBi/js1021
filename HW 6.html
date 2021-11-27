@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>JS FE</title> 
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1"> 
+	<meta name="keywords" content="Js HTML CSS markup front-end">
+	<link rel="stylesheet"  href="main.css" >
+</head>
+<body>
+
+
+
+<script>
+
+
+										
+
+
+
+//1) toCamelCase другим способом
+
+function toCamelCase(str){
+	let strNew = '';
+
+	for (let i = 0; i < str.length; i++) {
+    	if (str [i - 1] === '-') {
+        	strNew += str[i].toUpperCase();
+    	}else if (str[i] !== '-'){
+        	strNew += str[i];
+    	}
+	}
+	console.log(strNew)
+}
+
+toCamelCase('border-left-color');
+toCamelCase('margin-top');
+
+
+
+
+// 2) isAnagram('Анна')
+function isAnagram(str){
+	let str1 = str.toLowerCase();
+	console.log(str1);
+	let a = str1.split(''); 
+	console.log(a);
+	if(a === a.reverse()){ 
+		return true;
+	}
+	else{
+		return false; 
+	}
+}
+
+console.log(isAnagram('Анна'));
+
+
+</script>
+
+</body>
+</html>
