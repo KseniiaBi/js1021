@@ -13,47 +13,254 @@
 
 <script>
 
-// ДЗ: 1) toCamelCase другим способом 2) isAnagram('Анна')
+	// descriptors, getters, setters in objects
 
-// 1
+	let user = {
+		name: 'Ann'
+	}
 
-function toCamelCase(str){
-	let newstr = '';
+	console.log(user.toString());
 
-	newstr = str.replace(/-[a-z]/g, function(x,y){ // x: search result, y:  position of search result
-		return str.charAt(y+1).toUpperCase();
+
+	// Flags - writable, configurable, enumerable
+
+	Object.defineProperty(user, 'pass', {
+		value: 123123123,
+		writable: false, // можно ли перезаписать свойство или нет через знак =, но при этом можно перезаписать через повторный вызов Object.defineProperty(
+		configurable: false, // Cannot redefine property: pass при значении false
+		enumerable: false
 	});
 
-	console.log(newstr);
-}
-toCamelCase('border-left-color');
+
+	Object.defineProperty(user, 'name', {
+		value: 'MMMMM',
+		writable: false, // можно ли перезаписать свойство или нет через знак =, но при этом можно перезаписать через повторный вызов Object.defineProperty(
+		configurable: false, // Cannot redefine property: pass при значении false
+		enumerable: true
+	});
+
+	let prop = 'age';
+
+	Object.defineProperty(user, prop, {
+		value: '18',
+		writable: false, // можно ли перезаписать свойство или нет через знак =, но при этом можно перезаписать через повторный вызов Object.defineProperty(
+		configurable: false, // Cannot redefine property: pass при значении false
+		enumerable: true
+	});
 
 
-// 2
-
-function isAnagram(word){
-	word = word.toUpperCase();
-	let wordReversed = word.split('').reverse().join('');
-	return word == wordReversed;
-}
-
-console.log(isAnagram('Анна'));
-console.log(isAnagram('Мария'));
+	for(let prop in user){
+		console.log(prop);
+	}
 
 
-// 3 
+	// user.toString = () => {
+	// 	for(let prop in user){
+	// 		console.log(`${prop}: ${user[prop]}`);
+	// 	}
+	// }
+	//  will be enumerable
 
-function checkPhoneNum(num){
-	// [0-9]
-	// \d - digit
-	// \s -whitespace
-	// n{X}
-	return num.match(/[\+]38\s[\(]0[0-9]{2}[\)]\s[0-9]{3}[\-][0-9]{2}[\-][0-9]{2}/gi);
-}
+	Object.defineProperty(user, 'toString', {
+		value: () => {
+			for(let prop in user){
+				console.log(`${prop}: ${user[prop]}`);
+			}
+		},
+		enumerable: false,
+		writable: false,
+		configurable: false	
+	});
 
-console.log(checkPhoneNum('+38 (099) 099-99-99'));
-console.log(checkPhoneNum('+38(099)099 9999'));
+	user.toString();
 
+	Object.getOwnPropertyDescriptors(user); // прочитать дескрипторы
+	Object.getOwnPropertyDescriptor(user, 'pass'); // прочитать дескриптор
+
+	Object.preventExtensions(user); //нельзя добавлять свойства
+
+	user.hobbys = []; // not created because of Object.preventExtensions(user);
+
+
+	// Object.freeze(user) // configurable: false, writable: false для всех существующих свойств  + нельзя добавлять или удалять свойства
+	// Object.seal(user) // configurable: false для всех существующих свойств  + нельзя добавлять или удалять свойства
+
+	// Object.isFrozen(user) // true/false
+	// Object.isSealed(user) // true/false
+
+
+	let o = Object.create(null); // чтобы этот обьект не наследовался от Object и у него не было встроенных методов
+
+
+	// геттеры и сеттеры
+
+	let admin = {
+		_cardNum: '8888 7777 6666 9999',
+		_name: 'Admin',
+		_lastname: 'Adminych',
+		get fullname(){
+			return this._name + ' ' + this._lastname;
+		},
+		set fullname(newname){
+			this._name = newname.split(' ')[0];
+			this._lastname = newname.split(' ')[1];
+		}
+	}
+
+// define property accessor
+
+	Object.defineProperty(admin, 'card', {
+		// will return value with get(), but won't set new becase of not set()
+		get(){
+			return this._cardNum
+		},
+		set(c){
+			if(c.toString().length < 16){
+				console.error(c.length);
+				return false;
+			}
+			else{
+				this._cardNum = c;
+			}
+		},
+		enumerable: false
+	});
+
+
+
+	let userProfile = {
+		username: '',
+		phone: '',
+
+		get name(){
+			return this.username;
+		},
+		set name(newname){
+			if(typeof(newname) != 'string' && newname.toString().length < 3 || newname != 'Ян'){
+				return false;
+			}
+			else{
+				this.username = newname;
+			}
+		},
+		get tel(){
+			return this.phone;
+		},
+		set tel(newtel){
+			if(newtel.toString().match(/[0-9]/g)){ // вставить регулярку из дз
+				this.phone = newtel;
+			}
+		}
+	}
+
+
+	//  деструктурирующее присваивание
+
+
+	// let arr = ['Name', 'Lastname'];
+	// let [name, lastname] = arr;
+
+	// console.log(name);
+	// console.log(lastname);
+
+	let c = ['Yulius', 'Caesar', 'Roman Imperior', 'Council'];
+
+	// let [name, lastname, , title] = c;
+	// console.log(name);
+	// console.log(lastname);
+	// console.log(title);
+
+	let [name, lastname, ...rest] = c;
+	console.log(name);
+	console.log(lastname);
+	console.log(rest); // все элементы массива, начиная с индекса 2
+
+
+	let opt = {
+		w: 400,
+		h: 200,
+		type: 'menu',
+		url: 'index'
+	}
+
+	// let {w, h, type} = opt;
+
+	// console.log(w);
+	// console.log(h);
+	// console.log(type);
+
+
+	let {w = width, h = height, ...sdacha} = opt;
+
+	console.log(w);
+	console.log(h);
+	console.log(sdacha);
+
+
+
+	//  Map and Set
+
+	let dictionary = new Map();
+
+	// size  map.set(key, value) map.get(key) map.has(key) map.delete(key) map.clear()
+
+	dictionary.set('usr', user);
+	dictionary.set(1, admin);
+	dictionary.set(true, 'True');
+
+	console.log(dictionary);
+	console.log(dictionary.size);
+
+	console.log(dictionary.has('1'));
+	console.log(dictionary.delete(1));
+
+	console.log(dictionary.size);
+
+	dictionary.clear();
+
+	console.log(dictionary.size);
+
+
+	// for ... of ... map.entries()  map.keys() map.values()
+
+
+	let usver = new Map(Object.entries(user)); // создание из обьекта
+	console.log(usver);
+
+
+	for(let e of usver.entries()){
+		console.log(e);
+	}
+
+
+	//  Set 
+
+	let indexes = new Set(); // можно передавать параметром массив
+
+	indexes.add(61001);
+	indexes.add(61005);
+	indexes.add(61077);
+	indexes.add(61001);
+	indexes.add(61001);
+
+	console.log(indexes.size);
+
+	console.log(indexes.has(61001));
+
+	indexes.delete(61001);
+
+	console.log(indexes.has(61001));
+
+
+	// for ... of or forEach
+
+	indexes.forEach(item => console.log(item));
+
+
+	indexes.clear();
+	console.log(indexes.size);
+
+	
 
 </script>
 
