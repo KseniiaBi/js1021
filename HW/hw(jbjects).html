@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="script.js"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 1)в массиве есть обьекты с товарами, у них может быть свойство "акция".
+      // вывести в консоль только те товары, у которых она есть.
+
+      // 1.1
+
+      let arr = [
+        { item: `bread`, sale: true },
+        { sale: false, item: `gum` },
+        { item: `butter`, sale: true },
+      ];
+
+      let getSale = arr
+        .filter(function (products) {
+          return products.sale == true;
+        })
+        .map(function (products) {
+          return products.item;
+        });
+
+      console.log(getSale);
+
+      // 1.2
+
+      // let arr2 = [
+      // 	{item: `bread`,
+      // 	sale: true,
+      // 	price: 22,
+      // 	},
+      // 	{item: `chocolate`,
+      // 	sale: true,
+      // 	price: 36,
+      // 	},
+      // 	{item: `fondue`,
+      // 	sale: false,
+      // 	price: 100,
+      // 	},
+      // ];
+
+      // for(let i = 0; i < arr2.length; i++) {
+      // 	if(arr2[i].sale == true){
+      // 		console.log(arr2[i].item);
+      // 	}
+      // }
+
+      // console.log(arr2);
+
+      // 2)Напишите функцию map(fn, array), которая принимает на вход функцию
+      //  и массив, и обрабатывает каждый элемент массива этой функцией,
+      //  возвращая новый массив.
+
+      let array = [1, -2, `jh`, `ssl`, 3, -4, 5, 0, null];
+
+      let getNumbers = array
+        .map((positiveNumbers) => {
+          return positiveNumbers;
+        })
+        .filter((positiveNumbers) => {
+          return positiveNumbers % 2 == 0;
+        });
+
+      console.log(getNumbers);
+      console.log(array);
+
+      // 3)напишите функцию pluck, которая берет массив объектов
+      //  и возвращает массив значений определенного поля:
+
+      let characters = [
+        { name: "barney", age: 36 },
+        { name: "fred", age: 40 },
+      ];
+
+      let getName = characters.map((characterName) => {
+        return characterName.name;
+      });
+
+      console.log(getName);
+    </script>
+  </body>
+</html>
