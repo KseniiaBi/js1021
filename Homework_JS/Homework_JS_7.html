@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HW #7</title>
+</head>
+<body>
+    <script>
+        //1)в массиве есть обьекты с товарами, у них может быть свойство "акция". вывести в консоль только те товары, у которых она есть
+
+        product = [
+            {name:"Парацетамол",property:"action"},
+            {name:"Активированный уголь"},
+            {name:"Нош-шпа", property:"action"},
+            {name:"Ибупрофен"},
+            {name:"Аспирин", property:"action"},
+            {name:"Дротаверин"},
+            {name:"Нимесил",property:"action"},
+            {name:"АЦЦ"},
+            {name:"Муколтин"},
+        ]
+            product.forEach (function(element){
+            for(let key in element){
+                if(key == 'property'){
+                console.log(element.name);
+                }
+            }
+        });
+        //2)Напишите функцию map(fn, array), которая принимает на вход функцию и массив, и обрабатывает каждый элемент массива этой функцией, возвращая новый массив.
+        function arrRever(n){
+            return arr1.reverse();
+        }
+        let arr1 = [1,2,3,4,5,6,7,8,9,10,11,12,13];
+        console.log(arr1);
+        
+        function map(fn,array){
+            arr = [];
+            for(let i = 0;i < array.length; i++){
+                arr = arrRever(array[i]);
+            }
+            console.log(arr);
+        }
+        map(arrRever,arr1);
+        //3)напишите функцию pluck, которая берет массив объектов и возвращает массив значений определенного поля:
+
+    var characters = [
+        { 'name': 'barney', 'age': 36 },
+        { 'name': 'fred', 'age': 40 }
+    ];
+            function pulck(arr,a){
+                let arrChar = arr.map(function(element){
+                    return element[a];
+                });
+                console.log(arrChar);
+            }
+            pulck(characters, 'name');
+    </script>
+</body>
+</html>
