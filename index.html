@@ -300,16 +300,15 @@ function callEvery(n){
 
 console.log (callEvery([1,2,3,4,5])) */
 
-// HW #6
+/* // HW #6
 // 1) toCamelCase другим способом
 
 
-/* function camelize(text) {
-    text = text.replace(/[-_\s.]+(.)?/g,
-     (_, c) => c ? c.toUpperCase() : '');
-
-    return text.substr(0, 1).toLowerCase() + text.substr(1);
-} */
+// function camelize(text) {                                        )
+//     text = text.replace(/[-_\s.]+(.)?/g,                         )
+//      (_, c) => c ? c.toUpperCase() : '');                        >>> not my
+//     return text.substr(0, 1).toLowerCase() + text.substr(1);     )
+// }                                                                )
 
 function toCamelCase2(s){
     let arr = s.split('-');
@@ -338,7 +337,63 @@ function checkNumFormat (num){
         return false;
     }
 }
-console.log(checkNumFormat('+38 (099) 099-99-99'))
+console.log(checkNumFormat('+38 (099) 099-99-99')) */
+
+
+// HW #7
+// 1)в массиве есть обьекты с товарами, у них может быть свойство "акция". вывести в консоль только те товары,
+// у которых она есть
+// if sale == true (попробовать for of)
+let menu = [
+      	{val: `soup`, sale: true, price: 10},
+      	{val: `salad`, sale: false, price: 20},
+      	{val: `cake`, sale: true, price: 30}
+      ];
+function saleConsole(arr){
+	for (let i = 0; i < arr.length; i++){
+		if (arr[i].sale == true){
+			console.log (`${arr[i].val}:${arr[i].price}`);
+		}
+	}
+}
+saleConsole(menu);
+let getSale = menu.filter(function(item){
+	return item.sale == true;
+})
+ console.log(getSale);
+
+// 2)Напишите функцию map(fn, array), которая принимает на вход функцию и массив, и обрабатывает каждый элемент массива этой функцией,
+// возвращая новый массив.
+function isPositive(n){
+		return n > 0;
+	}
+positive = [1,2,-5,6,-9,-8,12]
+function map(fn, arr){
+	let newArr = [];
+       for(let i = 0; i < arr.length; i++){
+           newArr.push(isPositive(arr[i]));
+       }
+       console.log(newArr);
+}
+
+map(isPositive, positive);
+
+
+
+
+// 3)напишите функцию pluck, которая берет массив объектов и возвращает массив значений определенного поля:
+let characters = [
+  { 'name': 'barney', 'age': 36 },
+  { 'name': 'fred', 'age': 40 }
+];
+function pluck(arr){
+		let getVal= arr.map(function(item){
+			return item.age
+			}
+		)
+		console.log(getVal)
+};
+pluck(characters);
 
 
 </script>
