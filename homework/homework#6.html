@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>JS FE</title> 
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1"> 
+	<meta name="keywords" content="Js HTML CSS markup front-end">
+</head>
+<body>
+
+
+
+<script>
+
+// 1) toCamelCase другим способом
+
+
+
+	let str = 'border-left-color';
+	let camelCased = str.replace(/-([a-z])/g,
+	function (g){
+		return g[1].toUpperCase();
+	}
+	);
+
+	console.log(camelCased);
+
+// 2) isAnagram('Анна')
+
+let stera = 'Потоп';
+
+function isAnagram(str){
+	let str1 = str.toLowerCase();
+	let str2 = str.toLowerCase();
+	let arr = str2.split('');
+	arr.reverse();
+	str2 = arr.join('');
+	if(str1 == str2){
+		return true;
+	}
+	else{
+		return false;
+	}
+}
+
+console.log(isAnagram(stera));
+
+// 3) проверить ввод номера телефона в таком формате +38 (099) 099-99-99
+
+function checkPhoneNum(num){
+	return num.match(/[\+]38\s[\(]0[0-9]{2}[\)]\s[0-9]{3}[\-][0-9]{2}[\-][0-9]{2}/gi);
+}
+
+console.log(checkPhoneNum('+38 (099) 099-99-99'));
+console.log(checkPhoneNum('+38(099)099 9999'));
+ 
+</script>
+
+</body>
+</html>

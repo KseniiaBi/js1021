@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>JS FE</title> 
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1"> 
+	<meta name="keywords" content="Js HTML CSS markup front-end">
+</head>
+<body>
+
+
+
+<script>
+
+// 1)в массиве есть обьекты с товарами, у них может быть свойство "акция". вывести в консоль только те товары, у которых она есть
+
+let massobj = [
+	{'name': 'phone', 'promotion': true},
+	{'name': 'PC', 'promotion': false},
+	{'name': 'Notebook', 'promotion': true},
+	{'name': 'Headphones', 'promotion': false},
+	{'name': 'Keyboard', 'promotion': true},
+];
+
+function isPromotion(mass){
+	for(let num in mass){
+		if(mass[num].promotion == true){
+			console.log(mass[num]);
+		}
+	}
+}
+
+isPromotion(massobj);
+
+// 2)Напишите функцию map(fn, array), которая принимает на вход функцию и массив, и обрабатывает каждый элемент массива этой функцией, возвращая новый массив.
+
+let array1 = [2,3,6,5,2];
+
+
+function isMap(fn, arr){
+	let newArr = [];
+	for(let i in arr){
+		newArr[i] = isExp(arr[i]);
+	}
+	return newArr;
+}
+
+function isExp(item){
+	let resultitm = item ** 2;
+	return resultitm;
+}
+
+console.log(isMap(isExp, array1));
+
+// 3)напишите функцию pluck, которая берет массив объектов и возвращает массив значений определенного поля
+
+
+let characters = [
+	{'name': 'barney', 'age': 36},
+	{'name': 'fred', 'age': 40}
+];
+
+function pluck(massobj){
+	let newMass = [];
+	for(let num in massobj){
+		newMass[num] = massobj[num].age;
+	}
+	return newMass;
+}
+
+console.log(pluck(characters));
+
+</script>
+
+</body>
+</html>
