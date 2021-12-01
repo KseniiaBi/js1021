@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>JS FE</title> 
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1"> 
+	<meta name="keywords" content="Js HTML CSS markup front-end">
+</head>
+<body>
+
+<script>
+
+//1)в массиве есть обьекты с товарами, у них может быть свойство "акция". вывести в консоль только те товары, у которых она есть
+
+let goodsArr = [
+	{title: 'apple', cost: 20},
+	{title: 'banana', cost: 25, property: 'promotion'},
+	{title: 'orange', cost: 30, property: 'promotion'},
+	{title: 'potatoes', cost: 15},
+	{title: 'carrot', cost: 10},
+];
+
+let filteredValue = goodsArr.filter(function (item) {
+      return item.property == 'promotion';
+});
+
+console.log(filteredValue);
+
+
+//2)Напишите функцию map(fn, array), которая принимает на вход функцию и массив, и обрабатывает каждый элемент массива этой функцией, возвращая новый массив.
+
+function map(fn,array){
+	let arrayLength = array.length;
+	let newArray = [];
+	for (i = 0; i < array.length; i++){
+		newArray [i] = fn(array [i]);
+	}
+	return newArray;
+}
+function square(x) {return x*x;};
+console.log(map(square,[1,2,3,4]));
+
+
+//3)напишите функцию pluck, которая берет массив объектов и возвращает массив значений определенного поля:
+
+var characters = [
+{ 'name': 'barney', 'age': 36 },
+{ 'name': 'fred', 'age': 40 }
+];
+f
+unction pluck(objs,name) {
+    var arr = [];
+    for(let i in objs){
+        if(objs[i].hasOwnProperty(name)){
+            arr.push(objs[i][name]);
+        }
+    }
+    return arr;
+}
+console.log(pluck(characters, 'name'));
+
+</script>
+
+</body>
+</html>
