@@ -11,67 +11,7 @@
 
 
 
-<script>
-
-
-	let user = {
-		username: 'Johnny',
-		firstname: 'John',
-		lastname: 'Doe',
-		sayHi(){
-			console.log('Hi, my name is '+ this.username);
-		}
-	}
-
-	let admin = {
-		firstname: 'Admin',
-		lastname: 'Adminych'
-	}
-
-	user.sayHi();
-
-
-	// setTimeout(user.sayHi, 1000); // undefined
-	// setTimeout(() => user.sayHi(), 1000); // fixed
-	setTimeout(user.sayHi.call(user), 1000); // fixed
-
-
-	// call / apply call(context, arg1, arg2 ... argN) apply(context, [args])
-
-	function introduce(){
-		console.log(`My name is ${this.firstname} ${this.lastname}`);
-	}
-
-
-	introduce.call(user);
-	introduce.call(admin);
-
-	console.log(Math.min.apply(null, [1,2,3,7,-4,6,-9]));
-	console.log(Math.max.call(null, 1,2,3,7,-4,6,-9));
-
-	// bind 
-
-	let bound = introduce.bind(user);
-
-	bound();
-
-
-	function foo(){
-		console.log(`${this.firstname} has ${Math.max(...arguments)} hobbys`);
-	}
-
-	foo.call(user, 1,2,3,7,-4,6,-9);
-	foo.apply(admin, [1,2,3,7,-4,6,-9]);
-
-
-
-	
-
-
-
-
-
-</script>
+<script type="module" src="main.js"></script>
 
 </body>
 </html>
