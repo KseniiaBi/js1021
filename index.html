@@ -131,7 +131,13 @@
 			// break; // останавливает выполнение
 			continue; // пропустили итерацию
 		}
-		console.log(`j: ${j}`);
+		console.log(`j: ${j}`);mfdbgmdfb
+	function greet(phrase, name, ...restOfAll){
+		let msg = `${phrase}, ${name}`;
+		for(let arg of restOfAll){
+			msg += ' ' + arg ;
+		} 
+		console.log( msg);
 	}
 
 
