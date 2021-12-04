@@ -15,257 +15,59 @@
 	
 // OOP
 
-// obects and proto
 
-let alive = {
-	exist: true,
-	breathe(){
-		console.log('Breath in........ Breath out');
-	}
-}
-
-let animal = {
-	eat: true,
-	__proto__: alive
-}
-
-let rabbit = {
-	jump: true,
-	__proto__: animal
-}
-
-// alive.__proto__ = rabbit; // TypeError: Cyclic __proto__ value
-
-console.log(rabbit.eat);
-
-for(let prop in rabbit){
-	if(rabbit.hasOwnProperty(prop)){
-		console.log(prop);
-	}
-}
-
-
-rabbit.breathe();
-
-
-
-
-//  function constructor
-
-
-function Gadget(name){
-	this.name = name;
-	this.enabled = false;
-
-	this.enable = function(){
-		this.enabled = true;
-		console.log(`${this.name} is enabled`);
-	}
-
-	this.disable = function(){
-		this.enabled = false;
-		console.log(`${this.name} is disabled`);
-	}
-}
-
-let fridge = new Gadget('Samvisung');
-fridge.enable();
-fridge.disable();
-
-
-
-function CoffeeMachine(name, c){
-
-	Gadget.call(this, name);
-
-	this._waterAmount = 0;
-	this.capacity = c;
-	this.min_water = 100;
-	this.has_beans = false;
-	this.waterIsHeated = false;
-
-	this.parentEnable = this.enable;
-
-	this.enable = function(){
-		this.parentEnable(); // вызвали родительский enable()
-		setTimeout(() => {
-			this.waterIsHeated = true;
-			console.log('Ready to use');
-		}, 500);
-	}
-
-	this.waterAmount = function(){
-		if(arguments.length == 0){
-			console.log(this._waterAmount);
-		}
-		else{
-			if(typeof(arguments[0]) !== 'number'){
-				console.error('Please, use water instead');
+class Article{
+	static author = 'John Doe';
+	static articlesCount = 0;
+	static archive = [];
+	static sortArticles(){
+		Article.archive.sort((a,b) => {
+			if(a.date > b.date){
+				return 1;
+			}
+			else if(a.date < b.date){
+				return -1;
 			}
 			else{
-				if(arguments[0] < 0){
-					console.warn(`Don't use this water for uoyr own purposes!`);
-				}
-				else if(arguments[0] + this._waterAmount > this.capacity){
-					console.error('Caution! Wet floor!');
-				}
-				else{
-					this._waterAmount += arguments[0];
-					console.log(`Current waterAmount is ${this._waterAmount}`);
-				}
+				return 0;
 			}
-		}
+		});
+		console.log(Article.archive);
 	}
 
-	this.addCoffee = function(amount){
-		this.has_beans = true;
+	#authorNickName = 'Poet';
+
+
+	constructor(name, date){
+		Article.articlesCount += 1;
+		Article.archive.push(this);
+		this.name = name;
+		this.date = date;
+
 	}
 
-	this.run = function(drink){
-		console.log(this._waterAmount);
-		// console.log(this.has_beans);
-		console.log(this);
-		console.log(this.enabled);
-		if(this._waterAmount >= this.min_water && this.has_beans  && this.enabled){
-			console.log(`Preparing ${drink}...`);
-			setTimeout(() =>console.log(`${drink} is ready`), 1000);
-		}
-		else{
-			console.error('Can not brew coffee');
-		}
+	printArticle(){
+		console.log(`Издана статья ${this.name}, автор: ${Article.author} ${this.#authorNickName} `);
+		this.#checkNN();
 	}
-}
-
-
-let saeco = new CoffeeMachine('Saeco 2f', 900);
-
-saeco.run();
-saeco.enable();
-saeco.waterAmount();
-saeco.waterAmount(90);
-saeco.waterAmount(1110);
-saeco.waterAmount(110);
-saeco.addCoffee(16);
-// saeco.run();
-setTimeout(saeco.run.call(saeco,'espresso'), 2000);
-
-saeco.disable();
-
-
-// F.prototype
-
-function Animal(type, name){
-	this.name = name;
-	this.type = type;
-	this.speed = 0;
-	this.isRunning;
-}
-
-Animal.prototype.run = function(){
-	this.isRunning = setInterval( run.bind(this), 200);
-}
-
-function run(){
-	this.speed += 1;
-	console.log(`${this.type} ${this.name} is running with speed ${this.speed} km/h`);
-}
-
-Animal.prototype.stop = function(){
-	clearInterval(this.isRunning);
-	this.speed = 0;
-	console.log(`${this.type} ${this.name}'s speed ${this.speed} km/h`);
-}
-
-let leo = new Animal('Lion', 'Leo');
-// leo.run();
-
-
-
-function Cat(type,name){
-	Animal.call(this, type, name);
-	this.isPlaying = false;
-
-	this.isRunning;
-	// methods will be applied here via Cat.prototype
-}
-
-Cat.prototype.run = function() {
-	this.isRunning = setInterval( run.bind(this), 200);
-}
-
-Cat.prototype.purr = function(){
-	console.warn('Mrrrrrr');
-}
-Cat.prototype.play = function(){
-	this.isPlaying = true;
-	console.log(`${this.type} ${this.name} is playing`);
-}
-
-
-let murzik = new Cat('Siberian', 'Murzius II');
-
-murzik.purr();
-murzik.play();
-// murzik.run();
-
-
-// Classes OOP
-
-class Vehicle{
-	constructor(type, year, model){
-		this.type = type;
-		this.year = year;
-		this.model = model;
-		this.fuel = 0;
-		this.fuelCapacity = 70;
-	}
-
-	sell(){
-		console.warn(`Продам ${this.type} ${this.model} ${this.year} года выпуска не бит, не крашен`);
-	}
-
-	addFuel(amount){
-		if(this.fuel + amount < this.fuelCapacity){
-			this.fuel += amount;
-			console.log(`Залили ${amount} литров`);
-		}
-	}
-
-	drive(){
-		console.log(`${this.model} поехал, 50км/ч`);
+	#checkNN(){
+		console.log(this.#authorNickName);
 	}
 }
 
-let zil = new Vehicle('Грузовик', 1989, 'ЗИЛ');
-zil.addFuel(20);
-zil.sell();
+let a1 = new Article('How to learn JS in 1 hr', '15.11.2020');
+let a2 = new Article('How to learn CSS in 1 hr', '19.11.2020');
+let a3 = new Article('How to learn HTML in 1 hr', '12.11.2020');
 
+a1.printArticle();
+a2.printArticle();
+a3.printArticle();
 
-class ElectroCar extends Vehicle{
-	constructor(type, year, name){
-		super(type, year, name); // вызываем родительский конструктор
-	}
+console.log(Article.articlesCount);
+Article.sortArticles();
 
-	addFuel(){
-		console.warn('Не отключайте зарядный кабель до окончания процесса');
-		setTimeout(console.log('🔌'), 500);
-	}
+// a1.#checkNN(); //Uncaught SyntaxError: Private field '#checkNN' must be declared in an enclosing class
 
-	drive(){
-		super.drive();
-		console.log('🚥');
-	}
-}
-
-
-let tesla = new ElectroCar('Electric car', 2020, 'Tesla model X');
-
-tesla.addFuel();
-tesla.drive();
-tesla.sell();
-
-
-//  ДЗ 1) переписать кофеварку на классы, а транспорт на функции-конструкторы (***можете описывать любые другие сущности)
 
 </script>
 
