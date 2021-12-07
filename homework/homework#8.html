@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>JS FE</title> 
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1"> 
+	<meta name="keywords" content="Js HTML CSS markup front-end">
+</head>
+<body>
+
+
+
+<script>
+
+'use strict'
+
+//  ДЗ 
+// 1) переписать кофеварку на классы.
+
+class CoffeeMachine{
+	constructor(name, c){
+		this.name = name;
+		this.capacity = c;
+		this.water_Amount = 0;
+		this.min_water = 100;
+		this.has_beans = false;
+		this.waterIsHeated = false;
+		this.enable = false;
+	}
+	enables(){
+		this.enable = true;
+		console.log(`${this.name} вкючена`);
+		setTimeout(() => {
+			this.waterIsHeated = true;
+			console.log('Готова к использованию');
+		}, 2000);
+	}
+	disable(){
+		this.enable = false;
+		console.log(`${this.name} выкючена`);
+	}
+	waterAmount(){
+		if(arguments.length == 0){
+			console.log(this.water_Amount);
+		}
+		else{
+			if(typeof(arguments[0]) !== 'number'){
+				console.error('Пожалуйста, используйте вместо этого воду');
+			}
+			else{
+				if(arguments[0] < 0){
+					console.warn('Не используйте эту воду в своих целях!')
+				}
+				else if(arguments[0] + this.water_Amount > this.capacity){
+					console.error('Осторожно, полный контейнер воды!');
+				}
+				else{
+					this.water_Amount += arguments[0];
+					console.log(`Текущее кол-во воды ${this.water_Amount}`);
+				}
+			}
+		}
+	}
+	addCoffee(amount){
+		if(amount > 0){
+		this.has_beans = true;
+		}
+	}
+	run(drink){
+		console.log(this.water_Amount);
+		console.log(this);
+		console.log(this.enable);
+		if(this.water_Amount >= this.min_water && this.has_beans && this.enable){
+			console.log(`Приготовление ${drink}...`);
+			setTimeout(() => console.log(`${drink} готов!`), 3000);
+		}
+		else{
+			console.error('Невозможно сварить кофе');
+		}
+	}
+
+
+}
+
+let franke = new CoffeeMachine('Franke A600', 2000);
+franke.enables();
+franke.waterAmount(90);
+franke.waterAmount(500);
+franke.addCoffee(20);
+franke.run('americano');
+franke.disable();
+
+
+
+
+// 2)транспорт на функции-конструкторы (***можете описывать любые другие сущности)
+
+function Vehicle(type, year, model){
+	this.type = type;
+	this.year = year;
+	this.model = model;
+	this.fuel = 0;
+	this.fuelCapacuty = 70;
+
+	this.sell = function(){
+		console.warn(`Продам ${this.type} ${this.model} ${this.year} года выпуска, не бит, не крашен `);		
+	}
+	this.addFuel = function(amount){
+		if(this.fuel + amount < this.fuelCapacuty){
+			this.fuel += amount;
+			console.log(`Залили ${amount} литров`);
+		}
+		else{
+			console.warn(`Ваш бак будет переполнен, в случае если вы нальете столько литров топлива`);
+		}
+	}
+	this.drive = function(){
+		console.log(`${this.model} поехал, 50км/ч`);
+	}
+}
+
+let volvo = new Vehicle('Легковой автомобиль', 2005, 'Volvo V50');
+volvo.sell();
+volvo.addFuel(45);
+volvo.drive();
+
+</script>
+
+</body>
+</html>
