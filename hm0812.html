@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html, charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Project name for browser tab</title>
+</head>
+<body>
+    <script>
+        
+        class Gadget {
+            constructor(name, capacity) {
+                this.name = name;
+                this.enabled = false;
+            }
+            enable() {
+                if (this.enabled = true) {
+                    console.log(`${this.name} is enabled`);
+                }
+            }
+            disable() {
+                if(this.enabled = false) {
+                console.log(`${this.name} is disabled`); 
+                }
+            }
+        }
+
+        class CoffeeMachine extends Gadget{
+            constructor(name, capacity) {
+                super(name, capacity);
+                this._waterAmount = 0;
+                this.min_water = 100;
+                this.has_beans = false;
+                this.waterIsHeated = false;
+            }
+            enable() {
+                super.enable();
+                setTimeout(() => {
+                    this.waterIsHeated = true;
+			        console.log('Ready to use');
+		            }, 500);
+            }
+            waterAmount() {
+                if (arguments.length == 0) {
+                    console.log(this._waterAmount);
+                }
+                else {
+                    if(typeof(arguments[0]) !== 'number'){
+                    console.error('Please, use water instead');
+                }
+                    else{
+                        if(arguments[0] < 0){
+                            console.warn(`Don't use this water for uoyr own purposes!`);
+                        }
+                        else if(arguments[0] + this._waterAmount > this.capacity){
+                            console.error('Caution! Wet floor!');
+                        }
+                        else{
+                            this._waterAmount += arguments[0];
+                            console.log(`Current waterAmount is ${this._waterAmount}`);
+                        }
+                    }
+                }
+            }
+            addCoffee(amount) {
+                this.has_beans = true;
+            }
+            run(drink) {
+                // console.log(this._waterAmount);
+                // console.log(this.has_beans);
+                // console.log(this);
+                // console.log(this.enabled);
+                if(this._waterAmount >= this.min_water && this.has_beans  && this.enabled){
+                    console.log(`Preparing ${drink}...`);
+                    setTimeout(() =>console.log(`${drink} is ready`), 1000);
+                }
+                else{
+                    console.error('Can not brew coffee');
+                }
+            }
+        }
+
+        let saeco = new CoffeeMachine('Saeco 2f', 900);
+
+        saeco.run();
+        saeco.enable();
+        saeco.waterAmount();
+        saeco.waterAmount(90);
+        saeco.waterAmount(150);
+        saeco.addCoffee(16);
+        setTimeout(saeco.run.call(saeco,'espresso'), 2000);
+
+
+
+    function Vehicle(type, year, model) {
+        this.type = type;
+        this.year = year;
+        this.model = model;
+        this.fuel = 0;
+        this.fuelCapacity = 70;
+
+        this.sell = function() {
+            console.warn(`Продам ${this.type} ${this.model} ${this.year} года выпуска не бит, не крашен`);
+        }
+
+        this.addFuel = function(amount) {
+            if(this.fuel + amount < this.fuelCapacity){
+			this.fuel += amount;
+			console.log(`Залили ${amount} литров`);
+		    }
+	    }
+        
+        this.drive = function() {
+            console.log(`${this.model} поехал, 50км/ч`);
+        }
+    }
+
+    let zil = new Vehicle('Грузовик', 1989, 'ЗИЛ');
+    zil.addFuel(20);
+    zil.sell();
+    zil.drive();
+
+    function ElectroCar(type, year, model) {
+
+        Vehicle.call(this, type, year, model);
+
+        this.addFuel = function() {
+            console.warn('Не отключайте зарядный кабель до окончания процесса');
+		    setTimeout(console.log('🔌'), 500);
+        }
+        this.parentDrive = this.drive;
+
+        this.drive = function () {
+		    console.log('🚥');
+        }
+        
+    }
+
+    let tesla = new ElectroCar('Electric car', 2020, 'Tesla model X');
+    tesla.addFuel();
+    tesla.drive();
+    tesla.sell();
+
+    </script>
+</body>
+</html>    
