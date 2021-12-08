@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>JS FE</title> 
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1"> 
+	<meta name="keywords" content="Js HTML CSS markup front-end">
+</head>
+<body>
+
+<script>
+//переписать транспорт на функции-конструкторы
+
+function Vehicle(type, year, model){
+		this.type = type;
+		this.year = year;
+		this.model = model;
+		this.fuel = 0;
+		this.fuelCapacity = 70;
+
+	this.sell = function(){
+		console.warn(`Продам ${this.type} ${this.model} ${this.year} года выпуска не бит, не крашен`);
+	}
+	this.addFuel = function(amount){
+		if(this.fuel + amount < this.fuelCapacity){
+			this.fuel += amount;
+			console.log(`Залили ${amount} литров`);
+		}
+	}
+
+	this.drive = function(){
+		console.log(`${this.model} поехал, 50км/ч`);
+	}
+}
+
+
+let kia = new Vehicle('Седан', 2013, 'kia');
+kia.addFuel(60);
+kia.sell();
+kia.drive();
+
+
+
+
+
+//переписать кофеварку на классы,
+
+class CoffeeMachine{
+	constructor(name, c){
+		this.name = name;
+		this.enabled = false;
+		this._waterAmount = 0;
+		this.capacity = c;
+		this.min_water = 100;
+		this.has_beans = false;
+		this.waterIsHeated = false;
+		this.parentEnable = this.enable;
+	}
+
+	enable(){
+		if(this.enabled = true){
+		console.log(`${this.name} is enabled`)};
+		
+	}
+	disable(){
+		if(this.enabled = false){
+			console.log(`${this.name} is disabled`)};
+	}
+	setTimeout(){
+			if(this.waterIsHeated = true){
+			console.log('Ready to use')}
+	}
+	waterAmount(){
+		if(arguments.length == 0){
+			console.log(this._waterAmount);
+		}
+		else{
+			if(typeof(arguments[0]) !== 'number'){
+				console.error('Please, use water instead');
+			}
+			if(arguments[0] < 0){
+				console.warn(`Don't use this water for uoyr own purposes!`);
+			}
+			else if(arguments[0] + this._waterAmount > this.capacity){
+				console.error('Caution! Wet floor!');
+			}
+			else{
+				this._waterAmount += arguments[0];
+				console.log(`Current waterAmount is ${this._waterAmount}`);
+			}
+		}
+	}
+
+	addCoffee(amount){
+		this.has_beans = true;
+	}
+
+	run(drink){
+		console.log(this._waterAmount);
+		// console.log(this.has_beans);
+		console.log(this);
+		console.log(this.enabled);
+		if(this._waterAmount >= this.min_water && this.has_beans  && this.enabled){
+			console.log(`Preparing ${drink}...`);
+			setTimeout(() =>console.log(`${drink} is ready`), 1000);
+		}
+		else{
+			console.error('Can not brew coffee');
+		}
+	}
+}
+
+let saeco = new CoffeeMachine('Saeco 2f', 900);
+saeco.run();
+saeco.enable();
+saeco.waterAmount();
+saeco.waterAmount(90);
+saeco.waterAmount(1110);
+saeco.waterAmount(110);
+saeco.addCoffee(16);
+// saeco.run();
+setTimeout(saeco.run.call(saeco,'espresso'), 2000);
+saeco.disable();
+
+
+
+</script>
+
+</body>
+</html>
