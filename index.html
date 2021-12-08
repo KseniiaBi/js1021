@@ -5,93 +5,89 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width,initial-scale=1"> 
 	<meta name="keywords" content="Js HTML CSS markup front-end">
-	<link rel="stylesheet"  href="main.css" >
+	<style>
+		header{
+			padding: 30px;
+		}
+		nav{
+			display: none;
+		}
+
+		.opened nav{
+			display: block;
+		}
+
+		.opened #burgermenu {
+			filter: invert(1);
+		}
+
+	</style>
 </head>
 <body>
+
+	<header>
+		<nav>
+			<a href="#">Link</a>
+			<a href="#">Link</a>
+			<a href="#">Link</a>
+		</nav>
+
+		<div id="burgermenu">✅</div>
+	</header>
+
+
+	<div id="menubtn">🆗</div>
+	<div class="menu">Menu</div>
+	<button>Click Me!</button>
+	<section>Section 1</section>
+	<section class="menu">Section 2
+		<div>
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+		<button onclick="alert(1111)">don't click me!</button>
+	</div>
+	</section>
 
 
 
 <script>
 
-// Singleton
+	let menu_btn = document.getElementById('menubtn');
 
-	class Universe{
-		static count = 0;
-		static singleton = null;
+	let menus = document.getElementsByClassName('menu'); // HTML Collection
+	let menu = document.getElementsByClassName('menu')[0]; // 1st elem of HTML Collection
 
-		constructor(name){
-			if(Universe.count == 0){
-				this.name = name;
-				Universe.count += 1;
-				Universe.singleton = this;
-				console.log(Universe.singleton);
-			}
-			else{
-				return Universe.singleton;
-			}
-		}
+	let btn = document.getElementsByTagName('button')[0];
+
+	let section1 = document.querySelector('section'); // querySelector can use any VALID CSS selector - .menu #menubtn div.menu .nav>.link
+
+	let sections = document.querySelectorAll('section'); // Node List
+
+	let section2 = document.querySelectorAll('section')[1]; // alternative - sections[1]
+
+	let btn2 = section2.getElementsByTagName('button')[0];
+
+	btn2.onclick =  () => console.log(222);
+
+
+	function sayHi(){
+		console.log('Hi!');
 	}
 
-	let u = new Universe('Вселенная');
-	let u2 = new Universe('Вселенная 2');
-	let u3 = new Universe('Вселенная 3');
+	btn.onclick = sayHi;
 
+// burger menu
 
-	// Factory
+const header = document.getElementsByTagName('header')[0];
+const bm_btn = document.getElementById('burgermenu');
 
-
-	class Cookie{
-		constructor(props){
-			this.name = props.name;
-			this.type = props.type;
-			this.price = props.price;
-		}
-	}
-
-	class Cake{
-		constructor(props){
-			this.name = props.name;
-			this.type = props.type;
-			this.price = props.price;
-			this.weight = props.weight;
-		}
-	}
-
-	class Candy {
-		constructor(props){
-			this.name = props.name;
-			this.type = props.type;
-			this.price = props.price;
-			this.color = props.color;
-		}
-	}
-
-
-	class Factory{
-		// fabric method
-		createSweets(props){
-			switch (props.type){
-				case 'candy' : return new Candy(props);
-				case 'cake' : return new Cake(props);
-				case 'cookie' : return new Cookie(props);
-			}
-		}
-	}
-
-
-
-let sweetsFactory = new Factory();
-
-let sweet1 = sweetsFactory.createSweets({name: 'Roshen', type: 'candy', price: 99.90, color: 'orange'});
-let sweet2 = sweetsFactory.createSweets({name: 'Romashka', type: 'candy', price: 199.90, color: 'green'});
-let sweet3 = sweetsFactory.createSweets({name: 'Red Velvet', type: 'cake', price: 299.90, weight: 1.5});
-let sweet4 = sweetsFactory.createSweets({name: 'American', type: 'cookie', price: 199.90});
-
-console.log(sweet1);
-console.log(sweet2);
-console.log(sweet3);
-console.log(sweet4);
-
+bm_btn.onclick = function(){
+	header.classList.toggle('opened');
+}
 
 </script>
 
