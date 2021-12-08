@@ -6,88 +6,211 @@
 	<meta name="viewport" content="width=device-width,initial-scale=1"> 
 	<meta name="keywords" content="Js HTML CSS markup front-end">
 	<style>
-		header{
-			padding: 30px;
-		}
-		nav{
-			display: none;
+
+	*{
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+	}
+		
+		.slider{
+			width: 100%;
+			position: relative;
+			height: 320px;
 		}
 
-		.opened nav{
-			display: block;
+		.slide{
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			text-align: center;
+			font-size: 100px;
+			color: #fff;
+			background: lightgray;
+			padding: 60px 20px;
+			opacity: 0;
+			transition: opacity 0.5s linear;
 		}
 
-		.opened #burgermenu {
-			filter: invert(1);
+		.slide:nth-of-type(2){
+			background-color: lightgreen;
+		}
+		.slide:nth-of-type(3){
+			background-color: gold;
+		}
+		.slide:nth-of-type(4){
+			background-color: hotpink;
+		}
+		.slide:nth-of-type(5){
+			background-color: lightblue;
+		}
+
+		.slide.active{
+			opacity: 1;
+		}
+
+		.dots {
+			position: absolute;
+			bottom: 20px;
+			width: 100%;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+
+		.dot{
+			width: 14px;
+			height: 14px;
+			border-radius: 50%;
+			border: 2px solid #fff;
+			margin: 0 7px;
+			cursor: pointer;
+		}
+
+		.dot.active{
+			background: #fff;
+		}
+
+		#arr_prev, #arr_next {
+			position: absolute;
+			z-index: 5;
+			top: 90px;
+			font-size: 120px;
+			transform: scaleX(0.6);
+			color: #fff;
+			cursor: pointer;
+		}
+
+		#arr_next{
+			right: 0;
 		}
 
 	</style>
 </head>
 <body>
 
-	<header>
-		<nav>
-			<a href="#">Link</a>
-			<a href="#">Link</a>
-			<a href="#">Link</a>
-		</nav>
+	<div class="slider">
+		<div class="slide active">Slide 1</div>
+		<div class="slide">Slide 2</div>
+		<div class="slide">Slide 3</div>
+		<div class="slide">Slide 4</div>
+		<div class="slide">Slide 5</div>
 
-		<div id="burgermenu">✅</div>
-	</header>
+		<div class="dots">
+			<div class="dot active"></div>
+			<div class="dot"></div>
+			<div class="dot"></div>
+			<div class="dot"></div>
+			<div class="dot"></div>
+		</div>
 
-
-	<div id="menubtn">🆗</div>
-	<div class="menu">Menu</div>
-	<button>Click Me!</button>
-	<section>Section 1</section>
-	<section class="menu">Section 2
-		<div>
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-		<button onclick="alert(1111)">don't click me!</button>
+		<div id="arr_prev">&lt;</div> 
+		<div id="arr_next">&gt;</div> 
 	</div>
-	</section>
 
+
+	<div class="slider">
+		<div class="slide active">Slide 1</div>
+		<div class="slide">Slide 2</div>
+		<div class="slide">Slide 3</div>
+		<div class="slide">Slide 4</div>
+		<div class="slide">Slide 5</div>
+
+		<div class="dots">
+			<div class="dot active"></div>
+			<div class="dot"></div>
+			<div class="dot"></div>
+			<div class="dot"></div>
+			<div class="dot"></div>
+		</div>
+
+		<div id="arr_prev">&lt;</div> 
+		<div id="arr_next">&gt;</div> 
+	</div>
+
+	<div class="slider">
+		<div class="slide active">Slide 1</div>
+		<div class="slide">Slide 2</div>
+		<div class="slide">Slide 3</div>
+		<div class="slide">Slide 4</div>
+		<div class="slide">Slide 5</div>
+
+		<div class="dots">
+			<div class="dot active"></div>
+			<div class="dot"></div>
+			<div class="dot"></div>
+			<div class="dot"></div>
+			<div class="dot"></div>
+		</div>
+
+		<div id="arr_prev">&lt;</div> 
+		<div id="arr_next">&gt;</div> 
+	</div>
 
 
 <script>
+	// autoplay +
+	// dots + 
+	// arrows +
 
-	let menu_btn = document.getElementById('menubtn');
+	const slides = document.querySelectorAll('.slide');
+	const dots = document.querySelectorAll('.dot');
+	const btn_prev = document.getElementById('arr_prev');
+	const btn_next = document.getElementById('arr_next');
+	let currentSlide = 0;
+	let interval;
 
-	let menus = document.getElementsByClassName('menu'); // HTML Collection
-	let menu = document.getElementsByClassName('menu')[0]; // 1st elem of HTML Collection
-
-	let btn = document.getElementsByTagName('button')[0];
-
-	let section1 = document.querySelector('section'); // querySelector can use any VALID CSS selector - .menu #menubtn div.menu .nav>.link
-
-	let sections = document.querySelectorAll('section'); // Node List
-
-	let section2 = document.querySelectorAll('section')[1]; // alternative - sections[1]
-
-	let btn2 = section2.getElementsByTagName('button')[0];
-
-	btn2.onclick =  () => console.log(222);
-
-
-	function sayHi(){
-		console.log('Hi!');
+	function autoplay(){
+		interval = setInterval(function(){	
+			currentSlide = currentSlide < slides.length - 1 ? ++currentSlide : 0;
+			changeSlide(currentSlide);
+		}, 2500);
 	}
 
-	btn.onclick = sayHi;
+	autoplay();
 
-// burger menu
+	for(let i = 0; i < dots.length; i++){
+		dots[i].onclick = function(){
+			currentSlide = i;
+			changeSlide(currentSlide);
+			clearInterval(interval);
+			autoplay();
+		}
+	}
 
-const header = document.getElementsByTagName('header')[0];
-const bm_btn = document.getElementById('burgermenu');
+	function changeSlide(num){
+		for(let i = 0; i < slides.length; i++){
+			slides[i].classList.remove('active');
+			dots[i].classList.remove('active');
+		}
+		slides[num].classList.add('active');
+		dots[num].classList.add('active');
+	}
 
-bm_btn.onclick = function(){
-	header.classList.toggle('opened');
-}
+	btn_next.onclick = () => {
+		currentSlide = currentSlide < slides.length - 1 ? ++currentSlide : 0;
+		changeSlide(currentSlide);
+		clearInterval(interval);
+		autoplay();
+	}
+
+	btn_prev.onclick = () => {
+		currentSlide = currentSlide > 0 ? --currentSlide : slides.length-1;
+		changeSlide(currentSlide);
+		clearInterval(interval);
+		autoplay();
+	}
+
+
+
+
+
+
+	// Event object
+
+	document.onclick = (event) => console.log(event);
 
 </script>
 
