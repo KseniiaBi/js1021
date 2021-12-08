@@ -12,64 +12,91 @@
 
 
 <script>
-	
-// OOP
 
+// Singleton
 
-class Article{
-	static author = 'John Doe';
-	static articlesCount = 0;
-	static archive = [];
-	static sortArticles(){
-		Article.archive.sort((a,b) => {
-			if(a.date > b.date){
-				return 1;
-			}
-			else if(a.date < b.date){
-				return -1;
+	class Universe{
+		static count = 0;
+		static singleton = null;
+
+		constructor(name){
+			if(Universe.count == 0){
+				this.name = name;
+				Universe.count += 1;
+				Universe.singleton = this;
+				console.log(Universe.singleton);
 			}
 			else{
-				return 0;
+				return Universe.singleton;
 			}
-		});
-		console.log(Article.archive);
+		}
 	}
 
-	#authorNickName = 'Poet';
+	let u = new Universe('Вселенная');
+	let u2 = new Universe('Вселенная 2');
+	let u3 = new Universe('Вселенная 3');
 
 
-	constructor(name, date){
-		Article.articlesCount += 1;
-		Article.archive.push(this);
-		this.name = name;
-		this.date = date;
+	// Factory
 
+
+	class Cookie{
+		constructor(props){
+			this.name = props.name;
+			this.type = props.type;
+			this.price = props.price;
+		}
 	}
 
-	printArticle(){
-		console.log(`Издана статья ${this.name}, автор: ${Article.author} ${this.#authorNickName} `);
-		this.#checkNN();
+	class Cake{
+		constructor(props){
+			this.name = props.name;
+			this.type = props.type;
+			this.price = props.price;
+			this.weight = props.weight;
+		}
 	}
-	#checkNN(){
-		console.log(this.#authorNickName);
+
+	class Candy {
+		constructor(props){
+			this.name = props.name;
+			this.type = props.type;
+			this.price = props.price;
+			this.color = props.color;
+		}
 	}
-}
 
-let a1 = new Article('How to learn JS in 1 hr', '15.11.2020');
-let a2 = new Article('How to learn CSS in 1 hr', '19.11.2020');
-let a3 = new Article('How to learn HTML in 1 hr', '12.11.2020');
 
-a1.printArticle();
-a2.printArticle();
-a3.printArticle();
+	class Factory{
+		// fabric method
+		createSweets(props){
+			switch (props.type){
+				case 'candy' : return new Candy(props);
+				case 'cake' : return new Cake(props);
+				case 'cookie' : return new Cookie(props);
+			}
+		}
+	}
 
-console.log(Article.articlesCount);
-Article.sortArticles();
 
-// a1.#checkNN(); //Uncaught SyntaxError: Private field '#checkNN' must be declared in an enclosing class
+
+let sweetsFactory = new Factory();
+
+let sweet1 = sweetsFactory.createSweets({name: 'Roshen', type: 'candy', price: 99.90, color: 'orange'});
+let sweet2 = sweetsFactory.createSweets({name: 'Romashka', type: 'candy', price: 199.90, color: 'green'});
+let sweet3 = sweetsFactory.createSweets({name: 'Red Velvet', type: 'cake', price: 299.90, weight: 1.5});
+let sweet4 = sweetsFactory.createSweets({name: 'American', type: 'cookie', price: 199.90});
+
+console.log(sweet1);
+console.log(sweet2);
+console.log(sweet3);
+console.log(sweet4);
 
 
 </script>
 
 </body>
 </html>
+
+
+
