@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>classCoffee</title>
+</head>
+<body>
+    <script>
+
+class Gadget{
+    constructor(name, enabled){
+    this.name = name;
+	this.enabled = false; 
+    }
+    enable(){
+        if(this.enable = true){
+            console.log(`${this.name} is enabled`);
+    }
+}
+    disable(){
+        if(this.enable = false){
+            console.log(`${this.name} is disabled`);
+        }
+    }
+}
+// let lavazza = new Gadget("Lavazza");
+// lavazza.enable();
+
+class CoffeeMachine extends Gadget{
+    constructor( _waterAmount, min_water, has_beans, waterIsHeated, parentEnable){
+    super( _waterAmount, min_water, has_beans, waterIsHeated, parentEnable);
+    this._waterAmount = 0;
+	this.min_water = 100;
+	this.has_beans = false;
+	this.waterIsHeated = false;
+	this.parentEnable = this.enable;
+}
+	enable(){
+		super.enable(); // вызвали родительский enable()
+		setTimeout(() => {
+			this.waterIsHeated = true;
+			console.log('Ready to use');
+		}, 100);
+	}
+        waterAmount(){
+            if(arguments.length == 0){
+			console.log(this._waterAmount);
+		}
+		else{
+			if(typeof(arguments[0]) !== 'number'){
+				console.error('Please, use water instead');
+			}
+			else{
+				if(arguments[0] < 0){
+					console.warn(`Don't use this water for your own purposes!`);
+				}
+				else if(arguments[0] + this._waterAmount > this.capacity){
+					console.error('Caution! Wet floor!');
+				}
+				else{
+					this._waterAmount += arguments[0];
+					console.log(`Current waterAmount is ${this._waterAmount}`);
+				}
+			}
+		}
+	}
+        addCoffee(amount){
+            this.has_beans = true
+    }
+        run(drink) {
+            console.log(this._waterAmount);
+		    console.log(this.enabled);
+            if(this._waterAmount >= this.min_water && this.has_beans  && this.enabled){
+			console.log(`Preparing ${drink}...`);
+			setTimeout(() =>console.log(`${drink} is ready`), 1000);
+		}
+		else{
+			console.error('Can not brew coffee');
+		}
+     }
+    }
+
+let lavazza = new CoffeeMachine('Lavazza', 900);
+lavazza.run();
+lavazza.enable();
+lavazza.waterAmount();
+lavazza.waterAmount(90);
+lavazza.waterAmount(1110);
+lavazza.waterAmount(110);
+lavazza.addCoffee(16);
+lavazza.run();
+setTimeout(lavazza.run.call(lavazza,'espresso'), 2000);
+lavazza.disable();
+
+    </script>
+</body>
+</html>
