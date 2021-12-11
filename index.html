@@ -7,227 +7,220 @@
 	<meta name="keywords" content="Js HTML CSS markup front-end">
 	<style>
 
-	*{
-		margin: 0;
-		padding: 0;
-		box-sizing: border-box;
+	li{
+		cursor: pointer;
+		font-size: 20px;
+		padding: 10px 0;
 	}
-		
-		.slider{
-			width: 100%;
-			position: relative;
-			height: 320px;
-		}
 
-		.slide{
-			position: absolute;
-			left: 0;
-			top: 0;
-			width: 100%;
-			height: 100%;
-			text-align: center;
-			font-size: 100px;
-			color: #fff;
-			background: lightgray;
-			padding: 60px 20px;
-			opacity: 0;
-			transition: opacity 0.5s linear;
-		}
+	.done{
+		text-decoration: line-through;
+	}
 
-		.slide:nth-of-type(2){
-			background-color: lightgreen;
-		}
-		.slide:nth-of-type(3){
-			background-color: gold;
-		}
-		.slide:nth-of-type(4){
-			background-color: hotpink;
-		}
-		.slide:nth-of-type(5){
-			background-color: lightblue;
-		}
+	.del, .edit{
+		width: 30px;
+		height: 30px;
+		display: inline-block;
+		margin-left: 20px;
+		cursor: pointer;
+	}
 
-		.slide.active{
-			opacity: 1;
-		}
+	.del{
+		background: url(delete.png) no-repeat center;
+		background-size: contain;
+	}
 
-		.dots {
-			position: absolute;
-			bottom: 20px;
-			width: 100%;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-		}
+	.edit{
+		background: url(edit.png) no-repeat center;
+		background-size: contain;
+	}
 
-		.dot{
-			width: 14px;
-			height: 14px;
-			border-radius: 50%;
-			border: 2px solid #fff;
-			margin: 0 7px;
-			cursor: pointer;
-		}
-
-		.dot.active{
-			background: #fff;
-		}
-
-		.arr_prev, .arr_next {
-			position: absolute;
-			z-index: 5;
-			top: 90px;
-			font-size: 120px;
-			transform: scaleX(0.6);
-			color: #fff;
-			cursor: pointer;
-		}
-
-		.arr_next{
-			right: 0;
-		}
+	.hidden{
+		display: none;
+	}
 
 	</style>
 </head>
 <body>
 
-	<div class="slider">
-		<div class="slide active">Slide 1</div>
-		<div class="slide">Slide 2</div>
-		<div class="slide">Slide 3</div>
-		<div class="slide">Slide 4</div>
-		<div class="slide">Slide 5</div>
+	<h1>To Do List</h1>
 
-		<div class="dots">
-			<div class="dot active"></div>
-			<div class="dot"></div>
-			<div class="dot"></div>
-			<div class="dot"></div>
-			<div class="dot"></div>
-		</div>
-
-		<div class="arr_prev">&lt;</div> 
-		<div class="arr_next">&gt;</div> 
-	</div>
+	<form class="todoform">
+		<input id="task_input" type="text" placeholder="Type your task here">
+		<input type="submit" value="Save">
+	</form>
 
 
-	<div class="slider">
-		<div class="slide active">Slide 1</div>
-		<div class="slide">Slide 2</div>
-		<div class="slide">Slide 3</div>
-		<div class="slide">Slide 4</div>
-		<div class="slide">Slide 5</div>
+	<h3>Any task yet, type your first  above</h3>
 
-		<div class="dots">
-			<div class="dot active"></div>
-			<div class="dot"></div>
-			<div class="dot"></div>
-			<div class="dot"></div>
-			<div class="dot"></div>
-		</div>
+	<ol class="todolist hidden"></ol>
 
-		<div class="arr_prev">&lt;</div> 
-		<div class="arr_next">&gt;</div> 
-	</div>
 
-	<div class="slider">
-		<div class="slide active">Slide 1</div>
-		<div class="slide">Slide 2</div>
-		<div class="slide">Slide 3</div>
-		<div class="slide">Slide 4</div>
-		<div class="slide">Slide 5</div>
-
-		<div class="dots">
-			<div class="dot active"></div>
-			<div class="dot"></div>
-			<div class="dot"></div>
-			<div class="dot"></div>
-			<div class="dot"></div>
-		</div>
-
-		<div class="arr_prev">&lt;</div> 
-		<div class="arr_next">&gt;</div> 
-	</div>
 
 
 <script>
-	// autoplay +
-	// dots + 
-	// arrows +
+
+	// add task +
+	// mark as done + 
+	// delete task +
+	// edit task +
+	// save to storage
 
 
+	const todoform = document.querySelector('.todoform');
+	const todoinput = document.querySelector('#task_input');
+	const msg = document.querySelector('h3');
+	const list = document.querySelector('.todolist');
+	const storage = localStorage;
+	const APP_NAME = 'ToDoApp1021';
 
-	class Slider{
-		constructor(parent){
-			this.parent = parent;
-			this.slides = this.parent.querySelectorAll('.slide');
-			this.dots = this.parent.querySelectorAll('.dot');
-			this.btn_prev = this.parent.querySelector('.arr_prev');
-			this.btn_next = this.parent.querySelector('.arr_next');
-			this.currentSlide = 0;
-			this.interval;
+	let todos; // cоздаем переменную под массив todos
 
-			this.autoplay(this);
-
-
-			this.btn_next.onclick = () => {
-				this.currentSlide = this.currentSlide < this.slides.length - 1 ? ++this.currentSlide : 0;
-				this.changeSlide(this.currentSlide);
-				clearInterval(this.interval);
-				this.autoplay(this);
-			}
-
-			this.btn_prev.onclick = () => {
-				this.currentSlide = this.currentSlide > 0 ? --this.currentSlide : this.slides.length-1;
-				this.changeSlide(this.currentSlide);
-				clearInterval(this.interval);
-				this.autoplay(this);
-			}
-
-			for(let i = 0; i < this.dots.length; i++){
-				this.dots[i].onclick = () => this.dotClick(i);
-			}
-
+	if(storage.getItem(APP_NAME) == null || JSON.parse(storage.getItem(APP_NAME)).length == 0){
+		// если в локальном хранилище не было элемента с APP_NAME или в нем хранился пустой массив
+		todos = []; // записываем в todos пустой массив
+	}
+	else{ // или содержимое локального хранилища
+		todos = JSON.parse(storage.getItem(APP_NAME));
+		// и из этого массива отрисовываем список
+		for(let task of todos){
+			drawLi(task);
 		}
+	}
 
-		dotClick(i){
-			this.currentSlide = i;
-			this.changeSlide(this.currentSlide);
-			clearInterval(this.interval);
-			this.autoplay(this);
+	function saveToLS(){
+		// преобразовывает в JSON массив задач и сохраняет в локальное хранилище
+		storage.setItem(APP_NAME, JSON.stringify(todos));
+	}
+
+
+	todoform.onsubmit = (event) => {
+		event.preventDefault(); // отменяем перезагрузку страницы и очистку формы
+		saveTask();
+	};
+
+	function checkTodos(){
+		//  проверяет пустой ли массив и в зависимости от этого показывает\скрывает заголовок и список
+		if(todos.length == 0){
+			msg.classList.remove('hidden');
+			list.classList.add('hidden');
 		}
-
-
-		autoplay(ctx){
-			this.interval = setInterval(function(){	
-				// debugger;
-				ctx.currentSlide = ctx.currentSlide < ctx.slides.length - 1 ? ++ctx.currentSlide : 0;
-				ctx.changeSlide(ctx.currentSlide);
-			}, 2500);
+		else{
+			msg.classList.add('hidden');
+			list.classList.remove('hidden');
 		}
+	}
+
+	checkTodos(); // на старте приложения делаем эту проверку
 
 
-		changeSlide(num){
-			for(let i = 0; i < this.slides.length; i++){
-				this.slides[i].classList.remove('active');
-				this.dots[i].classList.remove('active');
+	function saveTask(){
+		let task = todoinput.value;
+		if(task.length > 0){ // если поле было не пустым, создаем обьект задачи
+			let id = Date.now(); // уникальный идентификатор
+
+			let todo = {
+				task: task, // текст задачи
+				id: id, // идентификатор
+				done: false // выполнена задача или нет
 			}
-			this.slides[num].classList.add('active');
-			this.dots[num].classList.add('active');
+			todos.push(todo); // добавляем в массив
+
+			drawLi(todo); // отрисовка li
+ 
+			todoinput.value = '';	// очищаем поле, в котором вводили задачу
+			if(todos.length == 1){
+				checkTodos();
+			}
+			saveToLS();
 		}
 	}
 
 
-	const sliders = document.querySelectorAll('.slider');
+	function drawLi(todo){
 
-	for(let s of sliders){
-		let n = new Slider(s);
+		let li = document.createElement('li');
+		li.dataset.id = todo.id;
+
+		li.append(createEl('span', ['task_text'], todo.task));
+		li.append(createEl('input', ['hidden']));
+		li.append(createEl('span', ['del']));
+		li.append(createEl('span', ['edit']));
+		list.append(li);	
+		
 	}
 
-	
+	function createEl(tagname, classes, text = ''){
+		let element = document.createElement(tagname); // создаем элемент с тегом
+		for(let i = 0; i < classes.length; i++){
+			element.classList.add(classes[i]); // добавляем ему классы, если массив с ними не пустой
+		}
+		element.innerText = text; // и текст, по умолчанию пустой
+		return element; // возвращаем элемент, чтобы мы могли его использовать внутри метода append()
+	}
 
 
+	function markAsDone(el){
+		el.classList.toggle('done'); //добавляет\удаляет класс, который стилизует текст как зачеркнутый
+		todos.forEach((item,index) => { // и вносим изменения в массив
+			if(item.id == el.dataset.id){
+				item.done = !item.done; // true => false \\ false => true
+			}
+		});
+		saveToLS();
+	}
 
+	function deleteTask(el){
+		el.remove(); // удаляем элемент из верстки
+		todos.forEach((item,index) => {
+			if(item.id == el.dataset.id){ // ищем в массиве совпадение по id
+				todos.splice(index, 1); // удаляем
+			}
+		});
+
+		if(todos.length == 0){
+			checkTodos();
+		}
+		saveToLS();
+	}
+
+
+	function editTask(el){
+		let span = el.querySelector('.task_text');  // ищем спан с текстом внутри li (li === el)
+		let input = el.querySelector('input'); // ищем инпут внутри li 
+
+		input.value = span.innerText; // старый текст записываем в инпут
+		input.classList.remove('hidden'); // показываем инпут
+		span.classList.add('hidden'); // прячем спан
+
+		input.onkeyup = function(event){ // слушаем нажатия клавиш
+			if(event.keyCode == 13){ // если нажали Enter
+				span.innerText = input.value; // записываем новый текст в спан
+				input.classList.add('hidden'); //  прячем инпут
+				span.classList.remove('hidden'); // показываем спан с новым текстом
+
+				todos.forEach((item,index) => { // редактируем массив
+					if(item.id == el.dataset.id){
+						item.task = input.value; // в элемент массива записываем новый текст
+					}
+				});
+				saveToLS();
+			}
+		}
+	}
+
+//  документ слушает клики (можно в нашем случае вместо документа указать list (ol))
+	document.addEventListener('click', function(event){
+		if(event.target.classList.contains('task_text')){ // если кликнули на спан с текстом в списке
+			markAsDone(event.target.parentNode); // помечаем как выполненный
+		}
+		if(event.target.classList.contains('del')){
+			deleteTask(event.target.parentNode); // удаляем
+		}
+		if(event.target.classList.contains('edit')){
+			editTask(event.target.parentNode); // редактируем
+		}
+	});
 
 
 </script>
