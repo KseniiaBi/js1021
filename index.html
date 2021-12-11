@@ -7,62 +7,230 @@
 	<meta name="keywords" content="Js HTML CSS markup front-end">
 	<style>
 
-	body{
-		background-color: hotpink;
+	*{
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
 	}
+		
+		.slider{
+			width: 100%;
+			position: relative;
+			height: 320px;
+		}
 
-	h1{
-		font-size: 60px;
-		color: #fff;
-	}
+		.slide{
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			text-align: center;
+			font-size: 100px;
+			color: #fff;
+			background: lightgray;
+			padding: 60px 20px;
+			opacity: 0;
+			transition: opacity 0.5s linear;
+		}
 
-	.typewriter{
-		text-transform: uppercase;
-	}
+		.slide:nth-of-type(2){
+			background-color: lightgreen;
+		}
+		.slide:nth-of-type(3){
+			background-color: gold;
+		}
+		.slide:nth-of-type(4){
+			background-color: hotpink;
+		}
+		.slide:nth-of-type(5){
+			background-color: lightblue;
+		}
+
+		.slide.active{
+			opacity: 1;
+		}
+
+		.dots {
+			position: absolute;
+			bottom: 20px;
+			width: 100%;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+
+		.dot{
+			width: 14px;
+			height: 14px;
+			border-radius: 50%;
+			border: 2px solid #fff;
+			margin: 0 7px;
+			cursor: pointer;
+		}
+
+		.dot.active{
+			background: #fff;
+		}
+
+		.arr_prev, .arr_next {
+			position: absolute;
+			z-index: 5;
+			top: 90px;
+			font-size: 120px;
+			transform: scaleX(0.6);
+			color: #fff;
+			cursor: pointer;
+		}
+
+		.arr_next{
+			right: 0;
+		}
 
 	</style>
 </head>
 <body>
 
-	<h1>Hello, I am <span class="typewriter"></span></h1>
+	<div class="slider">
+		<div class="slide active">Slide 1</div>
+		<div class="slide">Slide 2</div>
+		<div class="slide">Slide 3</div>
+		<div class="slide">Slide 4</div>
+		<div class="slide">Slide 5</div>
+
+		<div class="dots">
+			<div class="dot active"></div>
+			<div class="dot"></div>
+			<div class="dot"></div>
+			<div class="dot"></div>
+			<div class="dot"></div>
+		</div>
+
+		<div class="arr_prev">&lt;</div> 
+		<div class="arr_next">&gt;</div> 
+	</div>
+
+
+	<div class="slider">
+		<div class="slide active">Slide 1</div>
+		<div class="slide">Slide 2</div>
+		<div class="slide">Slide 3</div>
+		<div class="slide">Slide 4</div>
+		<div class="slide">Slide 5</div>
+
+		<div class="dots">
+			<div class="dot active"></div>
+			<div class="dot"></div>
+			<div class="dot"></div>
+			<div class="dot"></div>
+			<div class="dot"></div>
+		</div>
+
+		<div class="arr_prev">&lt;</div> 
+		<div class="arr_next">&gt;</div> 
+	</div>
+
+	<div class="slider">
+		<div class="slide active">Slide 1</div>
+		<div class="slide">Slide 2</div>
+		<div class="slide">Slide 3</div>
+		<div class="slide">Slide 4</div>
+		<div class="slide">Slide 5</div>
+
+		<div class="dots">
+			<div class="dot active"></div>
+			<div class="dot"></div>
+			<div class="dot"></div>
+			<div class="dot"></div>
+			<div class="dot"></div>
+		</div>
+
+		<div class="arr_prev">&lt;</div> 
+		<div class="arr_next">&gt;</div> 
+	</div>
 
 
 <script>
-	// typewriter effect
-	const typewriter = document.querySelector('.typewriter');
-	let text = ['JS developer', 'Human', 'Front-end tutor'];
+	// autoplay +
+	// dots + 
+	// arrows +
 
-	let phraseNum = 0;
-	let currentLetter = 0;
-	let interval;
 
-	function typewrite(){
-		interval = setInterval(function(){
-			if(currentLetter < text[phraseNum].length){
-				typewriter.textContent += text[phraseNum].charAt(currentLetter);
-				currentLetter++;
+
+	class Slider{
+		constructor(parent){
+			this.parent = parent;
+			this.slides = this.parent.querySelectorAll('.slide');
+			this.dots = this.parent.querySelectorAll('.dot');
+			this.btn_prev = this.parent.querySelector('.arr_prev');
+			this.btn_next = this.parent.querySelector('.arr_next');
+			this.currentSlide = 0;
+			this.interval;
+
+			this.autoplay(this);
+
+
+			this.btn_next.onclick = () => {
+				this.currentSlide = this.currentSlide < this.slides.length - 1 ? ++this.currentSlide : 0;
+				this.changeSlide(this.currentSlide);
+				clearInterval(this.interval);
+				this.autoplay(this);
 			}
-			else{
-				clearInterval(interval);
-				setTimeout(function(){
-					phraseNum = phraseNum < text.length -1 ? ++phraseNum :  0;
-					currentLetter = 0;
-					typewriter.textContent = '';
-					typewrite();
-				}, 1000);
+
+			this.btn_prev.onclick = () => {
+				this.currentSlide = this.currentSlide > 0 ? --this.currentSlide : this.slides.length-1;
+				this.changeSlide(this.currentSlide);
+				clearInterval(this.interval);
+				this.autoplay(this);
 			}
 
-		},100);
+			for(let i = 0; i < this.dots.length; i++){
+				this.dots[i].onclick = () => this.dotClick(i);
+			}
+
+		}
+
+		dotClick(i){
+			this.currentSlide = i;
+			this.changeSlide(this.currentSlide);
+			clearInterval(this.interval);
+			this.autoplay(this);
+		}
+
+
+		autoplay(ctx){
+			this.interval = setInterval(function(){	
+				// debugger;
+				ctx.currentSlide = ctx.currentSlide < ctx.slides.length - 1 ? ++ctx.currentSlide : 0;
+				ctx.changeSlide(ctx.currentSlide);
+			}, 2500);
+		}
+
+
+		changeSlide(num){
+			for(let i = 0; i < this.slides.length; i++){
+				this.slides[i].classList.remove('active');
+				this.dots[i].classList.remove('active');
+			}
+			this.slides[num].classList.add('active');
+			this.dots[num].classList.add('active');
+		}
 	}
 
-	typewrite();
 
-	 
+	const sliders = document.querySelectorAll('.slider');
+
+	for(let s of sliders){
+		let n = new Slider(s);
+	}
+
+	
+
+
+
+
 
 </script>
 
 </body>
 </html>
-
-
-
