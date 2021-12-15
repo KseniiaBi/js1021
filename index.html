@@ -6,178 +6,102 @@
 	<meta name="viewport" content="width=device-width,initial-scale=1"> 
 	<meta name="keywords" content="Js HTML CSS markup front-end">
 	<style>
-
-		.accordeon{
-			display: flex;
-			flex-direction: column;
-			width: 100%;
-			max-width: 600px;
-			border-radius: 5px;
-			border: 1px solid #e2e2e2;
-			margin-bottom: 40px;
+		*{
+			box-sizing: border-box;
 		}
-
-		.accordeon_title{
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
-			background: lightblue;
-			color: #fff;
-			padding: 20px;
-			font-size: 20px;
-			cursor: pointer;
-			position: relative;
-		}
-
-		.accordeon_title::after{
-			content: '';
-			display: block;
-			width: 24px;
-			height: 24px;
-			background: url(arrow.png) no-repeat center;
-			background-size: contain;
-			filter: invert(1);
-		}
-
-		.opened .accordeon_title::after{
-			transform: rotate(180deg);
-		}
-
-		.opened .accordeon_title::before{
-			position: absolute;
-			left: 0;
-			top: 0;
-			width: 100%;
-			height: 100%;
-			z-index: 2;
-		}
-
-		.accordeon_content{
-			display: none;
-			padding: 20px;
-		}
-
-		.opened .accordeon_content{
-			display: block;
-		}
-
-		.accordeon_item + .accordeon_item{
-			margin-top: 14px;
+		canvas{
+			border: 1px solid black;
+			width: 500px;
+			height: 300px;
 		}
 	
 	</style>
 </head>
 <body>
 
-
-
-	<div class="accordeon" id="a1">
-		<div class="accordeon_item opened">
-			<div class="accordeon_title">Title 1</div>
-			<div class="accordeon_content">
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-				quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-				consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-				cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-				proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-			</div>
-		</div>
-		<div class="accordeon_item">
-			<div class="accordeon_title">Title 2</div>
-			<div class="accordeon_content">
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-				quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-				consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-				cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-				proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-			</div>
-		</div>
-		<div class="accordeon_item">
-			<div class="accordeon_title">Title 3</div>
-			<div class="accordeon_content">
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-				quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-				consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-				cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-				proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-			</div>
-		</div>
-	</div>
-
-
-	<div class="accordeon" id="a2">
-		<div class="accordeon_item opened">
-			<div class="accordeon_title">Title 1</div>
-			<div class="accordeon_content">
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-				quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-				consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-				cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-				proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-			</div>
-		</div>
-		<div class="accordeon_item">
-			<div class="accordeon_title">Title 2</div>
-			<div class="accordeon_content">
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-				quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-				consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-				cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-				proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-			</div>
-		</div>
-		<div class="accordeon_item">
-			<div class="accordeon_title">Title 3</div>
-			<div class="accordeon_content">
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-				quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-				consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-				cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-				proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-			</div>
-		</div>
-	</div>
+	<canvas id="mad_balls" width="500" height="300"></canvas>
 
 
 
 <script>
-//  only 1 accordeon per page
-	// let accordeon_items = document.querySelectorAll('.accordeon_item');
 
-	// document.addEventListener('click', function(event){
-	// 	if(event.target.classList.contains('accordeon_title')){
-	// 		for(let item of accordeon_items){
-	// 			item.classList.remove('opened');
-	// 		}
-	// 		event.target.parentNode.classList.add('opened');
-	// 	}
-	// });
+	const canvas = document.getElementById('mad_balls');
+	const ctx = canvas.getContext('2d');
+	const cW = canvas.offsetWidth;// canvas width
+	const cH = canvas.offsetHeight;// canvas height
+
+	let balls = [];
+	const maxBalls = 10;
+	const maxRad = 20;
+	const minRad = 5;
+	const d_x = 3;
+	const d_y = 3;
+	let interval;
 
 
-	// more than 1 acc 
-
-	let accordeon_items = document.querySelectorAll('.accordeon_item');
-
-	document.addEventListener('click', function(event){
-		if(event.target.classList.contains('accordeon_title')){
-			let parentId = event.target.parentNode.parentNode.id;
-			for(let item of accordeon_items){
-				if(item.parentNode.id == parentId){
-					item.classList.remove('opened');
-				}
-			}
-			event.target.parentNode.classList.add('opened');
+	interval = setInterval(function(){
+		if(balls.length < maxBalls){
+			createBall();
 		}
-	});
+		else{
+			clearInterval(interval);
+		}
+	}, 1000);
+
+
+	function createBall(){
+		let rad = Math.floor(Math.random()*(maxRad - minRad) + minRad);
+		let red = Math.floor(Math.random()*255);
+		let green = Math.floor(Math.random()*255);
+		let blue = Math.floor(Math.random()*255);
+		let color = `rgb(${red}, ${green}, ${blue})`;
+
+		let ball = {
+			x: Math.floor(Math.random()*(cW - rad)+rad),
+			y: Math.floor(Math.random()*(cH - rad)+rad),
+			r: rad,
+			color: color,
+			d_x: d_x,
+			d_y: d_y
+		}
+
+		balls.push(ball);
+
+	}
+
+	function drawBall(ball){
+		ctx.fillStyle = ball.color;
+		ctx.beginPath();
+		ctx.arc(ball.x, ball.y, ball.r, 0, Math.PI * 2, true); 
+		ctx.fill();
+
+		ball.x += ball.d_x;
+		ball.y += ball.d_y;
+
+		if(ball.x <= ball.r || ball.x >= cW - ball.r){
+			ball.d_x = -ball.d_x;
+		}
+		if(ball.y <= ball.r || ball.y >= cH - ball.r){
+			ball.d_y = -ball.d_y;
+		}
+
+	}
 
 
 
+	function update(){
+		clearCanvas();
+		for(let b of balls){
+			drawBall(b);
+		}
+	} 
+
+
+	function clearCanvas(){
+		ctx.clearRect(0,0, cW, cH);
+	}
+
+	setInterval(update, 22);
 
 
 
