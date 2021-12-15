@@ -7,220 +7,178 @@
 	<meta name="keywords" content="Js HTML CSS markup front-end">
 	<style>
 
-	li{
-		cursor: pointer;
-		font-size: 20px;
-		padding: 10px 0;
-	}
+		.accordeon{
+			display: flex;
+			flex-direction: column;
+			width: 100%;
+			max-width: 600px;
+			border-radius: 5px;
+			border: 1px solid #e2e2e2;
+			margin-bottom: 40px;
+		}
 
-	.done{
-		text-decoration: line-through;
-	}
+		.accordeon_title{
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			background: lightblue;
+			color: #fff;
+			padding: 20px;
+			font-size: 20px;
+			cursor: pointer;
+			position: relative;
+		}
 
-	.del, .edit{
-		width: 30px;
-		height: 30px;
-		display: inline-block;
-		margin-left: 20px;
-		cursor: pointer;
-	}
+		.accordeon_title::after{
+			content: '';
+			display: block;
+			width: 24px;
+			height: 24px;
+			background: url(arrow.png) no-repeat center;
+			background-size: contain;
+			filter: invert(1);
+		}
 
-	.del{
-		background: url(delete.png) no-repeat center;
-		background-size: contain;
-	}
+		.opened .accordeon_title::after{
+			transform: rotate(180deg);
+		}
 
-	.edit{
-		background: url(edit.png) no-repeat center;
-		background-size: contain;
-	}
+		.opened .accordeon_title::before{
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			z-index: 2;
+		}
 
-	.hidden{
-		display: none;
-	}
+		.accordeon_content{
+			display: none;
+			padding: 20px;
+		}
 
+		.opened .accordeon_content{
+			display: block;
+		}
+
+		.accordeon_item + .accordeon_item{
+			margin-top: 14px;
+		}
+	
 	</style>
 </head>
 <body>
 
-	<h1>To Do List</h1>
-
-	<form class="todoform">
-		<input id="task_input" type="text" placeholder="Type your task here">
-		<input type="submit" value="Save">
-	</form>
 
 
-	<h3>Any task yet, type your first  above</h3>
+	<div class="accordeon" id="a1">
+		<div class="accordeon_item opened">
+			<div class="accordeon_title">Title 1</div>
+			<div class="accordeon_content">
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+				quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+				consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+				cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+				proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+			</div>
+		</div>
+		<div class="accordeon_item">
+			<div class="accordeon_title">Title 2</div>
+			<div class="accordeon_content">
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+				quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+				consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+				cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+				proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+			</div>
+		</div>
+		<div class="accordeon_item">
+			<div class="accordeon_title">Title 3</div>
+			<div class="accordeon_content">
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+				quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+				consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+				cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+				proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+			</div>
+		</div>
+	</div>
 
-	<ol class="todolist hidden"></ol>
 
+	<div class="accordeon" id="a2">
+		<div class="accordeon_item opened">
+			<div class="accordeon_title">Title 1</div>
+			<div class="accordeon_content">
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+				quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+				consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+				cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+				proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+			</div>
+		</div>
+		<div class="accordeon_item">
+			<div class="accordeon_title">Title 2</div>
+			<div class="accordeon_content">
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+				quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+				consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+				cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+				proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+			</div>
+		</div>
+		<div class="accordeon_item">
+			<div class="accordeon_title">Title 3</div>
+			<div class="accordeon_content">
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+				quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+				consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+				cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+				proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+			</div>
+		</div>
+	</div>
 
 
 
 <script>
+//  only 1 accordeon per page
+	// let accordeon_items = document.querySelectorAll('.accordeon_item');
 
-	// add task +
-	// mark as done + 
-	// delete task +
-	// edit task +
-	// save to storage
-
-
-	const todoform = document.querySelector('.todoform');
-	const todoinput = document.querySelector('#task_input');
-	const msg = document.querySelector('h3');
-	const list = document.querySelector('.todolist');
-	const storage = localStorage;
-	const APP_NAME = 'ToDoApp1021';
-
-	let todos; // cоздаем переменную под массив todos
-
-	if(storage.getItem(APP_NAME) == null || JSON.parse(storage.getItem(APP_NAME)).length == 0){
-		// если в локальном хранилище не было элемента с APP_NAME или в нем хранился пустой массив
-		todos = []; // записываем в todos пустой массив
-	}
-	else{ // или содержимое локального хранилища
-		todos = JSON.parse(storage.getItem(APP_NAME));
-		// и из этого массива отрисовываем список
-		for(let task of todos){
-			drawLi(task);
-		}
-	}
-
-	function saveToLS(){
-		// преобразовывает в JSON массив задач и сохраняет в локальное хранилище
-		storage.setItem(APP_NAME, JSON.stringify(todos));
-	}
+	// document.addEventListener('click', function(event){
+	// 	if(event.target.classList.contains('accordeon_title')){
+	// 		for(let item of accordeon_items){
+	// 			item.classList.remove('opened');
+	// 		}
+	// 		event.target.parentNode.classList.add('opened');
+	// 	}
+	// });
 
 
-	todoform.onsubmit = (event) => {
-		event.preventDefault(); // отменяем перезагрузку страницы и очистку формы
-		saveTask();
-	};
+	// more than 1 acc 
 
-	function checkTodos(){
-		//  проверяет пустой ли массив и в зависимости от этого показывает\скрывает заголовок и список
-		if(todos.length == 0){
-			msg.classList.remove('hidden');
-			list.classList.add('hidden');
-		}
-		else{
-			msg.classList.add('hidden');
-			list.classList.remove('hidden');
-		}
-	}
+	let accordeon_items = document.querySelectorAll('.accordeon_item');
 
-	checkTodos(); // на старте приложения делаем эту проверку
-
-
-	function saveTask(){
-		let task = todoinput.value;
-		if(task.length > 0){ // если поле было не пустым, создаем обьект задачи
-			let id = Date.now(); // уникальный идентификатор
-
-			let todo = {
-				task: task, // текст задачи
-				id: id, // идентификатор
-				done: false // выполнена задача или нет
-			}
-			todos.push(todo); // добавляем в массив
-
-			drawLi(todo); // отрисовка li
- 
-			todoinput.value = '';	// очищаем поле, в котором вводили задачу
-			if(todos.length == 1){
-				checkTodos();
-			}
-			saveToLS();
-		}
-	}
-
-
-	function drawLi(todo){
-
-		let li = document.createElement('li');
-		li.dataset.id = todo.id;
-
-		li.append(createEl('span', ['task_text'], todo.task));
-		li.append(createEl('input', ['hidden']));
-		li.append(createEl('span', ['del']));
-		li.append(createEl('span', ['edit']));
-		list.append(li);	
-		
-	}
-
-	function createEl(tagname, classes, text = ''){
-		let element = document.createElement(tagname); // создаем элемент с тегом
-		for(let i = 0; i < classes.length; i++){
-			element.classList.add(classes[i]); // добавляем ему классы, если массив с ними не пустой
-		}
-		element.innerText = text; // и текст, по умолчанию пустой
-		return element; // возвращаем элемент, чтобы мы могли его использовать внутри метода append()
-	}
-
-
-	function markAsDone(el){
-		el.classList.toggle('done'); //добавляет\удаляет класс, который стилизует текст как зачеркнутый
-		todos.forEach((item,index) => { // и вносим изменения в массив
-			if(item.id == el.dataset.id){
-				item.done = !item.done; // true => false \\ false => true
-			}
-		});
-		saveToLS();
-	}
-
-	function deleteTask(el){
-		el.remove(); // удаляем элемент из верстки
-		todos.forEach((item,index) => {
-			if(item.id == el.dataset.id){ // ищем в массиве совпадение по id
-				todos.splice(index, 1); // удаляем
-			}
-		});
-
-		if(todos.length == 0){
-			checkTodos();
-		}
-		saveToLS();
-	}
-
-
-	function editTask(el){
-		let span = el.querySelector('.task_text');  // ищем спан с текстом внутри li (li === el)
-		let input = el.querySelector('input'); // ищем инпут внутри li 
-
-		input.value = span.innerText; // старый текст записываем в инпут
-		input.classList.remove('hidden'); // показываем инпут
-		span.classList.add('hidden'); // прячем спан
-
-		input.onkeyup = function(event){ // слушаем нажатия клавиш
-			if(event.keyCode == 13){ // если нажали Enter
-				span.innerText = input.value; // записываем новый текст в спан
-				input.classList.add('hidden'); //  прячем инпут
-				span.classList.remove('hidden'); // показываем спан с новым текстом
-
-				todos.forEach((item,index) => { // редактируем массив
-					if(item.id == el.dataset.id){
-						item.task = input.value; // в элемент массива записываем новый текст
-					}
-				});
-				saveToLS();
-			}
-		}
-	}
-
-//  документ слушает клики (можно в нашем случае вместо документа указать list (ol))
 	document.addEventListener('click', function(event){
-		if(event.target.classList.contains('task_text')){ // если кликнули на спан с текстом в списке
-			markAsDone(event.target.parentNode); // помечаем как выполненный
-		}
-		if(event.target.classList.contains('del')){
-			deleteTask(event.target.parentNode); // удаляем
-		}
-		if(event.target.classList.contains('edit')){
-			editTask(event.target.parentNode); // редактируем
+		if(event.target.classList.contains('accordeon_title')){
+			let parentId = event.target.parentNode.parentNode.id;
+			for(let item of accordeon_items){
+				if(item.parentNode.id == parentId){
+					item.classList.remove('opened');
+				}
+			}
+			event.target.parentNode.classList.add('opened');
 		}
 	});
+
+
+
+
 
 
 </script>
