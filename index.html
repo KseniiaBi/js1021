@@ -9,99 +9,187 @@
 		*{
 			box-sizing: border-box;
 		}
-		canvas{
-			border: 1px solid black;
-			width: 500px;
-			height: 300px;
+
+		a{
+			text-decoration: none;
+			color: inherit;
+		}
+
+		header{
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			color: #fff;
+			background: #004526;
+			padding: 20px;
+		}
+
+		.shop{
+			display: flex;
+			flex-flow: row wrap;
+			justify-content: space-between;
+			align-items: flex-start;
+		}
+
+		.item{
+			width: 45%;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			margin-bottom: 40px;
+			border: 1px solid rgba(250, 0, 0, 0.5);
+			border-radius: 10px;
+			box-shadow: 0 2px 12px rgba(250, 0, 0, 0.2);
+			overflow: hidden;
+			padding-bottom: 20px;
+		}
+
+		.item>img{
+			width: 100%;
+			height: 200px;
+			object-fit: cover;
+			object-position: center;
+		}
+
+		.buy{
+			border-radius: 10px;
+			text-transform: uppercase;
+			font-size: 18px;
+			height: 45px;
+			background: red;
+			color: #fff;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			outline: none;
+			border: none;
+			padding: 5px 33px;
+		}
+		.buy img, .cart_img{
+			filter: invert(1);
+			width: 24px;
+		}
+
+		h2{
+			color: #004526;
+		}
+
+		.price{
+			color: #004526;
+			font-weight: bold;
+			font-size: 44px;
+			margin-bottom: 20px;
 		}
 	
 	</style>
 </head>
 <body>
 
-	<canvas id="mad_balls" width="500" height="300"></canvas>
+	<header>
+		<nav>
+			<a href="index.html">Home</a>
+			<a href="cart.html">Cart</a>
+		</nav>
 
+		<div class="cart_summary">
+			<img src="cart.png" class="cart_img">
+			<span class="cart_count">0</span> items,
+			<span class="cart_total">0 UAH</span>
+		</div>
+	</header>
+
+	<select>
+		<option selected disabled>Sort by</option>
+		<option>name A-Z</option>
+		<option>Price Low-high</option>
+	</select>
+
+	<div class="shop"></div>
 
 
 <script>
 
-	const canvas = document.getElementById('mad_balls');
-	const ctx = canvas.getContext('2d');
-	const cW = canvas.offsetWidth;// canvas width
-	const cH = canvas.offsetHeight;// canvas height
+	const URL = 'data.json';
+	const shop = document.querySelector('.shop');
+	let data;
+	let cart = [];
+	let spanCount = document.querySelector('.cart_count');
+	let spanTotal = document.querySelector('.cart_total');
+	let cartTotal = 0;
+	let cartCount = 0;
 
-	let balls = [];
-	const maxBalls = 10;
-	const maxRad = 20;
-	const minRad = 5;
-	const d_x = 3;
-	const d_y = 3;
-	let interval;
+	const xhr = new XMLHttpRequest();
+	xhr.open('GET', URL, true);
+	xhr.send();
 
-
-	interval = setInterval(function(){
-		if(balls.length < maxBalls){
-			createBall();
-		}
-		else{
-			clearInterval(interval);
-		}
-	}, 1000);
-
-
-	function createBall(){
-		let rad = Math.floor(Math.random()*(maxRad - minRad) + minRad);
-		let red = Math.floor(Math.random()*255);
-		let green = Math.floor(Math.random()*255);
-		let blue = Math.floor(Math.random()*255);
-		let color = `rgb(${red}, ${green}, ${blue})`;
-
-		let ball = {
-			x: Math.floor(Math.random()*(cW - rad)+rad),
-			y: Math.floor(Math.random()*(cH - rad)+rad),
-			r: rad,
-			color: color,
-			d_x: d_x,
-			d_y: d_y
-		}
-
-		balls.push(ball);
-
-	}
-
-	function drawBall(ball){
-		ctx.fillStyle = ball.color;
-		ctx.beginPath();
-		ctx.arc(ball.x, ball.y, ball.r, 0, Math.PI * 2, true); 
-		ctx.fill();
-
-		ball.x += ball.d_x;
-		ball.y += ball.d_y;
-
-		if(ball.x <= ball.r || ball.x >= cW - ball.r){
-			ball.d_x = -ball.d_x;
-		}
-		if(ball.y <= ball.r || ball.y >= cH - ball.r){
-			ball.d_y = -ball.d_y;
-		}
-
+	xhr.onload = () => {
+		data = JSON.parse(xhr.response);
+		buildLayout(data);
 	}
 
 
+	function buildLayout(d) {
+		for(let item of d){
+			let wrap = document.createElement('div');
+			wrap.classList.add('item');
+			wrap.dataset.id = item.name;
 
-	function update(){
-		clearCanvas();
-		for(let b of balls){
-			drawBall(b);
+			let image = new Image();
+			image.src = item.img;
+
+			let title = document.createElement('h2');
+			title.textContent = item.name;
+
+			let price = document.createElement('div');
+			price.classList.add('price');
+			price.textContent = item.price;
+
+			let btn = document.createElement('button');
+			btn.classList.add('buy');
+			btn.innerHTML = `Add to <img src="cart.png">`;
+
+			wrap.append(image);
+			wrap.append(title);
+			wrap.append(price);
+			wrap.append(btn);
+
+			shop.append(wrap);
 		}
-	} 
-
-
-	function clearCanvas(){
-		ctx.clearRect(0,0, cW, cH);
 	}
 
-	setInterval(update, 22);
+	document.addEventListener('click', function(event){
+		if(event.target.classList.contains('buy')){
+			addToCart(event.target.parentNode.dataset.id);
+		}
+	});
+
+	function addToCart(id){
+		let bought; 
+		let wasInCart = false;
+
+		data.forEach(item => {
+			if(item.name == id){
+				cartTotal += item.price;
+				bought = item;
+			}
+		});
+
+		cart.forEach(inCart => {
+			if(inCart.name == bought.name){
+				wasInCart = true;
+				inCart.count += 1;
+			}
+		})
+
+		if(!wasInCart){
+			cart.push({ count: 1, ...bought});
+		}
+			console.log(cart);
+
+		
+		cartCount += 1;
+	}
 
 
 
