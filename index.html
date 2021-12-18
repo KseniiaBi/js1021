@@ -235,7 +235,12 @@
 		}
 		if(event.target.classList.contains('delete')){
 			// удалить товар из корзины
-			deleteFromCart(event.target.parentNode.dataset.id);
+
+			let promise = new Promise((resolve, reject) => {
+				confirm('Are you sure? Delete item?') ? resolve() : reject('Item was not deleted') ;
+			});
+
+			promise.then(() => deleteFromCart(event.target.parentNode.dataset.id), (err)=>alert(err));
 		}
 	});
 
