@@ -15,37 +15,103 @@
 			color: inherit;
 		}
 
+		.carousel{
+			width: 100%;
+			overflow: hidden;
+		}
+
+		.carousel_content{
+			position: relative;
+			display: flex;
+		}
+
+		.item{
+			flex: 0 0 250px;
+			height: 100px;
+			background: green;
+			color: #fff;
+			text-align: center;
+			line-height: 100px;
+			font-size: 34px;
+			margin-right: 20px;
+		}
+
+		#arr_prev, #arr_next{
+			position: absolute;
+			top: 30px;
+			left: 0;
+			font-size: 40px;
+			transform: scaleX(0.5);
+			color: green;
+			text-shadow: 0 0 4px #fff;
+			cursor: pointer;
+			z-index: 5;
+		}
+
+		#arr_next{
+			left: auto;
+			right: 0;
+		}
+
 	</style>
 </head>
 <body>
 
-	<div class="app"></div>
+	<div class="carousel">
+		<div class="carousel_content">
+			<div class="item">1</div>
+			<div class="item">2</div>
+			<div class="item">3</div>
+			<div class="item">4</div>
+			<div class="item">5</div>
+			<div class="item">6</div>
+			<div class="item">7</div>
+			<div class="item">8</div>
+			<div class="item">9</div>
+		</div>
+		
+		<div id="arr_prev">&lt;</div>
+		<div id="arr_next">&gt;</div>
+	</div>
 
 
+<script
+  src="https://code.jquery.com/jquery-3.6.0.min.js"
+  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+  crossorigin="anonymous"></script>
 <script>
 
-	const API_KEY = 'bdd347262453e415a2230910a4d49ebf';
-	let city = 'Kharkiv';
-	const URL = `https://api.openweathermap.org/data/2.5/weather?q=London,uk&appid=${API_KEY}`; 
-	const app = document.querySelector('.app'); // контейнер, в котором будет app
+	let items = $('.item');
+	let wrapper = $('.carousel_content');
+	let arr_prev = $('#arr_prev');
+	let arr_next = $('#arr_next');
+	let target_move = items.first().outerWidth(true);
 
-	let weather;
-	let promise = fetch(URL);
-
-	promise
-		.then((data) => {
-			console.log(data);
-			return weather = data.json();
-		})
-		.then(data => showWeather(data))
-		.catch((e) => console.error(e));
+	// arr_prev.click(() => console.error('jQuery Magic!')); // onclick = fn
+	// items.on('click', (e)=> console.warn(e.target)); // addEventListener
 
 
-	function showWeather(resp){
-		app.innerText = `In ${city} weather is ${resp.weather[0].main} temperature is ${resp.main.temp} and feels like ${resp.main.feels_like}`;
+	function showNext(){
+		wrapper.animate({
+			// первый элемент карусели плавно уезжает за экран
+			left: `${-target_move}px`
+		}, 1000, function(){ 
+			// после того, как анимация закончилась
+			$('.item').last().after($('.item').first()); // после последнего элемента вставляем первый
+			wrapper.css({left: 0}); // переставляем нашу обертку быстро в позицию 0
+		});
 	}
 
-	
+	function showPrev(){
+		$('.item').first().before($('.item').last()); // вставляем последний элемент перед первым
+		wrapper.css({left: -target_move}); // в 1 кадр перемещаем обертку карусели на ширину вставленного элемента
+		wrapper.animate({ // элемент плавно выезжает из-за экрана
+			left: `0px`
+		}, 1000);
+	}
+
+	arr_prev.click(showPrev);
+	arr_next.click(showNext);
 
 
 </script>
