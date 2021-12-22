@@ -26,34 +26,23 @@
 
 	const API_KEY = 'bdd347262453e415a2230910a4d49ebf';
 	let city = 'Kharkiv';
-	const URL = `https://api.openweathermap.org/data/2.5/weather?q=London,uk&callback=test&appid=${API_KEY}`; 
+	const URL = `https://api.openweathermap.org/data/2.5/weather?q=London,uk&appid=${API_KEY}`; 
 	const app = document.querySelector('.app'); // контейнер, в котором будет app
 
-
-	let promise = new Promise(function (resolve, reject){
-		let xhr = new XMLHttpRequest();
-		xhr.open('GET', URL);
-		xhr.send();
-
-		xhr.onreadystatechange = () =>{
-			if(xhr.readyState == 4){
-				if(xhr.status == 200){
-					resolve(JSON.parse(xhr.response));
-				}
-				else{
-					reject(xhr.statusText);
-				}
-			}
-		}
-	});
+	let weather;
+	let promise = fetch(URL);
 
 	promise
-		.then((data) => showWeather(data))
+		.then((data) => {
+			console.log(data);
+			return weather = data.json();
+		})
+		.then(data => showWeather(data))
 		.catch((e) => console.error(e));
 
 
 	function showWeather(resp){
-		app.innerText = `In ${city} weather is ${resp.weather.main} temperature is ${resp.main.temp} and feels like ${resp.main.feels_like}`;
+		app.innerText = `In ${city} weather is ${resp.weather[0].main} temperature is ${resp.main.temp} and feels like ${resp.main.feels_like}`;
 	}
 
 	
