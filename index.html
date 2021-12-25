@@ -15,63 +15,62 @@
 			color: inherit;
 		}
 
-		.carousel{
-			width: 100%;
-			overflow: hidden;
+		.sudoku{
+			margin: 50px auto;
+			display: flex;
+			flex-wrap: wrap;
+			width: 360px;
+			height: 360px;
 		}
 
-		.carousel_content{
-			position: relative;
+		.rect{
+			width: 40px;
+			height: 40px;
+			text-align: center;
+			line-height: 40px;
+			font-size: 22px;
+			color: green;
+			border: 1px solid green;
+			cursor: pointer;
+		}
+
+		.nums{
 			display: flex;
 		}
-
-		.item{
-			flex: 0 0 250px;
-			height: 100px;
-			background: green;
-			color: #fff;
-			text-align: center;
-			line-height: 100px;
-			font-size: 34px;
-			margin-right: 20px;
-		}
-
-		#arr_prev, #arr_next{
-			position: absolute;
-			top: 30px;
-			left: 0;
-			font-size: 40px;
-			transform: scaleX(0.5);
+		.num{
+			font-size: 50px;
 			color: green;
-			text-shadow: 0 0 4px #fff;
+			margin-right: 30px;
 			cursor: pointer;
-			z-index: 5;
 		}
 
-		#arr_next{
-			left: auto;
-			right: 0;
+		.selected{
+			border: 1px solid #e2e2e2;
 		}
+
+		.false{
+			background: rgba(255, 0, 0, 0.3);
+		}
+
 
 	</style>
 </head>
 <body>
 
-	<div class="carousel">
-		<div class="carousel_content">
-			<div class="item">1</div>
-			<div class="item">2</div>
-			<div class="item">3</div>
-			<div class="item">4</div>
-			<div class="item">5</div>
-			<div class="item">6</div>
-			<div class="item">7</div>
-			<div class="item">8</div>
-			<div class="item">9</div>
-		</div>
+	<div class="nums">
+		<div class="num">1</div>
+		<div class="num">2</div>
+		<div class="num">3</div>
+		<div class="num">4</div>
+		<div class="num">5</div>
+		<div class="num">6</div>
+		<div class="num">7</div>
+		<div class="num">8</div>
+		<div class="num">9</div>
+	</div>
+
+	<div class="sudoku">
 		
-		<div id="arr_prev">&lt;</div>
-		<div id="arr_next">&gt;</div>
 	</div>
 
 
@@ -81,38 +80,136 @@
   crossorigin="anonymous"></script>
 <script>
 
-	let items = $('.item');
-	let wrapper = $('.carousel_content');
-	let arr_prev = $('#arr_prev');
-	let arr_next = $('#arr_next');
-	let target_move = items.first().outerWidth(true);
+	const app = $('.sudoku');
+	let elements = [];
+	let nums = $('.num'); // коллекция цифр
+	let currentNum; // 
+	let isGameOver = false;
 
-	// arr_prev.click(() => console.error('jQuery Magic!')); // onclick = fn
-	// items.on('click', (e)=> console.warn(e.target)); // addEventListener
-
-
-	function showNext(){
-		wrapper.animate({
-			// первый элемент карусели плавно уезжает за экран
-			left: `${-target_move}px`
-		}, 1000, function(){ 
-			// после того, как анимация закончилась
-			$('.item').last().after($('.item').first()); // после последнего элемента вставляем первый
-			wrapper.css({left: 0}); // переставляем нашу обертку быстро в позицию 0
-		});
+	function createArr(){
+		for(let i = 0; i < 9; i++){
+			let row = [];
+			for(let j = 0; j < 9; j++){
+				row[j] = 0;
+			}
+			elements.push(row);
+		}
 	}
 
-	function showPrev(){
-		$('.item').first().before($('.item').last()); // вставляем последний элемент перед первым
-		wrapper.css({left: -target_move}); // в 1 кадр перемещаем обертку карусели на ширину вставленного элемента
-		wrapper.animate({ // элемент плавно выезжает из-за экрана
-			left: `0px`
-		}, 1000);
+	createArr();
+
+	function createRects(){
+		for(let i = 0; i < 9; i++){
+			for(let j = 0; j < 9; j++){
+				let num = createRandomNum();
+					// debugger;
+				let div = document.createElement('div');
+				$(div).addClass('rect'); // el.classList.add
+				div.dataset.id = `i${i}j${j}`;
+
+				if(!hasInstance(num, i, j)){
+					if(num != ''){
+						$(div).addClass('default');
+					}
+					elements[i][j] = num;
+					$(div).text(num); // innerText
+				}
+				$(app).append(div);
+			}
+		}
 	}
 
-	arr_prev.click(showPrev);
-	arr_next.click(showNext);
+	function hasInstance(n, r, c){ // число, номер строки, номер колонки
+		let col = [];
+		let row = [];
 
+		let alarm = false;
+
+		for(let i = 0; i < 9; i++){
+			for(let j = 0; j < 9; j++){
+				if(typeof(elements[i][j]) == 'number' ){
+					if(j == c){
+						col.push(elements[i][j]);
+					}
+					if(i == r){
+						row.push(elements[i][j]);
+					}	
+				}
+			}
+		}
+
+		if(col.includes(n)){
+			alarm = true;
+		}
+		if(row.includes(n)){
+			alarm = true;
+		}
+
+		return alarm;
+	}
+
+	function createRandomNum(){
+		let random = Math.floor(Math.random()*100);
+		if(random > 70){
+			let number = Math.ceil(Math.random()*9 );
+			return number;
+		}
+		else return '';
+	}
+
+	createRects();
+
+
+	nums.click((e) => currentNum = +$(e.target).text());
+
+	function setNumber(el){
+		let id = el.dataset.id; // i8j9
+		let row = +id.charAt(1);
+		let col = +id.charAt(3);
+		$(el).text(currentNum);
+
+		if(hasInstance(currentNum, row, col)){
+			el.classList.add('false');
+		}
+		else{
+			el.classList.remove('false');
+		}
+		elements[row][col] = currentNum;
+
+		checkGameOver();
+	}
+
+	app.on('click', '.rect', () => {
+		if(!$(event.target).hasClass('default')){
+			setNumber(event.target);
+		}
+	});
+
+	function checkGameOver(){
+		let flatArr = elements.flat();
+		let allNums = flatArr.every(item => typeof(item) == 'number');
+
+		let rects = document.querySelectorAll('.rect');
+		rects = [].slice.call(rects);
+		let allCorrect = rects.every(rect => !$(rect).hasClass('false'));
+
+
+		if(allNums){
+			if(allCorrect){
+				alert('You won!');
+			}
+			else{
+				alert('You lost!');
+			}
+			let restart = confirm('Start new game?');
+			if(restart){
+				app.html('');
+				elements = [];
+				createArr();
+				createRects();
+			}
+		}	
+	}
 
 </script>
 
