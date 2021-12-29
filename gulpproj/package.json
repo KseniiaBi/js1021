@@ -1,0 +1,23 @@
+{
+  "name": "gulpproj",
+  "version": "1.0.0",
+  "description": "test proj",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "browser-sync": "^2.27.7",
+    "gulp": "^4.0.2",
+    "gulp-dest-clean": "^0.5.0",
+    "gulp-ext-replace": "^0.3.0",
+    "gulp-minify": "^3.1.0",
+    "gulp-sass": "^5.0.0",
+    "sass": "^1.45.1"
+  },
+  "dependencies": {
+    "gulp-htmlmin": "^5.0.1"
+  }
+}
