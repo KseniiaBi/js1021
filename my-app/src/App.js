@@ -1,88 +1,55 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import logo from './logo.svg';
 import './App.css';
-import cartIcon from'./cart.png';
-import {books}  from "./books.js";
 
+// router
+import {
+  BrowserRouter,
+  Routes,
+  Route
+} from "react-router-dom";
+import { Link } from "react-router-dom";
 
-class App extends React.Component {
-  constructor(props){
-    super(props);
-    this.state = {
-     data: books,
-     cart: [],
-     cartTotal: 0,
-     cartCount: 0
-    };
+function App() {
+  return (
+    <div className="App">
+      <header className="App-header">
+        <div className="logo">SuperAPP</div>
+          <Link to="/">Home</Link>
+          <Link to="/contact">Contact</Link>
+          <Link to="/cart">Cart</Link>
+        <nav>
+        </nav>
+      </header>
 
-    this.addToCart = this.addToCart.bind(this);
-  }
+      <main>
+        <Routes>
+          <Route path="/" element={<Home text='SuperApp Homepage' />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/cart" element={<Cart />} />
+        </Routes>
+      </main>
 
-  addToCart(name){
-    const books = this.state.data.slice();
-    let added;
-    books.forEach(item => {
-      if(item.name === name){
-        added = item;
-      }
-    });
-
-    let _cart = this.state.cart.slice();
-    let wasInCart = false;
-    _cart.forEach(item =>{
-      if(item.name === name){
-        item.count += 1;
-        wasInCart = true;
-      }
-    });
-    if(!wasInCart){
-      _cart.push({...added, count: 1});
-    }
-
-    this.setState({
-       data: books,
-       cart: _cart,
-       cartTotal: this.state.cartTotal + added.price,
-       cartCount:this.state.cartCount +1
-    });
-
-  }
-
-  render(){
-    return (
-
-    <>
-    <header>
-      <div className="logo">BookStore</div>
-      <div className="cartInfo">
-        <img className="cart" src={cartIcon} />
-        <span>{this.state.cartCount} items in cart,</span>
-        <span>{this.state.cartTotal} UAH</span>
-      </div> 
-    </header>
-    <h1>Book store</h1>
-
-    <div className="shop">
-      {
-        this.state.data.map((item,index) => <Book id={index} key={index} content={item} onBuy={this.addToCart}  />)
-      }
+      <footer> &copy; JS 10.2021 </footer>
     </div>
-    </>
-  )};
+  );
 }
 
-
-function Book(props){
+function Home(props){
   return(
-    <div className="book">
-      <img src={props.content.img} />
-      <h2>{props.content.name}</h2>
-      <div className="author">{props.content.author}</div>
-      <div className="price">{props.content.price}</div>
-      <button onClick={() => props.onBuy(props.content.name)}>Add to cart</button>
-    </div>
-   );
+    <h1>Welcome to {props.text} </h1>
+  );
 }
 
+function Contact(props){
+  return(
+    <h1>Some longread about us  </h1>
+  );
+}
+function Cart(props){
+  return(
+    <h1>Cart </h1>
+
+  );
+}
 
 export default App;
