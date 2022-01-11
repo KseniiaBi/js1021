@@ -2,6 +2,11 @@
   text-align: center;
 }
 
+*{
+  box-sizing: border-box;
+  
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -15,13 +20,33 @@
 
 .App-header {
   background-color: #282c34;
-  min-height: 100vh;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+
+.App{
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main{
+  flex: 1 1 auto;
+}
+
+a{
+  color: inherit;
+  padding: 0 10px;
+}
+header, footer{
+  background-color: black;
+  color: #fff;
+  padding: 30px;
 }
 
 .App-link {
@@ -35,4 +60,34 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.shop{
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.pizza{
+  width: 250px;
+  padding: 20px;
+}
+
+.pizza img{
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.item_in_cart{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 20px;
+}
+
+.item_in_cart img{
+  width: 100px;
 }
