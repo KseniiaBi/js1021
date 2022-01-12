@@ -51,13 +51,14 @@ function reducer(state = [], action){
 
 				let cartC = state.cart.slice();
 				let total = state.cartTotal;
-				cartC.forEach(item => {
+				cartC.forEach((item, index) => {
 					if(item.name == action.name && item.count > 1){
 						item.count -= 1;
 						total -= item.price
 					}
 					else if(item.name == action.name && item.count == 1){
-						store.dispatch({type: 'DELETE_FROM_CART', name: item.name})
+						total  -= item.price;
+						cartC.splice(index, 1);
 					}
 				});
 
